@@ -1,6 +1,7 @@
 import "@shopify/shopify-api/adapters/node";
-import "dotenv/config";
-import express from "express";
+import dotenv from 'dotenv'
+import express from 'express'
+import payload from 'payload'
 import { resolve } from "path";
 import shopify from "./utils/shopifyConfig.js";
 import cors from "cors"
@@ -23,17 +24,19 @@ import proxyRouter from "./routes/app_proxy/index.js";
 import router from "./routes/index.js";
 import webhookRegistrar from "./webhooks/index.js";
 
+dotenv.config()
+
 setupCheck(); // Run a check to ensure everything is setup properly
 
 const PORT = parseInt(process.env.PORT, 10) || 8081;
 const isDev = process.env.NODE_ENV === "dev";
 
 
-sequelize.sync().then(() => {
-   console.log('Database synced');
-}).catch((err)=>{
-  console.log(err)
-});
+// sequelize.sync().then(() => {
+//    console.log('Database synced');
+// }).catch((err)=>{
+//   console.log(err)
+// });
  
 // Register all webhook handlers
 webhookRegistrar();
@@ -41,7 +44,18 @@ webhookRegistrar();
 const app = express();
 app.use(cors())
 
+
+// Initialize Payload
+await payload.init({
+  secret: process.env.PAYLOAD_SECRET,
+  express: app,
+  onInit: async () => {
+    payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
+  },
+})
+
 const createServer = async (root = process.cwd()) => {
+
   app.disable("x-powered-by");
 
   applyAuthMiddleware(app);
