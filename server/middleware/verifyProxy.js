@@ -1,4 +1,4 @@
-import crypto from "crypto";
+const crypto = require("crypto")
 
 const verifyProxy = (req, res, next) => {
   const { signature } = req.query;
@@ -24,4 +24,4 @@ const verifyProxy = (req, res, next) => {
   }
 };
 
-export default verifyProxy;
+module.exports = verifyProxy;

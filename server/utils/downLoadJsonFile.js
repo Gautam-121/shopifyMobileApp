@@ -1,5 +1,5 @@
-import fs  from "fs/promises";
-import fetch  from "node-fetch"
+const fs = require('fs').promises;
+const fetch = require('node-fetch');
 
 async function downloadJsonlFile(url, destination) {
     const response = await fetch(url);
@@ -7,4 +7,4 @@ async function downloadJsonlFile(url, destination) {
     await fs.writeFile(destination, fileData, 'utf-8');
 }
 
-export default downloadJsonlFile
+module.exports =  downloadJsonlFile

@@ -1,7 +1,7 @@
 //Combine all your webhooks here
-import { DeliveryMethod } from "@shopify/shopify-api";
-import shopify from "../utils/shopifyConfig.js";
-import appUninstallHandler from "./app_uninstalled.js";
+const { DeliveryMethod } = require('@shopify/shopify-api');
+const shopify = require('../utils/shopifyConfig.js');
+const appUninstallHandler = require('./app_uninstalled.js');
 
 /*
   Template for adding new topics:
@@ -28,4 +28,4 @@ const webhookRegistrar = async () => {
   });
 };
 
-export default webhookRegistrar;
+module.exports =  webhookRegistrar;

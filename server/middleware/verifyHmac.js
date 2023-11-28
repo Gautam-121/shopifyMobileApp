@@ -1,5 +1,5 @@
-import crypto from "crypto";
-import shopify from "../utils/shopifyConfig.js";
+const crypto = require("crypto");
+const shopify = require("../utils/shopifyConfig.js");
 
 const verifyHmac = (req, res, next) => {
   try {
@@ -20,4 +20,4 @@ const verifyHmac = (req, res, next) => {
   }
 };
 
-export default verifyHmac;
+module.exports =  verifyHmac;

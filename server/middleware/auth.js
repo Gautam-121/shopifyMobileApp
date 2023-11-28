@@ -1,12 +1,22 @@
-import {
+// import {
+//   CookieNotFound,
+//   InvalidOAuthError,
+//   InvalidSession,
+// } from "@shopify/shopify-api";
+// import authRedirect from "../utils/authRedirect.js";
+// import StoreModel from "../models/StoreModels.js";
+// import sessionHandler from "../utils/sessionHandler.js";
+// import shopify from "../utils/shopifyConfig.js";
+
+const {
   CookieNotFound,
   InvalidOAuthError,
   InvalidSession,
-} from "@shopify/shopify-api";
-import authRedirect from "../utils/authRedirect.js";
-import StoreModel from "../models/StoreModels.js";
-import sessionHandler from "../utils/sessionHandler.js";
-import shopify from "../utils/shopifyConfig.js";
+} = require("@shopify/shopify-api");
+const authRedirect = require("../utils/authRedirect.js");
+const StoreModel = require("../models/StoreModels.js");
+const sessionHandler = require("../utils/sessionHandler.js");
+const shopify = require("../utils/shopifyConfig.js");
 
 const authMiddleware = (app) => {
   
@@ -132,4 +142,4 @@ const authMiddleware = (app) => {
   });
 };
 
-export default authMiddleware;
+module.exports =  authMiddleware;

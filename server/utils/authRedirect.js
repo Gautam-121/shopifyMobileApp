@@ -1,4 +1,4 @@
-import shopify from "./shopifyConfig.js";
+const  shopify  =  require("./shopifyConfig.js");
 
 const authRedirect = async (req, res) => {
   
@@ -26,4 +26,4 @@ const authRedirect = async (req, res) => {
   });
 };
 
-export default authRedirect;
+module.exports =  authRedirect;

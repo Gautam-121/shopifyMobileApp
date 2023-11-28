@@ -1,4 +1,4 @@
-import StoreModel from "../models/StoreModels.js";
+const StoreModel = require("../models/StoreModels.js");
 
 const isShopActive = async (req, res, next) => {
 
@@ -40,4 +40,4 @@ const isShopActive = async (req, res, next) => {
   }
 };
 
-export default isShopActive;
+module.exports = isShopActive;

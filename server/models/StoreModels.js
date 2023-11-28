@@ -1,6 +1,6 @@
 // userModel.js
-import { DataTypes } from 'sequelize'
-import sequelize  from '../config/database.js'
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/database.js');
 
 const StoreModel = sequelize.define('Active_Stores', {
     shop : { // Shop Name of User
@@ -15,4 +15,4 @@ const StoreModel = sequelize.define('Active_Stores', {
   },
 });
 
-export default StoreModel;
+module.exports =  StoreModel;

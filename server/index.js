@@ -1,30 +1,58 @@
-import "@shopify/shopify-api/adapters/node";
-import dotenv from 'dotenv'
-import express from 'express'
-import payload from 'payload'
-import { resolve } from "path";
-import shopify from "./utils/shopifyConfig.js";
-import cors from "cors"
-import sequelize from "./config/database.js"
+// import "@shopify/shopify-api/adapters/node";
+// import dotenv from 'dotenv'
+// import express from 'express'
+// import payload from 'payload'
+// import { resolve } from "path";
+// import shopify from "./utils/shopifyConfig.js";
+// import cors from "cors"
+// import sequelize from "./config/database.js"
 
-import sessionHandler from "./utils/sessionHandler.js";
-import csp from "./middleware/csp.js";
-import setupCheck from "./utils/setupCheck.js";
-import {
+// import sessionHandler from "./utils/sessionHandler.js";
+// import csp from "./middleware/csp.js";
+// import setupCheck from "./utils/setupCheck.js";
+// import {
+//   customerDataRequest,
+//   customerRedact,
+//   shopRedact,
+// } from "./controllers/gdpr.js";
+// import applyAuthMiddleware from "./middleware/auth.js";
+// import isShopActive from "./middleware/isShopActive.js";
+// import verifyHmac from "./middleware/verifyHmac.js";
+// import verifyProxy from "./middleware/verifyProxy.js";
+// import verifyRequest from "./middleware/verifyRequest.js";
+// import proxyRouter from "./routes/app_proxy/index.js";
+// import router from "./routes/index.js";
+// import webhookRegistrar from "./webhooks/index.js";
+
+// dotenv.config()
+
+require('@shopify/shopify-api/adapters/node');
+const dotenv = require('dotenv');
+const express = require('express');
+const payload = require('payload');
+const { resolve } = require('path');
+const shopify = require('./utils/shopifyConfig.js');
+const cors = require('cors');
+const sequelize = require('./config/database.js');
+
+const sessionHandler = require('./utils/sessionHandler.js');
+const csp = require('./middleware/csp.js');
+const setupCheck = require('./utils/setupCheck.js');
+const {
   customerDataRequest,
   customerRedact,
   shopRedact,
-} from "./controllers/gdpr.js";
-import applyAuthMiddleware from "./middleware/auth.js";
-import isShopActive from "./middleware/isShopActive.js";
-import verifyHmac from "./middleware/verifyHmac.js";
-import verifyProxy from "./middleware/verifyProxy.js";
-import verifyRequest from "./middleware/verifyRequest.js";
-import proxyRouter from "./routes/app_proxy/index.js";
-import router from "./routes/index.js";
-import webhookRegistrar from "./webhooks/index.js";
+} = require('./controllers/gdpr.js');
+const applyAuthMiddleware = require('./middleware/auth.js');
+const isShopActive = require('./middleware/isShopActive.js');
+const verifyHmac = require('./middleware/verifyHmac.js');
+const verifyProxy = require('./middleware/verifyProxy.js');
+const verifyRequest = require('./middleware/verifyRequest.js');
+const proxyRouter = require('./routes/app_proxy/index.js');
+const router = require('./routes/index.js');
+const webhookRegistrar = require('./webhooks/index.js');
 
-dotenv.config()
+dotenv.config();
 
 setupCheck(); // Run a check to ensure everything is setup properly
 
@@ -32,11 +60,7 @@ const PORT = parseInt(process.env.PORT, 10) || 8081;
 const isDev = process.env.NODE_ENV === "dev";
 
 
-// sequelize.sync().then(() => {
-//    console.log('Database synced');
-// }).catch((err)=>{
-//   console.log(err)
-// });
+
  
 // Register all webhook handlers
 webhookRegistrar();
@@ -44,6 +68,18 @@ webhookRegistrar();
 const app = express();
 app.use(cors())
 
+
+
+
+const createServer = async (root = process.cwd()) => {
+
+  app.disable("x-powered-by");
+
+  sequelize.sync().then(() => {
+    console.log('Database synced');
+ }).catch((err)=>{
+   console.log(err)
+ });
 
 // Initialize Payload
 await payload.init({
@@ -53,10 +89,6 @@ await payload.init({
     payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
   },
 })
-
-const createServer = async (root = process.cwd()) => {
-
-  app.disable("x-powered-by");
 
   applyAuthMiddleware(app);
 

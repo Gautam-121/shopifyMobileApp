@@ -2,7 +2,7 @@
   "name": "shopify-express-boilerplate",
   "version": "0.0.6",
   "description": "Shopify Boilerplate Code written in React, Node, Express, MongoDB and GraphQL",
-  "type": "module",
+  "type": "commonjs",
   "author": {
     "name": "Harshdeep Singh Hura",
     "url": "https://harshdeephura.com"

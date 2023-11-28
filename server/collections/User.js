@@ -1,6 +1,6 @@
-import { CollectionConfig } from 'payload/types'
+const { CollectionConfig } = require('payload/types');
 
-const Users: CollectionConfig = {
+const Users = {
   slug: 'users',
   auth: true,
   admin: {
@@ -10,6 +10,6 @@ const Users: CollectionConfig = {
     // Email added by default
     // Add more fields as needed
   ],
-}
+};
 
-export default Users
+module.exports = Users;

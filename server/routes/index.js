@@ -1,6 +1,17 @@
-import { Router } from "express";
-import {sendNotification , updateServerKey , getServerKey } from "../controllers/firebaseController.js"
-import {getAllSegment , getProduct} from "../controllers/shopifyApiCotroller.js"
+// import { Router } from "express";
+// import {sendNotification , updateServerKey , getServerKey } from "../controllers/firebaseController.js"
+// import {getAllSegment , getProduct} from "../controllers/shopifyApiCotroller.js"
+
+const { Router } = require('express');
+const {
+  sendNotification,
+  updateServerKey,
+  getServerKey,
+} = require('../controllers/firebaseController.js');
+const {
+  getAllSegment,
+  getProduct,
+} = require('../controllers/shopifyApiCotroller.js');
 
 const router = Router();
 
@@ -21,4 +32,4 @@ router.post("/api/sendNotificatication", sendNotification)
 router.post("/api/updateServerKey",updateServerKey)
 
 
-export default router;
+module.exports = router;

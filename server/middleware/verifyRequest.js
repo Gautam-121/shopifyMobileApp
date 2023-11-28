@@ -1,5 +1,5 @@
-import sessionHandler from "../utils/sessionHandler.js";
-import shopify from "../utils/shopifyConfig.js";
+const sessionHandler = require("../utils/sessionHandler.js");
+const shopify = require("../utils/shopifyConfig.js");
 
 const TEST_QUERY = `
 {
@@ -76,4 +76,4 @@ const verifyRequest = async (req, res, next) => {
   }
 };
 
-export default verifyRequest;
+module.exports =  verifyRequest;

@@ -1,4 +1,4 @@
-import shopify from "../utils/shopifyConfig.js";
+const shopify = require("../utils/shopifyConfig.js");
 
 const csp = (req, res, next) => {
   
@@ -15,4 +15,4 @@ const csp = (req, res, next) => {
   next();
 };
 
-export default csp;
+module.exports = csp;

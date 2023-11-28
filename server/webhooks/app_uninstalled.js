@@ -1,5 +1,5 @@
-import SessionModel from "../models/SessionModels.js";
-import StoreModel from "../models/StoreModels.js";
+const SessionModel = require('../models/SessionModels.js');
+const StoreModel = require('../models/StoreModels.js');
 
 /**
  * @typedef { import("../../_developer/types/2023-07/webhooks.js").APP_UNINSTALLED } webhookTopic
@@ -31,4 +31,4 @@ const appUninstallHandler = async (
   // await SessionModel.deleteMany({ shop });
 };
 
-export default appUninstallHandler;
+module.exports =  appUninstallHandler;

@@ -1,5 +1,5 @@
-import { Router } from "express";
-import clientProvider from "../utils/clientProvider.js";
+const { Router } = require('express');
+const clientProvider = require('../utils/clientProvider.js');
 
 const subscriptionRoute = Router();
 
@@ -63,5 +63,4 @@ subscriptionRoute.get("/api/recurringSubscription", async (req, res) => {
     confirmationUrl: `${response.body.data.appSubscriptionCreate.confirmationUrl}`,
   });
 });
-
-export default subscriptionRoute;
+module.exports =  subscriptionRoute;

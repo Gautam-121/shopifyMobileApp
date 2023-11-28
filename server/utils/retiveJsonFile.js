@@ -1,5 +1,5 @@
-import fs from 'fs';
-import readline from 'readline'
+const fs = require('fs');
+const readline = require('readline');
 
 const firebaseToken = []
 
@@ -21,4 +21,4 @@ async function readJsonlFile(filePath) {
   return firebaseToken
 }
 
-export default readJsonlFile
+module.exports = readJsonlFile

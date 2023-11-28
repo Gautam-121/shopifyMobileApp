@@ -1,10 +1,12 @@
-import { Session } from "@shopify/shopify-api";
-import Cryptr from "cryptr";
-import SessionModel from "../models/SessionModels.js";
+const { Session } = require('@shopify/shopify-api');
+const Cryptr = require('cryptr');
+const SessionModel = require('../models/SessionModels.js');
 
 const cryption = new Cryptr(process.env.ENCRYPTION_STRING);
 
 const storeSession = async (session) => {
+
+  console.log("Enter Inside It" , session)
 
   const [result , created ] = await SessionModel.findOrCreate({
         where: { id: session.id },
@@ -13,6 +15,8 @@ const storeSession = async (session) => {
          shop : session.shop,
         }
       })
+
+      console.log("after created")
 
       if(!created)
       {
@@ -29,6 +33,7 @@ const storeSession = async (session) => {
          )
       }
   
+      console.log("All Done")
 
   // await SessionModel.findOneAndUpdate(
   //   { id: session.id },
@@ -67,4 +72,4 @@ const deleteSession = async (id) => {
 
 const sessionHandler = { storeSession, loadSession, deleteSession };
 
-export default sessionHandler;
+module.exports =  sessionHandler;

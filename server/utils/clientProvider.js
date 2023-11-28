@@ -1,6 +1,6 @@
-import { ApiVersion } from "@shopify/shopify-api";
-import sessionHandler from "./sessionHandler.js";
-import shopify from "./shopifyConfig.js";
+const { ApiVersion } = require('@shopify/shopify-api');
+const sessionHandler = require('./sessionHandler.js');
+const shopify = require('./shopifyConfig.js');
 
 const currentApiVersion = ApiVersion.January23;
 
@@ -56,4 +56,4 @@ const offline = {
 
 const clientProvider = { graphqlClient, restClient, offline };
 
-export default clientProvider;
+module.exports =  clientProvider;

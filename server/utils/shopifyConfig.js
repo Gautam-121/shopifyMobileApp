@@ -1,5 +1,5 @@
-import { shopifyApi } from "@shopify/shopify-api";
-import "dotenv/config";
+const { shopifyApi } = require('@shopify/shopify-api');
+require('dotenv').config();
 
 const isDev = process.env.NODE_ENV === "dev";
 
@@ -14,4 +14,4 @@ const shopify = shopifyApi({
   isEmbeddedApp: true,
   logger: { level: isDev ? 3 : 0 }, //Error = 0,Warning = 1,Info = 2,Debug = 3
 });
-export default shopify;
+module.exports =  shopify;

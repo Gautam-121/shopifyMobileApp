@@ -1,6 +1,6 @@
 // userModel.js
-import {  DataTypes } from  'sequelize'
-import sequelize from '../config/database.js';
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/database.js');
 
 const SessionModel = sequelize.define('session', {
   id: { // Session Id 
@@ -22,4 +22,4 @@ const SessionModel = sequelize.define('session', {
   }
 });
 
-export default SessionModel
+module.exports =  SessionModel

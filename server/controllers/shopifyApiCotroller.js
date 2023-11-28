@@ -1,12 +1,13 @@
-import axios from "axios";
-import dotenv from "dotenv";
+const axios = require("axios");
+const dotenv = require("dotenv");
+const Cryptr = require("cryptr");
+const SessionModel = require("../models/SessionModels.js");
+
 dotenv.config();
-import Cryptr from "cryptr";
-import SessionModel from "../models/SessionModels.js";
 
 const cryption = new Cryptr(process.env.ENCRYPTION_STRING);
 
-export const getAllSegment = async (req, res) => {
+const getAllSegment = async (req, res) => {
 
   try {
 
@@ -66,7 +67,7 @@ export const getAllSegment = async (req, res) => {
   }
 };
 
-export const getProduct = async (req, res) => {
+ const getProduct = async (req, res) => {
 
   try {
 
@@ -122,4 +123,6 @@ export const getProduct = async (req, res) => {
     res.status(500).json({ success: false, message : error.message });
   }
 };
+
+module.exports = {getAllSegment , getProduct}
 
