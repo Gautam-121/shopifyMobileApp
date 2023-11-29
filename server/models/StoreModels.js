@@ -1,6 +1,6 @@
 // userModel.js
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database.js');
+const sequelize = require('../config/database.js')
 
 const StoreModel = sequelize.define('Active_Stores', {
     shop : { // Shop Name of User

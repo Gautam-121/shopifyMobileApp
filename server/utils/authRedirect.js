@@ -1,5 +1,6 @@
 const  shopify  =  require("./shopifyConfig.js");
 
+
 const authRedirect = async (req, res) => {
   
   if (!req.query.shop) {

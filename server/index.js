@@ -60,28 +60,24 @@ const PORT = parseInt(process.env.PORT, 10) || 8081;
 const isDev = process.env.NODE_ENV === "dev";
 
 
-
- 
 // Register all webhook handlers
 webhookRegistrar();
 
 const app = express();
 app.use(cors())
 
-
+// sequelize.sync().then(() => {
+//   console.log('Database synced');
+// }).catch((err)=>{
+//  console.log(err)
+// });
 
 
 const createServer = async (root = process.cwd()) => {
 
   app.disable("x-powered-by");
 
-  sequelize.sync().then(() => {
-    console.log('Database synced');
- }).catch((err)=>{
-   console.log(err)
- });
-
-// Initialize Payload
+// // Initialize Payload
 await payload.init({
   secret: process.env.PAYLOAD_SECRET,
   express: app,

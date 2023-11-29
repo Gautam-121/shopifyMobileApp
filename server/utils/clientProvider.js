@@ -2,6 +2,7 @@ const { ApiVersion } = require('@shopify/shopify-api');
 const sessionHandler = require('./sessionHandler.js');
 const shopify = require('./shopifyConfig.js');
 
+
 const currentApiVersion = ApiVersion.January23;
 
 const fetchSession = async ({ req, res, isOnline }) => {

@@ -1,4 +1,6 @@
 const StoreModel = require("../models/StoreModels.js");
+const payload = require('payload');
+
 
 const isShopActive = async (req, res, next) => {
 
@@ -9,28 +11,52 @@ const isShopActive = async (req, res, next) => {
     return;
   }
 
-  const isShopAvaialble = await StoreModel.findOne({where : {shop : shop}})
+  // const isShopAvaialble = await StoreModel.findOne({where : {shop : shop}})
+  const isShopAvaialble = await payload.find({
+    collection: 'activeStores', // required
+    where: {shop:shop}, // pass a `where` query here
+    limit : 1
+  })
 
-  if (isShopAvaialble === null || !isShopAvaialble.isActive) {
+  if (isShopAvaialble.length === 0 || !isShopAvaialble[0].isActive) {
 
-    if (isShopAvaialble === null) {
+    if (isShopAvaialble.length === 0) {
 
-      await StoreModel.create({
-        shop :  shop ,
-        isActive : false
+      // await StoreModel.create({
+      //   shop :  shop ,
+      //   isActive : false
+      // })
+
+      await payload.create({
+        collection: 'activeStores', // required
+        data: {
+          shop : shop,
+          isActive: false
+        },
       })
 
-    } else if (!isShopAvaialble.isActive) {
+    } else if (!isShopAvaialble[0].isActive) {
 
-      await StoreModel.update(
-        {
-          isActive : false
-        },
-        {
-          where : {shop : shop},
+      // await StoreModel.update(
+      //   {
+      //     isActive : false
+      //   },
+      //   {
+      //     where : {shop : shop},
+      //     limit : 1
+      //   }
+      // )
+
+      await payload.update({
+        collection: 'activeStores',
+        where: {
+          shop: { equals: shop},
           limit : 1
+        },
+        data: {
+          isActive: false
         }
-      )
+      })
       // await StoreModel.findOneAndUpdate({ shop }, { isActive: false });
     }
     

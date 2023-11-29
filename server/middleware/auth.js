@@ -17,6 +17,8 @@ const authRedirect = require("../utils/authRedirect.js");
 const StoreModel = require("../models/StoreModels.js");
 const sessionHandler = require("../utils/sessionHandler.js");
 const shopify = require("../utils/shopifyConfig.js");
+const payload = require('payload');
+
 
 const authMiddleware = (app) => {
   
@@ -99,26 +101,55 @@ const authMiddleware = (app) => {
       const host = req.query.host;
       const { shop } = session;
 
-      const [result, created] = await StoreModel.findOrCreate({
-        where: { shop: shop},
-        defaults: {
-          shop : shop,
-          isActive: true
-        }
-      });
+      const result = await payload.find({
+        collection: 'activeStores', // required
+        where: {shop:shop}, // pass a `where` query here
+      })
 
-      if(!created){
-
-        await StoreModel.update(//Update store to true after auth has happened, or it'll cause reinstall issues.
-          {
-            isActive : true,
-            limit : 1
+      if(result.length!=0){
+        // Update Document
+        await payload.update({
+          collection: 'activeStores',
+          where: {
+            shop: { equals: shop},
           },
-          {
-            where : {shop : shop}
+          data: {
+            shop : shop,
+            isActive: true
           }
-        )
+        })
       }
+      else{
+        // Create The document
+        await payload.create({
+          collection: 'activeStores', // required
+          data: {
+            shop : shop,
+            isActive: true
+          },
+        })
+      }
+
+      // const [result, created] = await StoreModel.findOrCreate({
+      //   where: { shop: shop},
+      //   defaults: {
+      //     shop : shop,
+      //     isActive: true
+      //   }
+      // });
+
+      // if(!created){
+
+      //   await StoreModel.update(//Update store to true after auth has happened, or it'll cause reinstall issues.
+      //     {
+      //       isActive : true,
+      //       limit : 1
+      //     },
+      //     {
+      //       where : {shop : shop}
+      //     }
+      //   )
+      // }
 
       // Redirect to app with shop parameter upon auth
       res.redirect(`/?shop=${shop}&host=${host}`);

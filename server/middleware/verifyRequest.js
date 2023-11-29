@@ -1,6 +1,7 @@
 const sessionHandler = require("../utils/sessionHandler.js");
 const shopify = require("../utils/shopifyConfig.js");
 
+
 const TEST_QUERY = `
 {
   shop {

@@ -10,11 +10,17 @@
  */
 
   
-import { partnersRequest } from "@shopify/cli-kit/node/api/partners";
-import { AbortError } from "@shopify/cli-kit/node/error";
-import { ensureAuthenticatedPartners } from "@shopify/cli-kit/node/session";
-import { renderSelectPrompt } from "@shopify/cli-kit/node/ui";
-import "dotenv/config";
+// import { partnersRequest } from "@shopify/cli-kit/node/api/partners";
+// import { AbortError } from "@shopify/cli-kit/node/error";
+// import { ensureAuthenticatedPartners } from "@shopify/cli-kit/node/session";
+// import { renderSelectPrompt } from "@shopify/cli-kit/node/ui";
+// import "dotenv/config";
+
+const { partnersRequest } = require("@shopify/cli-kit/node/api/partners");
+const { AbortError } = require("@shopify/cli-kit/node/error");
+const { ensureAuthenticatedPartners } = require("@shopify/cli-kit/node/session");
+const { renderSelectPrompt } = require("@shopify/cli-kit/node/ui");
+require("dotenv/config");
 
 const UpdateAppURLQuery = ` mutation appUpdate($apiKey: String!, $applicationUrl: Url!, $redirectUrlWhitelist: [Url]!) {
     appUpdate(input: {apiKey: $apiKey, applicationUrl: $applicationUrl, redirectUrlWhitelist: $redirectUrlWhitelist}) {
