@@ -26,6 +26,7 @@ const Banner = require('./server/collections/Banner.js');
 const Collection = require('./server/collections/Collection.js');
 const Session = require("./server/collections/Session.js")
 const ActiveStore = require("./server/collections/ActiveStore.js")
+const Media = require("./server/collections/Media.js")
 
 
 module.exports =  buildConfig({
@@ -37,7 +38,7 @@ module.exports =  buildConfig({
   editor: slateEditor({}),
   cors: process.env.WHITELIST_ORIGINS ? process.env.WHITELIST_ORIGINS.split(',') : [],
   csrf: process.env.WHITELIST_ORIGINS ? process.env.WHITELIST_ORIGINS.split(',') : [],
-  collections: [User, Product, Banner, Collection , Session , ActiveStore],
+  collections: [User, Product, Banner, Collection , Session , ActiveStore ,Media],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },

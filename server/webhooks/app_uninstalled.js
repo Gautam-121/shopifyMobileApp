@@ -27,25 +27,27 @@ const appUninstallHandler = async (
   //   }
   // )
 
-  await payload.update({
+  const data = await payload.update({
     collection: 'activeStores',
     where: {
       shop: { equals: shop},
-      limit : 1
     },
     data: {
       isActive: false
     }
   })
+
+  console.log("WebHook update shop active false" , data)
   // await StoreModel.findOneAndUpdate({ shop }, { isActive: false });
 
   // await SessionModel.destroy({where : {shop : shop}})
-  await payload.delete({
+  const datas = await payload.delete({
     collection: 'session',
     where: {
-      fieldName: { equals: shop },
+      shop: { equals: shop },
     },
   })
+  console.log("WebHook delete session of that shop" , datas)
 
   // await SessionModel.deleteMany({ shop });
 };

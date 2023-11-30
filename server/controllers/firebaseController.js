@@ -12,6 +12,7 @@ const Cryptr = require("cryptr");
 const SessionModel = require("../models/SessionModels.js");
 const readJsonlFile = require("../utils/retiveJsonFile.js");
 const downloadJsonlFile = require("../utils/downLoadJsonFile.js");
+const Payload = require("payload");
 
 dotenv.config();
 
@@ -24,6 +25,9 @@ const cryption = new Cryptr(process.env.ENCRYPTION_STRING);
   try {
 
     const shop = req.query.shop;
+
+    return res.status(404).json({ success: false, error: "Server key not found" });
+    
     const [, sessionDetail] = await SessionModel.findAll({ where: { shop: shop } });
 
     if (!sessionDetail || !sessionDetail.serverKey) {
@@ -308,7 +312,125 @@ const cryption = new Cryptr(process.env.ENCRYPTION_STRING);
   };
 }
 
-module.exports = {getServerKey , updateServerKey , sendNotification}
+const createProduct = async (req , res , next)=>{
+  const createData = await Payload.create({
+    collection: 'product', // required
+    data: {
+      prName : req.body.product
+    },
+  })
+  console.log(createData)
+
+  return res.status(200).json({
+    success : true,
+    message : createData
+  })
+}
+
+
+const getPayloadProduct = async(req , res , next)=>{
+  const getData = await Payload.find({
+    collection: 'product',
+    where: {
+      prName: { equals: "Product100"},
+    }
+  })
+
+  console.log(getData)
+
+  return res.status(200).json({
+    success :  true,
+    message :  getData
+  })
+}
+
+const updatePayloadProduct = async(req , res , next)=>{
+  const data = await Payload.update({
+    collection: 'product',
+    where: {
+      // required
+      prName: { equals: 'Product3' },
+      limit : 1
+    },
+    data: {
+      prName : req.body.product
+    }
+  })
+  console.log(data)
+
+  return res.status(200).json({
+    success : true,
+    message : data
+  })
+
+}
+
+const createBanner = async(req , res , next)=>{
+  try{
+    const data = JSON.parse(JSON.stringify(req.body))
+    // const files = req.files
+  
+    console.log(data)
+    // console.log(files)
+  
+    const post = await Payload.create({
+      collection: 'banner', // require
+      data: data,  
+      // Alternatively, you can directly pass a File,
+      // if file is provided, filePath will be omitted
+      // file: files[0],
+    })
+  
+  
+    console.log(post)
+  
+    return res.status(200).json({
+      success : true,
+      message : "Data Created Successfully",
+      data : data,
+      post : post
+    })
+  }catch(error){
+    return res.status(500).json({
+      success : false,
+      error  : error
+    })
+  }
+}
+
+const getBanner = async(req , res , next)=>{
+  const getBanner = await Payload.find({
+    collection: 'banner',
+  })
+
+  console.log(getBanner)
+
+  return res.status(200).json({
+    success :  true,
+    message :  getBanner
+  })
+}
+
+const deleteBanner = async(req , res , next)=>{
+
+  console.log(req.params)
+  const datas = await Payload.delete({
+    collection: 'banner',
+    where: {
+      id: { equals: req.params.id },
+    },
+  })
+
+  console.log(datas)
+
+  return res.status(200).json({
+    success :  true,
+    message :  datas
+  })
+}
+
+
+module.exports = {getServerKey , updateServerKey , sendNotification , createProduct , getPayloadProduct , updatePayloadProduct , createBanner , getBanner , deleteBanner}
 
 
 

@@ -14,20 +14,23 @@ const isShopActive = async (req, res, next) => {
   // const isShopAvaialble = await StoreModel.findOne({where : {shop : shop}})
   const isShopAvaialble = await payload.find({
     collection: 'activeStores', // required
-    where: {shop:shop}, // pass a `where` query here
-    limit : 1
+    where: {
+      shop: { equals: shop},
+    }
   })
 
-  if (isShopAvaialble.length === 0 || !isShopAvaialble[0].isActive) {
+  console.log("Check Perticular Shop is Available or not" , isShopAvaialble)
 
-    if (isShopAvaialble.length === 0) {
+  if (isShopAvaialble.docs?.length === 0 || !isShopAvaialble.docs[0].isActive) {
+
+    if (isShopAvaialble.docs?.length === 0) {
 
       // await StoreModel.create({
       //   shop :  shop ,
       //   isActive : false
       // })
 
-      await payload.create({
+      const data = await payload.create({
         collection: 'activeStores', // required
         data: {
           shop : shop,
@@ -35,7 +38,9 @@ const isShopActive = async (req, res, next) => {
         },
       })
 
-    } else if (!isShopAvaialble[0].isActive) {
+      console.log("inside The Shop availabe and craete" , data)
+
+    } else if (!isShopAvaialble.docs[0].isActive) {
 
       // await StoreModel.update(
       //   {
@@ -47,16 +52,16 @@ const isShopActive = async (req, res, next) => {
       //   }
       // )
 
-      await payload.update({
+      const data = await payload.update({
         collection: 'activeStores',
         where: {
           shop: { equals: shop},
-          limit : 1
         },
         data: {
           isActive: false
         }
       })
+      console.log("inside The Shop availabe and Update" , data)
       // await StoreModel.findOneAndUpdate({ shop }, { isActive: false });
     }
     

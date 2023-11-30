@@ -12,6 +12,13 @@ const getAllSegment = async (req, res) => {
   try {
 
     const shop = req.query.shop;
+    const accessTokens = req.body?.accessToken
+
+    return res.status(200).json({
+      success : false,
+      message : "Send Before fetch Data",
+      accessTokens
+    })
     
     const [ , sessionDetail] = await SessionModel.findAll({where : {shop : shop}})
      
@@ -72,6 +79,11 @@ const getAllSegment = async (req, res) => {
   try {
 
     const shop = req.query.shop;
+
+    return res.status(200).json({
+      success : false,
+      message : "Send Before Data Fetch"
+    })
     
     const [ , sessionDetail] = await SessionModel.findAll({where : {shop : shop}})
   

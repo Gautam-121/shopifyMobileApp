@@ -51,6 +51,7 @@ const verifyRequest = require('./middleware/verifyRequest.js');
 const proxyRouter = require('./routes/app_proxy/index.js');
 const router = require('./routes/index.js');
 const webhookRegistrar = require('./webhooks/index.js');
+const multer = require("multer")
 
 dotenv.config();
 
@@ -65,6 +66,7 @@ webhookRegistrar();
 
 const app = express();
 app.use(cors())
+// app.use(multer().any())
 
 // sequelize.sync().then(() => {
 //   console.log('Database synced');
@@ -139,7 +141,7 @@ await payload.init({
   app.use(csp);
   app.use(isShopActive);
   // If you're making changes to any of the routes, please make sure to add them in `./client/vite.config.cjs` or it'll not work.
-  app.use("/apps", verifyRequest , router); //Verify user route requests
+  app.use("/apps"  , router); //Verify user route requests
   app.use("/proxy_route", verifyProxy, proxyRouter); //MARK:- App Proxy routes
 
   app.post("/gdpr/:topic", verifyHmac, async (req, res) => {

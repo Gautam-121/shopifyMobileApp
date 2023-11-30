@@ -53,6 +53,8 @@ const authMiddleware = (app) => {
 
       const { session } = callbackResponse;
 
+      console.log("Session from Auth/tokens" , session)
+
       await sessionHandler.storeSession(session);
 
       const webhookRegisterResponse = await shopify.webhooks.register({
@@ -96,6 +98,7 @@ const authMiddleware = (app) => {
       });
 
       const { session } = callbackResponse;
+      console.log("Session from Auth/callback" , session)
       await sessionHandler.storeSession(session);
 
       const host = req.query.host;
@@ -103,12 +106,16 @@ const authMiddleware = (app) => {
 
       const result = await payload.find({
         collection: 'activeStores', // required
-        where: {shop:shop}, // pass a `where` query here
+        where: {
+          shop: { equals: shop},
+        }
       })
 
-      if(result.length!=0){
+      console.log("auth/callback data find activeStores" , result)
+
+      if(result.docs?.length!=0){
         // Update Document
-        await payload.update({
+        const data = await payload.update({
           collection: 'activeStores',
           where: {
             shop: { equals: shop},
@@ -118,16 +125,19 @@ const authMiddleware = (app) => {
             isActive: true
           }
         })
+
+        console.log("After auth/token inside auth/callback update" , data )
       }
       else{
         // Create The document
-        await payload.create({
+        const data = await payload.create({
           collection: 'activeStores', // required
           data: {
             shop : shop,
             isActive: true
           },
         })
+        console.log("After auth/token inside auth/callback " , data )
       }
 
       // const [result, created] = await StoreModel.findOrCreate({

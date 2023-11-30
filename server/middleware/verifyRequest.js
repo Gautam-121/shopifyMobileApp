@@ -22,15 +22,17 @@ const verifyRequest = async (req, res, next) => {
     });
 
     const session = await sessionHandler.loadSession(sessionId);
+
+    console.log("Session in verifyRequest in line 24 is" , session)
     
     if(session && session?.shop)
     {
       req.query.shop = session?.shop
     }
 
-    console.log(session, "hii from session");
+    // console.log(session, "hii from session");
 
-    console.log(`exired token is ${new Date(session?.expires)}`)
+    // console.log(`exired token is ${new Date(session?.expires)}`)
 
     if (new Date(session?.expires) > new Date()) {
 
@@ -41,6 +43,8 @@ const verifyRequest = async (req, res, next) => {
         "Content-Security-Policy",
         `frame-ancestors https://${session.shop} https://admin.shopify.com;`
       );
+      
+      req.body.accessToken = session.accessToken
 
       return next();
     }

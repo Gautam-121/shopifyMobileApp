@@ -171,15 +171,19 @@ const Banner = {
     },
     {
       name: "product",
-      label: "Product",
-      type: "relationship",
-      relationTo: "product",
+      label: "Products",
+      type: "array",
+      fields:[
+        {
+          name: 'product_id',
+          type: 'text',
+          required : true
+        }
+      ],
       admin: {
         condition: (_, siblingData) => siblingData.navigate === "product",
       },
-      required: true,
-      hasMany: true,
-    },
+    },
     {
       name: "externalLink",
       label: "Url",
@@ -192,19 +196,20 @@ const Banner = {
     {
       name: "collection",
       label: "Collection",
-      type: "relationship",
-      relationTo: "collection",
+      type: "array",
+      fields:[
+        {
+          name: 'collection_id',
+          type: 'text',
+          required : true
+        }
+      ],
       admin: {
         condition: (_, siblingData) => siblingData.navigate === "collection",
       },
-      required: true,
-      hasMany: true,
-    },
+    },
   ],
 };
-
-module.exports = Banner;
-
 
 module.exports = Banner;
 
