@@ -1,8 +1,9 @@
 const { CollectionConfig } = require("payload/types");
 
-const Product = {
+const Media = {
   slug: "media",
-  upload : true
+  upload : true,
+  fields: [],
 };
 
-module.exports = Product
+module.exports = Media

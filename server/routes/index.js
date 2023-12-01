@@ -12,7 +12,9 @@ const {
   updatePayloadProduct,
   createBanner,
   getBanner,
-  deleteBanner
+  deleteBanner,
+  createMedia,
+  getMedia
 } = require('../controllers/firebaseController.js');
 const {
   getAllSegment,
@@ -30,6 +32,10 @@ router.post("/api/createProduct" , createProduct)
 router.post("/api/createBanner" , createBanner)
 
 router.get("/api/getBanner" , getBanner)
+
+router.post("/api/createMedia" , createMedia)
+
+router.get("/api/getMedia" , getMedia)
 
 router.delete("/api/deleteBanner/:id" , deleteBanner)
 

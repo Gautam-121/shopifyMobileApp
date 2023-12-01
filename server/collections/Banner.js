@@ -115,6 +115,19 @@ const Banner = {
   },
   fields: [
     {
+      name: "isVisible",
+      label : "Visible",
+      type: "checkbox", // Use "checkbox" for boolean fields
+      defaultValue: false,
+    },
+    {
+      name : "bannerImg",
+      type : "relationship",
+      relationTo : "media",
+      required : true,
+      hasMany:true
+    },
+    {
       name: 'imageAdjustment',
       label: "Image Adjustment",
       type: 'radio',

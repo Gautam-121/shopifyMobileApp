@@ -13,6 +13,7 @@ const SessionModel = require("../models/SessionModels.js");
 const readJsonlFile = require("../utils/retiveJsonFile.js");
 const downloadJsonlFile = require("../utils/downLoadJsonFile.js");
 const Payload = require("payload");
+const {uploadFile} = require("../utils/awsConfig.js")
 
 dotenv.config();
 
@@ -368,21 +369,49 @@ const updatePayloadProduct = async(req , res , next)=>{
 const createBanner = async(req , res , next)=>{
   try{
     const data = JSON.parse(JSON.stringify(req.body))
-    // const files = req.files
-  
-    console.log(data)
-    // console.log(files)
+    const files = req.files
+
+    const fileData = {
+      data : files[0].buffer,
+      mimetype : files[0].mimetype,
+      name : files[0].originalname,
+      size : files[0].size
+    }
+
+    // const fileResult = await files.map(async (file)=>{
+    //   const fileReturn = await Payload.create({
+    //     collection: 'media', // require
+    //     file: {
+    //       data : file.buffer,
+    //       mimetype : file.mimetype,
+    //       name : file.originalname,
+    //       size : file.size
+    //     }
+    //   })
+    //   return fileReturn.id
+    // })
+
+    let dataCollect = []
+    for(let file of files){
+      const fileReturn = await Payload.create({
+        collection: 'media', // require
+        file: {
+          data : file.buffer,
+          mimetype : file.mimetype,
+          name : file.originalname,
+          size : file.size
+        }
+      })
+      dataCollect.push(fileReturn.id)
+    }
+
+      data.bannerImg = dataCollect
+      console.log(data.bannerImg)
   
     const post = await Payload.create({
       collection: 'banner', // require
       data: data,  
-      // Alternatively, you can directly pass a File,
-      // if file is provided, filePath will be omitted
-      // file: files[0],
     })
-  
-  
-    console.log(post)
   
     return res.status(200).json({
       success : true,
@@ -429,8 +458,44 @@ const deleteBanner = async(req , res , next)=>{
   })
 }
 
+const createMedia = async(req , res , next)=>{
+  try{
+    const files = req.files    
+    const data = {
+    data : files[0].buffer,
+    mimetype : files[0].mimetype,
+    name : files[0].originalname,
+    size : files[0].size
+  }
+    const media = await Payload.create({
+      collection: 'media', // require
+      file: data, // Assuming the file field is named 'file'
+    })
+    return res.status(200).json({
+      success : true,
+      message : media
+    })
+  }catch(error){
+    return res.status(500).json({
+      success : false,
+      message : error
+    })
+  }
+}
 
-module.exports = {getServerKey , updateServerKey , sendNotification , createProduct , getPayloadProduct , updatePayloadProduct , createBanner , getBanner , deleteBanner}
+const getMedia = async(req , res , next)=>{
+  const getAllMedia = await Payload.find({
+    collection: 'media'
+  })
+
+  return res.status(200).json({
+    success : true,
+    data : getAllMedia
+  })
+}
+
+
+module.exports = {getServerKey , updateServerKey , sendNotification , createProduct , getPayloadProduct , updatePayloadProduct , createBanner , getBanner , deleteBanner , createMedia , getMedia}
 
 
 
