@@ -19,7 +19,7 @@ const isShopActive = async (req, res, next) => {
     }
   })
 
-  console.log("Check Perticular Shop is Available or not" , isShopAvaialble)
+  // console.log("Check Perticular Shop is Available or not" , isShopAvaialble)
 
   if (isShopAvaialble.docs?.length === 0 || !isShopAvaialble.docs[0].isActive) {
 
@@ -38,7 +38,7 @@ const isShopActive = async (req, res, next) => {
         },
       })
 
-      console.log("inside The Shop availabe and craete" , data)
+      // console.log("inside The Shop availabe and craete" , data)
 
     } else if (!isShopAvaialble.docs[0].isActive) {
 
@@ -61,7 +61,7 @@ const isShopActive = async (req, res, next) => {
           isActive: false
         }
       })
-      console.log("inside The Shop availabe and Update" , data)
+      // console.log("inside The Shop availabe and Update" , data)
       // await StoreModel.findOneAndUpdate({ shop }, { isActive: false });
     }
     

@@ -37,7 +37,7 @@ const appUninstallHandler = async (
     }
   })
 
-  console.log("WebHook update shop active false" , data)
+  // console.log("WebHook update shop active false" , data)
   // await StoreModel.findOneAndUpdate({ shop }, { isActive: false });
 
   // await SessionModel.destroy({where : {shop : shop}})
@@ -47,7 +47,7 @@ const appUninstallHandler = async (
       shop: { equals: shop },
     },
   })
-  console.log("WebHook delete session of that shop" , datas)
+  // console.log("WebHook delete session of that shop" , datas)
 
   // await SessionModel.deleteMany({ shop });
 };

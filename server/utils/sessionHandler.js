@@ -8,7 +8,7 @@ const payload = require('payload');
 
 const storeSession = async (session) => {
 
-  console.log("Enter Inside It" , session.id)
+  // console.log("Enter Inside It" , session.id)
 
   // const [result , created ] = await SessionModel.findOrCreate({
   //       where: { id: session.id },
@@ -26,7 +26,7 @@ const storeSession = async (session) => {
     
   })
 
-  console.log("1st Payload Entry" , result)
+  // console.log("1st Payload Entry" , result)
 
   if(result.docs?.length!=0){
     // Update Document
@@ -41,7 +41,7 @@ const storeSession = async (session) => {
       }
     })
 
-    console.log("After 1st Entry Payload Update" , data)
+    // console.log("After 1st Entry Payload Update" , data)
   }
   else{
     // Document Created
@@ -54,7 +54,7 @@ const storeSession = async (session) => {
       },
     })
 
-    console.log("After 1st payload entry Create" , data)
+    // console.log("After 1st payload entry Create" , data)
   }
 
       console.log("after created")
@@ -100,7 +100,7 @@ const loadSession = async (id) => {
     }
   })
 
-  console.log("sessionResult" , sessionResult)
+  // console.log("sessionResult" , sessionResult)
 
 
   // console.log(sessionRes)
@@ -108,7 +108,7 @@ const loadSession = async (id) => {
   if (sessionResult.docs.length === 0) {
     return undefined;
   }
-  console.log(sessionResult.docs[0].content.length)
+  // console.log(sessionResult.docs[0].content.length)
   if (sessionResult.docs[0].content.length > 0) {
     const sessionObj = JSON.parse(cryption.decrypt(sessionResult.docs[0].content));
     const returnSession = new Session(sessionObj);
@@ -126,7 +126,7 @@ const deleteSession = async (id) => {
     },
   })
 
-  console.log("Deleting a session" , data)
+  // console.log("Deleting a session" , data)
 
   return true;
 };

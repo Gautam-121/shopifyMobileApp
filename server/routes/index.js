@@ -10,15 +10,22 @@ const {
   createProduct,
   getPayloadProduct,
   updatePayloadProduct,
-  createBanner,
-  getBanner,
-  deleteBanner,
   createMedia,
-  getMedia
+  getMedia,
+  
 } = require('../controllers/firebaseController.js');
 const {
   getAllSegment,
+  getProduct,
+  getCollection
 } = require('../controllers/shopifyApiCotroller.js');
+
+const {
+  createBanner , 
+  getBanner , 
+  deleteBanner ,
+  updateBanner
+} = require("../controllers/bannerController.js")
 
 const router = Router();
 
@@ -27,17 +34,29 @@ router.get("/api", (req, res) => {
   return res.status(200).json(sendData);
 });
 
-router.post("/api/createProduct" , createProduct)
-
+// Creating Banner
 router.post("/api/createBanner" , createBanner)
 
-router.get("/api/getBanner" , getBanner)
+//Fetch banner Data
+router.get("/api/getBanner" , getBanner);
+
+//Update banner Data
+router.put("/api/updateBanner/:id" , updateBanner)
+
+//Delete Banner
+router.delete("/api/deleteBanner/:id" , deleteBanner)
+
+
+router.get("/api/getProduct" , getProduct)
+
+router.get("/api/getCollection" , getCollection)
+
+
 
 router.post("/api/createMedia" , createMedia)
 
 router.get("/api/getMedia" , getMedia)
 
-router.delete("/api/deleteBanner/:id" , deleteBanner)
 
 router.get("/api/getPayloadProduct" , getPayloadProduct)
 

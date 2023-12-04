@@ -23,7 +23,7 @@ const verifyRequest = async (req, res, next) => {
 
     const session = await sessionHandler.loadSession(sessionId);
 
-    console.log("Session in verifyRequest in line 24 is" , session)
+    // console.log("Session in verifyRequest in line 24 is" , session)
     
     if(session && session?.shop)
     {

@@ -1,11 +1,3 @@
-// import axios from "axios";
-// import dotenv from "dotenv";
-// dotenv.config();
-// import Cryptr from "cryptr";
-// import SessionModel from "../models/SessionModels.js";
-// import readJsonlFile from "../utils/retiveJsonFile.js"
-// import downloadJsonlFile from "../utils/downLoadJsonFile.js";
-
 const axios = require("axios");
 const dotenv = require("dotenv");
 const Cryptr = require("cryptr");
@@ -13,7 +5,7 @@ const SessionModel = require("../models/SessionModels.js");
 const readJsonlFile = require("../utils/retiveJsonFile.js");
 const downloadJsonlFile = require("../utils/downLoadJsonFile.js");
 const Payload = require("payload");
-const {uploadFile} = require("../utils/awsConfig.js")
+const {uploadFile} = require("../utils/awsConfig.js");
 
 dotenv.config();
 
@@ -366,98 +358,6 @@ const updatePayloadProduct = async(req , res , next)=>{
 
 }
 
-const createBanner = async(req , res , next)=>{
-  try{
-    const data = JSON.parse(JSON.stringify(req.body))
-    const files = req.files
-
-    const fileData = {
-      data : files[0].buffer,
-      mimetype : files[0].mimetype,
-      name : files[0].originalname,
-      size : files[0].size
-    }
-
-    // const fileResult = await files.map(async (file)=>{
-    //   const fileReturn = await Payload.create({
-    //     collection: 'media', // require
-    //     file: {
-    //       data : file.buffer,
-    //       mimetype : file.mimetype,
-    //       name : file.originalname,
-    //       size : file.size
-    //     }
-    //   })
-    //   return fileReturn.id
-    // })
-
-    let dataCollect = []
-    for(let file of files){
-      const fileReturn = await Payload.create({
-        collection: 'media', // require
-        file: {
-          data : file.buffer,
-          mimetype : file.mimetype,
-          name : file.originalname,
-          size : file.size
-        }
-      })
-      dataCollect.push(fileReturn.id)
-    }
-
-      data.bannerImg = dataCollect
-      console.log(data.bannerImg)
-  
-    const post = await Payload.create({
-      collection: 'banner', // require
-      data: data,  
-    })
-  
-    return res.status(200).json({
-      success : true,
-      message : "Data Created Successfully",
-      data : data,
-      post : post
-    })
-  }catch(error){
-    return res.status(500).json({
-      success : false,
-      error  : error
-    })
-  }
-}
-
-const getBanner = async(req , res , next)=>{
-  const getBanner = await Payload.find({
-    collection: 'banner',
-  })
-
-  console.log(getBanner)
-
-  return res.status(200).json({
-    success :  true,
-    message :  getBanner
-  })
-}
-
-const deleteBanner = async(req , res , next)=>{
-
-  console.log(req.params)
-  const datas = await Payload.delete({
-    collection: 'banner',
-    where: {
-      id: { equals: req.params.id },
-    },
-  })
-
-  console.log(datas)
-
-  return res.status(200).json({
-    success :  true,
-    message :  datas
-  })
-}
-
 const createMedia = async(req , res , next)=>{
   try{
     const files = req.files    
@@ -495,7 +395,7 @@ const getMedia = async(req , res , next)=>{
 }
 
 
-module.exports = {getServerKey , updateServerKey , sendNotification , createProduct , getPayloadProduct , updatePayloadProduct , createBanner , getBanner , deleteBanner , createMedia , getMedia}
+module.exports = {getServerKey , updateServerKey , sendNotification , createProduct , getPayloadProduct , updatePayloadProduct , createMedia , getMedia}
 
 
 

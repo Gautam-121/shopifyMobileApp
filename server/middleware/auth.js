@@ -53,7 +53,7 @@ const authMiddleware = (app) => {
 
       const { session } = callbackResponse;
 
-      console.log("Session from Auth/tokens" , session)
+      // console.log("Session from Auth/tokens" , session)
 
       await sessionHandler.storeSession(session);
 
@@ -98,7 +98,7 @@ const authMiddleware = (app) => {
       });
 
       const { session } = callbackResponse;
-      console.log("Session from Auth/callback" , session)
+      // console.log("Session from Auth/callback" , session)
       await sessionHandler.storeSession(session);
 
       const host = req.query.host;
@@ -111,7 +111,7 @@ const authMiddleware = (app) => {
         }
       })
 
-      console.log("auth/callback data find activeStores" , result)
+      // console.log("auth/callback data find activeStores" , result)
 
       if(result.docs?.length!=0){
         // Update Document
@@ -126,7 +126,7 @@ const authMiddleware = (app) => {
           }
         })
 
-        console.log("After auth/token inside auth/callback update" , data )
+        // console.log("After auth/token inside auth/callback update" , data )
       }
       else{
         // Create The document
@@ -137,7 +137,7 @@ const authMiddleware = (app) => {
             isActive: true
           },
         })
-        console.log("After auth/token inside auth/callback " , data )
+        // console.log("After auth/token inside auth/callback " , data )
       }
 
       // const [result, created] = await StoreModel.findOrCreate({
