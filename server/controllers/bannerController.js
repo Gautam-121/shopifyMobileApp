@@ -102,6 +102,7 @@ const getBanner = async (req, res, next) => {
   }
 };
 
+//UPDATING BANNER DETAILS
 const updateBanner = async (req, res, next) => {
   try {
     if (!req.params?.id) {
