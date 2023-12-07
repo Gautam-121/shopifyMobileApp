@@ -16,6 +16,7 @@ const cryption = new Cryptr(process.env.ENCRYPTION_STRING);
   try {
 
     const shop = req.query.shop;
+    console.log(shop)
 
     return res.status(404).json({ success: false, error: "Server key not found" });
     
