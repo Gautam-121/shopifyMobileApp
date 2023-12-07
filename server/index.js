@@ -86,10 +86,12 @@ const start = async () => {
   })
 }
 
-process.on('warning', e => console.warn(e.stack))
+
 
 
 const createServer = async (root = process.cwd()) => {
+
+  process.on('warning', e => console.warn(e.stack))
 
   app.disable("x-powered-by");
 
