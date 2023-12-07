@@ -83,14 +83,14 @@ const createServer = async (root = process.cwd()) => {
 
   applyAuthMiddleware(app);
 
-// Initialize Payload
-await payload.init({
-  secret: process.env.PAYLOAD_SECRET,
-  express: app,
-  onInit: async () => {
-    payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
-  },
-})
+// // Initialize Payload
+// await payload.init({
+//   secret: process.env.PAYLOAD_SECRET,
+//   express: app,
+//   onInit: async () => {
+//     payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
+//   },
+// })
 
   // Incoming webhook requests
   app.post(
