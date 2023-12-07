@@ -1,7 +1,7 @@
 const { CollectionConfig } = require('payload/types');
 
 const Users = {
-  slug: 'users',
+  slug: 'userPayload',
   auth: true,
   admin: {
     useAsTitle: 'email',
