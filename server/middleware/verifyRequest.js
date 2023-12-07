@@ -6,6 +6,7 @@ const TEST_QUERY = `
 {
   shop {
     name
+    id
   }
 }`;
 
@@ -23,13 +24,7 @@ const verifyRequest = async (req, res, next) => {
 
     const session = await sessionHandler.loadSession(sessionId);
 
-    // console.log("Session in verifyRequest in line 24 is" , session)
-    
-    if(session && session?.shop)
-    {
-      req.query.shop = session?.shop
-    }
-
+    console.log("Session in verifyRequest in line 24 is" , session)
     // console.log(session, "hii from session");
 
     // console.log(`exired token is ${new Date(session?.expires)}`)
@@ -37,13 +32,15 @@ const verifyRequest = async (req, res, next) => {
     if (new Date(session?.expires) > new Date()) {
 
       const client = new shopify.clients.Graphql({ session });
-      await client.query({ data: TEST_QUERY });
-    
+      const data = await client.query({ data: TEST_QUERY });
+
       res.setHeader(
         "Content-Security-Policy",
         `frame-ancestors https://${session.shop} https://admin.shopify.com;`
       );
       
+      req.query.shop = session.shop
+      req.query.shop_id = data?.body?.data?.shop?.id
       req.body.accessToken = session.accessToken
 
       return next();

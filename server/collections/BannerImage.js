@@ -1,6 +1,6 @@
 const { CollectionConfig } = require("payload/types");
 
-const Banner = {
+const BannerImage = {
   slug: "banner",
   admin: {
     useAsTitle: "title",
@@ -9,6 +9,11 @@ const Banner = {
     create: () => true,
   },
   fields: [
+    {
+      name : "bannerFomat",
+      type : "text",
+      required : true
+    },
     {
       name: "isVisible",
       label : "Visible",
@@ -124,5 +129,5 @@ const Banner = {
   ],
 };
 
-module.exports = Banner;
+module.exports = BannerImage;
 

@@ -1,7 +1,3 @@
-// import { Router } from "express";
-// import {sendNotification , updateServerKey , getServerKey } from "../controllers/firebaseController.js"
-// import {getAllSegment , getProduct} from "../controllers/shopifyApiCotroller.js"
-
 const { Router } = require('express');
 const {
   sendNotification,
@@ -14,44 +10,84 @@ const {
   getMedia,
   
 } = require('../controllers/firebaseController.js');
+
 const {
   getAllSegment,
   getProduct,
-  getCollection
+  getCollection,
+  getProductByCollectionId
 } = require('../controllers/shopifyApiCotroller.js');
 
 const {
-  createBanner , 
-  getBanner , 
-  deleteBanner ,
-  updateBanner
-} = require("../controllers/bannerController.js")
+  createBannerImage,
+  getBannerImage, 
+  updateBannerImage, 
+  deleteBannerImage
+} = require("../controllers/bannerImageController.js")
+
+const {
+  createCollectionSlider,
+  getCollectionSliderByShop,
+  updateCollectionSlider,
+  deleteCollectionSliderById
+} = require("../controllers/collectionSliderController.js")
+
+const {
+  createProductGrid,
+  getProductGridByShop,
+  updateProductGrid,
+  deleteProductGridById
+} = require("../controllers/productGridController.js")
 
 const router = Router();
 
-router.get("/api", (req, res) => {
-  const sendData = { text: "This is coming from /apps/api route." };
-  return res.status(200).json(sendData);
-});
-
 // Creating Banner
-router.post("/api/createBanner" , createBanner)
+router.post("/api/createBanner" , createBannerImage)
 
-//Fetch banner Data
-router.get("/api/getBanner" , getBanner);
+//Fetch Banner Data
+router.get("/api/getBanner" , getBannerImage);
 
-//Update banner Data
-router.put("/api/updateBanner/:id" , updateBanner)
+//Update Banner Data
+router.put("/api/updateBanner/:id" , updateBannerImage)
 
 //Delete Banner
-router.delete("/api/deleteBanner/:id" , deleteBanner)
+router.delete("/api/deleteBanner/:id" , deleteBannerImage)
+
+// Creating Collection-Slider
+router.post("/api/createCollection" , createCollectionSlider)
+
+//Fetch Collection-Slider Data
+router.get("/api/getCollection" , getCollectionSliderByShop);
+
+//Update Collection Data
+router.put("/api/updateCollection/:id" , updateCollectionSlider)
+
+//Delete Collection-Slider 
+router.delete("/api/deleteCollection/:id" , deleteCollectionSliderById)
+
+// Creating Product-Grid
+router.post("/api/createProductGrid" , createProductGrid)
+
+//Fetch Product-Grid Data
+router.get("/api/getProductGridByShop" , getProductGridByShop);
+
+//Update Banner Data
+router.put("/api/updateProductGrid/:id" , updateProductGrid)
+
+//Delete Product-Grid
+router.delete("/api/deleteProductGridById/:id" , deleteProductGridById)
+
+
+
+
+
 
 
 router.get("/api/getProduct" , getProduct)
 
 router.get("/api/getCollection" , getCollection)
 
-
+router.get("/api/getProductByCollectionId" , getProductByCollectionId)
 
 router.post("/api/createMedia" , createMedia)
 
@@ -69,6 +105,11 @@ router.get("/api/getServerkey",getServerKey)
 router.post("/api/sendNotificatication", sendNotification)
 
 router.post("/api/updateServerKey",updateServerKey)
+
+router.get("/api", (req, res) => {
+  const sendData = { text: "This is coming from /apps/api route." };
+  return res.status(200).json(sendData);
+});
 
 
 module.exports = router;

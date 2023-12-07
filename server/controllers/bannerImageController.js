@@ -1,11 +1,8 @@
 const Payload = require("payload");
-const {
-  mediaCreate,
-  mediaDelete,
-} = require("../utils/generalFunctions.js");
+const { mediaCreate, mediaDelete } = require("../utils/generalFunctions.js");
 
 //CREATING BANNER DETAILS
-const createBanner = async (req, res, next) => {
+const createBannerImage = async (req, res, next) => {
   try {
     const data = JSON.parse(JSON.stringify(req.body));
     const files = req.files;
@@ -18,6 +15,7 @@ const createBanner = async (req, res, next) => {
     }
 
     const dataCollect = await mediaCreate(files);
+
 
     if (
       data.navigate === "product" &&
@@ -50,7 +48,7 @@ const createBanner = async (req, res, next) => {
     }
 
     data.bannerImg = dataCollect;
-    data.shop = req.query.shop || "styleatrribute.myshopify.com"
+    data.shop = req.query.shop_id || "gid://shopify/Shop/81447387454";
 
     const post = await Payload.create({
       collection: "banner", // require
@@ -65,30 +63,36 @@ const createBanner = async (req, res, next) => {
   } catch (error) {
     return res.status(500).json({
       success: false,
-      error: error,
+      error: error.message,
     });
   }
 };
 
 //FETCHING BANNER DETAILS
-const getBanner = async (req, res, next) => {
+const getBannerImage = async (req, res, next) => {
   try {
+    const { shop_id } = req.query;
 
-    const {shop} = req.query
-
-    if(!shop){
-        return res.status(400).json({
-            success : false,
-            message : "Shop name is Missing"
-        })
+    if (!shop_id) {
+      return res.status(400).json({
+        success: false,
+        message: "Shop id is Missing",
+      });
     }
+
+    const keyWord = req.query.bannerFormat ? { "bannerFomat" : { equals: req.query.bannerFormat }  } : {}
 
     const getBanner = await Payload.find({
       collection: "banner",
-      where : {
-        shop : {equals : shop}
-      }
+      where: {...keyWord , shop: { equals: shop_id },},
     });
+
+    if (getBanner.docs.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "No Banner Exist",
+      });
+    }
 
     return res.status(200).json({
       success: true,
@@ -103,7 +107,7 @@ const getBanner = async (req, res, next) => {
 };
 
 //UPDATING BANNER DETAILS
-const updateBanner = async (req, res, next) => {
+const updateBannerImage = async (req, res, next) => {
   try {
     if (!req.params?.id) {
       return res.status(400).json({
@@ -123,33 +127,46 @@ const updateBanner = async (req, res, next) => {
     }
 
     if (files && files.length != 0) {
-      const result = await Payload.findByID({
+      const result = await Payload.find({
         collection: "banner", // required
-        id: req.params.id, // required
+        where: {
+          // required
+          id: { equals: req.params.id },
+          // shop: { equals: req.query.shop_id },
+        },
       });
 
-      console.log(result.bannerImg);
-
-      if (!result) {
+      if (result.docs.length === 0) {
         return res.status(404).json({
           success: false,
           message: `No banner Exist with id : ${req.params.id}`,
         });
       }
       //Delete Existing bannerImage
-      await mediaDelete(result.bannerImg);
+      await mediaDelete(result.docs[0].bannerImg);
+
       //Update New bannerImage
       const mediaUpdatedData = await mediaCreate(files);
-      console.log(mediaUpdatedData);
       data.bannerImg = mediaUpdatedData;
     }
 
     // Result will be the updated Banner document.
     const updateBannerData = await Payload.update({
       collection: "banner", // required
-      id: req.params.id, // required
+      where: {
+        // required
+        id: { equals: req.params.id },
+        // shop: { equals: req.query.shop_id },
+      },
       data: data,
     });
+
+    if (updateBannerData.docs.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: `No banner Exist with id : ${req.params.id}`,
+      });
+    }
 
     return res.status(200).json({
       success: true,
@@ -165,7 +182,7 @@ const updateBanner = async (req, res, next) => {
 };
 
 //DELETING BANNER
-const deleteBanner = async (req, res, next) => {
+const deleteBannerImage = async (req, res, next) => {
   try {
     if (!req.params?.id) {
       return res.status(400).json({
@@ -173,16 +190,25 @@ const deleteBanner = async (req, res, next) => {
         message: "Bannener Id is missing",
       });
     }
-    await Payload.delete({
+    const data = await Payload.delete({
       collection: "banner",
       where: {
         id: { equals: req.params.id },
+        // shop: { equals: req.query.shop_id },
       },
     });
+
+    if (data.docs.length == 0) {
+      return res.status(400).json({
+        success: false,
+        message: `Banner Not Exist with id:${req.params.id}`,
+      });
+    }
 
     return res.status(200).json({
       success: true,
       message: "Banner Deleted Successfully",
+      data: data,
     });
   } catch (error) {
     return res.status(500).json({
@@ -192,4 +218,4 @@ const deleteBanner = async (req, res, next) => {
   }
 };
 
-module.exports = { createBanner, getBanner, deleteBanner, updateBanner };
+module.exports = { createBannerImage, getBannerImage, updateBannerImage, deleteBannerImage };

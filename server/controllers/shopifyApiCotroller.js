@@ -128,12 +128,15 @@ const getCollection = async (req, res) => {
     const shopifyGraphQLEndpoint = `https://${shop || "renergii.myshopify.com"}/admin/api/2023-04/graphql.json`;
 
     const graphqlQuery = `
-    {
-      collections(first: 100) {
-        edges {
-          node {
-            id
-            title
+    query MyQuery {
+      collections(first: 10) {
+        nodes {
+          id
+          title
+          image {
+            height
+            src
+            url
           }
         }
       }
@@ -161,5 +164,75 @@ const getCollection = async (req, res) => {
   }
 };
 
-module.exports = {getAllSegment , getProduct , getCollection}
+const getProductByCollectionId = async( req , res , next)=>{
+  try {
+
+  if(!req.query.collectionId){
+    return res.status(400).json({
+      success : false,
+      message : "Collection_Id is Missing"
+    })
+  }
+
+    const shop = req.query.shop;
+    const { accessToken } = req.body
+
+    const shopifyGraphQLEndpoint = `https://${shop || "renergii.myshopify.com"}/admin/api/2023-04/graphql.json`;
+
+    const graphqlQuery = `
+    query MyQuery {
+      collection(id: "gid://shopify/Collection/456867971390") {
+        products(first: ${req.query.count || 1}) {
+          edges {
+            node {
+              id
+              productType
+              title
+              priceRange {
+                maxVariantPrice {
+                  amount
+                  currencyCode
+                }
+                minVariantPrice {
+                  amount
+                  currencyCode
+                }
+              }
+              images(first: 10) {
+                edges {
+                  node {
+                    src
+                    url
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+    const axiosShopifyConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        "X-Shopify-Access-Token": accessToken || "shpua_2ded48571d3a5406643d72078fdf2df7",
+      },
+    };
+
+    const fetchCollectionsProducts = await shopifyApiData(shopifyGraphQLEndpoint , graphqlQuery , axiosShopifyConfig)
+
+    const collectionsProducts = fetchCollectionsProducts?.data?.data?.collection?.products?.edges?.map((edge) => edge.node);
+
+    return res.status(200).json({
+      success: true,
+      data : collectionsProducts
+    });
+
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+}
+
+module.exports = {getAllSegment , getProduct , getCollection , getProductByCollectionId}
 
