@@ -1,11 +1,9 @@
 const axios = require("axios");
 const dotenv = require("dotenv");
 const Cryptr = require("cryptr");
-const SessionModel = require("../models/SessionModels.js");
 const readJsonlFile = require("../utils/retiveJsonFile.js");
 const downloadJsonlFile = require("../utils/downLoadJsonFile.js");
 const Payload = require("payload");
-const {uploadFile} = require("../utils/awsConfig.js");
 
 dotenv.config();
 
@@ -50,6 +48,11 @@ const cryption = new Cryptr(process.env.ENCRYPTION_STRING);
     const { serverKey } = req?.body
     const shop = req?.query?.shop;
 
+    return res.status(200).json({
+      success : true,
+      message : "Its coming From updateServerKey"
+    })
+
     if (!serverKey) {
       return res.status(400).json({
         success: false,
@@ -88,6 +91,11 @@ const cryption = new Cryptr(process.env.ENCRYPTION_STRING);
   try {
 
     const shop = req.query?.shop;
+
+    return res.status(200).json({
+      success : true,
+      message : "Its coming From sendNotification"
+    })
 
     if (!shop) {
       return res.status(400).json({

@@ -1,7 +1,5 @@
 const { Session } = require('@shopify/shopify-api');
 const Cryptr = require('cryptr');
-const SessionModel = require('../models/SessionModels.js');
-
 const cryption = new Cryptr(process.env.ENCRYPTION_STRING);
 const payload = require('payload');
 

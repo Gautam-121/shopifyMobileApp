@@ -1,7 +1,7 @@
 const { CollectionConfig } = require("payload/types");
 
 const Session = {
-  slug: "session_store",
+  slug: "session",
   admin: {
     useAsTitle: "id",
   },

@@ -1,7 +1,6 @@
 const axios = require("axios");
 const dotenv = require("dotenv");
 const Cryptr = require("cryptr");
-const SessionModel = require("../models/SessionModels.js");
 const {shopifyApiData} = require("../utils/generalFunctions.js")
 
 dotenv.config();

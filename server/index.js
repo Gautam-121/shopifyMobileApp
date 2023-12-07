@@ -33,7 +33,6 @@ const payload = require('payload');
 const { resolve } = require('path');
 const shopify = require('./utils/shopifyConfig.js');
 const cors = require('cors');
-const sequelize = require('./config/database.js');
 
 const sessionHandler = require('./utils/sessionHandler.js');
 const csp = require('./middleware/csp.js');

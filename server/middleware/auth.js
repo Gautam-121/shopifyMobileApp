@@ -14,7 +14,6 @@ const {
   InvalidSession,
 } = require("@shopify/shopify-api");
 const authRedirect = require("../utils/authRedirect.js");
-const StoreModel = require("../models/StoreModels.js");
 const sessionHandler = require("../utils/sessionHandler.js");
 const shopify = require("../utils/shopifyConfig.js");
 const payload = require('payload');
