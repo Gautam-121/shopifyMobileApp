@@ -7,6 +7,8 @@ const createBannerImage = async (req, res, next) => {
     const data = JSON.parse(JSON.stringify(req.body));
     const files = req.files;
 
+    console.log(data)
+
     if (!files && files.length == 0) {
       return res.status(400).json({
         success: false,
