@@ -45,40 +45,40 @@ const {
 const router = Router();
 
 // Creating Banner
-router.post("/api/createBanner" , verifyRequest ,  createBannerImage)
+router.post("/api/createBanner"  ,  createBannerImage)
 
 //Fetch Banner Data
 router.get("/api/getBanner" , getBannerImage);
 
 //Update Banner Data
-router.put("/api/updateBanner/:id" , verifyRequest ,  updateBannerImage)
+router.put("/api/updateBanner/:id"  ,  updateBannerImage)
 
 //Delete Banner
-router.delete("/api/deleteBanner/:id" , verifyRequest ,  deleteBannerImage)
+router.delete("/api/deleteBanner/:id"  ,  deleteBannerImage)
 
 // Creating Collection-Slider
-router.post("/api/createCollection" , verifyRequest ,  createCollectionSlider)
+router.post("/api/createCollection"  ,  createCollectionSlider)
 
 //Fetch Collection-Slider Data
 router.get("/api/getCollection"  ,  getCollectionSliderByShop);
 
 //Update Collection Data
-router.put("/api/updateCollection/:id" , verifyRequest ,  updateCollectionSlider)
+router.put("/api/updateCollection/:id"  ,  updateCollectionSlider)
 
 //Delete Collection-Slider 
-router.delete("/api/deleteCollection/:id" , verifyRequest ,  deleteCollectionSliderById)
+router.delete("/api/deleteCollection/:id"  ,  deleteCollectionSliderById)
 
 // Creating Product-Grid
-router.post("/api/createProductGrid" , verifyRequest ,  createProductGrid)
+router.post("/api/createProductGrid"  ,  createProductGrid)
 
 //Fetch Product-Grid Data
 router.get("/api/getProductGridByShop" , getProductGridByShop);
 
 //Update Banner Data
-router.put("/api/updateProductGrid/:id" , verifyRequest ,  updateProductGrid)
+router.put("/api/updateProductGrid/:id"  ,  updateProductGrid)
 
 //Delete Product-Grid
-router.delete("/api/deleteProductGridById/:id" , verifyRequest ,  deleteProductGridById)
+router.delete("/api/deleteProductGridById/:id"  ,  deleteProductGridById)
 
 
 

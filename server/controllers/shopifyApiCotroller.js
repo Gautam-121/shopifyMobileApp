@@ -99,7 +99,7 @@ const getProduct = async (req, res) => {
     const axiosShopifyConfig = {
       headers: {
         "Content-Type": "application/json",
-        "X-Shopify-Access-Token": accessToken || "shpua_1ec6decc7de873d682a709ff821ddf6f",
+        "X-Shopify-Access-Token": accessToken || "shpua_22476a2bf64e7f1cc14d4971b9e8725b",
       },
     };
 
@@ -145,7 +145,7 @@ const getCollection = async (req, res) => {
     const axiosShopifyConfig = {
       headers: {
         "Content-Type": "application/json",
-        "X-Shopify-Access-Token": accessToken || "shpua_1ec6decc7de873d682a709ff821ddf6f",
+        "X-Shopify-Access-Token": accessToken || "shpua_22476a2bf64e7f1cc14d4971b9e8725b",
       },
     };
 
@@ -215,7 +215,7 @@ const getProductByCollectionId = async( req , res , next)=>{
     const axiosShopifyConfig = {
       headers: {
         "Content-Type": "application/json",
-        "X-Shopify-Access-Token": accessToken || "shpua_2ded48571d3a5406643d72078fdf2df7",
+        "X-Shopify-Access-Token": accessToken || "shpua_22476a2bf64e7f1cc14d4971b9e8725b",
       },
     };
 
