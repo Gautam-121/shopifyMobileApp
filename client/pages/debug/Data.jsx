@@ -36,14 +36,6 @@ const GetData = () => {
     method: "GET",
   };
 
-  const getBanner = {
-    headers:{
-      Accept : "application/json",
-      "Content-Type" : "application/json"
-    },
-    method : "GET"
-  }
-
   const [responseSegment, fetchSegment] = useDataFetcher(
     "",
     "/api/getSegment",
@@ -65,14 +57,6 @@ const GetData = () => {
     getServerKey
   );
 
-  const [responseBanner , fetchBanner] = useDataFetcher(
-    "",
-    "/api/getBanner",
-    getBanner
-  )
-
-  console.log(responseBanner)
-
   useEffect(() => {
     if (serverKey === "") {
       setIsLoaderVisible(true);
@@ -80,7 +64,6 @@ const GetData = () => {
       fetchSegment();
       fetchProduct();
       fetchServerKey();
-      fetchBanner()
     }
   }, [serverKey]);
   useEffect(() => {

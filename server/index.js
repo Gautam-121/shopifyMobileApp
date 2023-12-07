@@ -75,11 +75,15 @@ app.use(multer().any())
 // });
 
 
+
+
 const createServer = async (root = process.cwd()) => {
 
   app.disable("x-powered-by");
 
-// // Initialize Payload
+  applyAuthMiddleware(app);
+
+// Initialize Payload
 await payload.init({
   secret: process.env.PAYLOAD_SECRET,
   express: app,
@@ -87,8 +91,6 @@ await payload.init({
     payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
   },
 })
-
-  applyAuthMiddleware(app);
 
   // Incoming webhook requests
   app.post(
