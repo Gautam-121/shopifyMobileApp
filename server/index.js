@@ -86,7 +86,7 @@ const start = async () => {
   })
 }
 
-
+require('events').EventEmitter.prototype._maxListeners = 0;
 
 
 const createServer = async (root = process.cwd()) => {
