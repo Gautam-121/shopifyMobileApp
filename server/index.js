@@ -75,16 +75,16 @@ app.use(multer().any())
 // });
 
 
-const start = async () => {
-  // Initialize Payload
-  await payload.init({
-    secret: process.env.PAYLOAD_SECRET,
-    express: app,
-    onInit: async () => {
-      payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
-    },
-  })
-}
+// const start = async () => {
+//   // Initialize Payload
+//   await payload.init({
+//     secret: process.env.PAYLOAD_SECRET,
+//     express: app,
+//     onInit: async () => {
+//       payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
+//     },
+//   })
+// }
 
 
 const createServer = async (root = process.cwd()) => {
@@ -220,4 +220,4 @@ createServer().then(({ app }) => {
   });
 });
 
-start()
+// start()
