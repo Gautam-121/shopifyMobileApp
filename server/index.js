@@ -54,6 +54,8 @@ const createServer = async (root = process.cwd()) => {
   app.disable("x-powered-by");
   applyAuthMiddleware(app);
 
+  console.log("Enter Inside The createServer")
+
   // Incoming webhook requests
   app.post(
     "/webhooks/:topic",
