@@ -22,6 +22,8 @@ const proxyRouter = require('./routes/app_proxy/index.js');
 const router = require('./routes/index.js');
 const webhookRegistrar = require('./webhooks/index.js');
 const multer = require("multer")
+require('events').EventEmitter.prototype._maxListeners = 70;
+
 
 dotenv.config();
 setupCheck(); // Run a check to ensure everything is setup properly
@@ -46,9 +48,6 @@ const start = async () => {
     },
   })
 }
-
-require('events').EventEmitter.prototype._maxListeners = 70;
-
 const createServer = async (root = process.cwd()) => {
 
   app.disable("x-powered-by");
