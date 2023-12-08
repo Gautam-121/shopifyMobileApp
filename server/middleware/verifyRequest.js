@@ -21,14 +21,10 @@ const verifyRequest = async (req, res, next) => {
       rawRequest: req,
       rawResponse: res,
     });
-
     const session = await sessionHandler.loadSession(sessionId);
 
     console.log("Session in verifyRequest in line 24 is" , session)
-    // console.log(session, "hii from session");
-
-    // console.log(`exired token is ${new Date(session?.expires)}`)
-
+    
     if (new Date(session?.expires) > new Date()) {
 
       const client = new shopify.clients.Graphql({ session });

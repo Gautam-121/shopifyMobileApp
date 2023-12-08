@@ -1,31 +1,3 @@
-// import "@shopify/shopify-api/adapters/node";
-// import dotenv from 'dotenv'
-// import express from 'express'
-// import payload from 'payload'
-// import { resolve } from "path";
-// import shopify from "./utils/shopifyConfig.js";
-// import cors from "cors"
-// import sequelize from "./config/database.js"
-
-// import sessionHandler from "./utils/sessionHandler.js";
-// import csp from "./middleware/csp.js";
-// import setupCheck from "./utils/setupCheck.js";
-// import {
-//   customerDataRequest,
-//   customerRedact,
-//   shopRedact,
-// } from "./controllers/gdpr.js";
-// import applyAuthMiddleware from "./middleware/auth.js";
-// import isShopActive from "./middleware/isShopActive.js";
-// import verifyHmac from "./middleware/verifyHmac.js";
-// import verifyProxy from "./middleware/verifyProxy.js";
-// import verifyRequest from "./middleware/verifyRequest.js";
-// import proxyRouter from "./routes/app_proxy/index.js";
-// import router from "./routes/index.js";
-// import webhookRegistrar from "./webhooks/index.js";
-
-// dotenv.config()
-
 require('@shopify/shopify-api/adapters/node');
 const dotenv = require('dotenv');
 const express = require('express');
@@ -33,7 +5,6 @@ const payload = require('payload');
 const { resolve } = require('path');
 const shopify = require('./utils/shopifyConfig.js');
 const cors = require('cors');
-
 const sessionHandler = require('./utils/sessionHandler.js');
 const csp = require('./middleware/csp.js');
 const setupCheck = require('./utils/setupCheck.js');
@@ -53,27 +24,17 @@ const webhookRegistrar = require('./webhooks/index.js');
 const multer = require("multer")
 
 dotenv.config();
-
 setupCheck(); // Run a check to ensure everything is setup properly
 
 const PORT = parseInt(process.env.PORT, 10) || 8081;
 const isDev = process.env.NODE_ENV === "dev";
-
 
 // Register all webhook handlers
 webhookRegistrar();
 
 const app = express();
 app.use(cors())
-app.use(multer().any())
-// app.use(express.json())
-
-// sequelize.sync().then(() => {
-//   console.log('Database synced');
-// }).catch((err)=>{
-//  console.log(err)
-// });
-
+// app.use(multer().any())
 
 const start = async () => {
   // Initialize Payload
@@ -86,16 +47,12 @@ const start = async () => {
   })
 }
 
-require('events').EventEmitter.prototype._maxListeners = 0;
-
+require('events').EventEmitter.prototype._maxListeners = 70;
 
 const createServer = async (root = process.cwd()) => {
 
-
   app.disable("x-powered-by");
-
   applyAuthMiddleware(app);
-
 
   // Incoming webhook requests
   app.post(
@@ -184,16 +141,6 @@ const createServer = async (root = process.cwd()) => {
       res.status(403).send("An error occured");
     }
   });
-
-  // if(process.env.NODE_ENV == "production"){
-
-  //   const path = require('path')
-
-  //   app.get("/" , (req , res)=>{
-  //     app.use(express.static(path.resolve(__dirname , 'dist' , 'client' )))
-  //     res.sendFile(path.resolve(__dirname , "dist" , "client" , "index.html"))
-  //   }) 
-  // }
 
   if (!isDev) {
     const compression = await import("compression").then(

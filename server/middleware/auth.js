@@ -1,13 +1,3 @@
-// import {
-//   CookieNotFound,
-//   InvalidOAuthError,
-//   InvalidSession,
-// } from "@shopify/shopify-api";
-// import authRedirect from "../utils/authRedirect.js";
-// import StoreModel from "../models/StoreModels.js";
-// import sessionHandler from "../utils/sessionHandler.js";
-// import shopify from "../utils/shopifyConfig.js";
-
 const {
   CookieNotFound,
   InvalidOAuthError,
@@ -52,8 +42,6 @@ const authMiddleware = (app) => {
 
       const { session } = callbackResponse;
 
-      // console.log("Session from Auth/tokens" , session)
-
       await sessionHandler.storeSession(session);
 
       const webhookRegisterResponse = await shopify.webhooks.register({
@@ -97,7 +85,7 @@ const authMiddleware = (app) => {
       });
 
       const { session } = callbackResponse;
-      // console.log("Session from Auth/callback" , session)
+      
       await sessionHandler.storeSession(session);
 
       const host = req.query.host;
@@ -109,8 +97,6 @@ const authMiddleware = (app) => {
           shop: { equals: shop},
         }
       })
-
-      // console.log("auth/callback data find activeStores" , result)
 
       if(result.docs?.length!=0){
         // Update Document
@@ -124,8 +110,6 @@ const authMiddleware = (app) => {
             isActive: true
           }
         })
-
-        // console.log("After auth/token inside auth/callback update" , data )
       }
       else{
         // Create The document
@@ -136,30 +120,7 @@ const authMiddleware = (app) => {
             isActive: true
           },
         })
-        // console.log("After auth/token inside auth/callback " , data )
       }
-
-      // const [result, created] = await StoreModel.findOrCreate({
-      //   where: { shop: shop},
-      //   defaults: {
-      //     shop : shop,
-      //     isActive: true
-      //   }
-      // });
-
-      // if(!created){
-
-      //   await StoreModel.update(//Update store to true after auth has happened, or it'll cause reinstall issues.
-      //     {
-      //       isActive : true,
-      //       limit : 1
-      //     },
-      //     {
-      //       where : {shop : shop}
-      //     }
-      //   )
-      // }
-
       // Redirect to app with shop parameter upon auth
       res.redirect(`/?shop=${shop}&host=${host}`);
 

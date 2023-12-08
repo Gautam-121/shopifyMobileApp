@@ -108,7 +108,7 @@ const getBannerImage = async (req, res, next) => {
   }
 };
 
-//UPDATING BANNER DETAILS
+//UPDATING BANNER DETAILs
 const updateBannerImage = async (req, res, next) => {
   try {
     if (!req.params?.id) {
