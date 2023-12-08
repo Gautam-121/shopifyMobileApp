@@ -36,7 +36,7 @@ webhookRegistrar();
 
 const app = express();
 app.use(cors())
-// app.use(multer().any())
+app.use(multer().any())
 
 const start = async () => {
   // Initialize Payload
