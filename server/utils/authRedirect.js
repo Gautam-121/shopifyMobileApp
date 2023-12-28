@@ -27,4 +27,4 @@ const authRedirect = async (req, res) => {
   });
 };
 
-module.exports =  authRedirect;
+module.exports =  authRedirect

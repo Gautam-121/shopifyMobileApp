@@ -2,30 +2,55 @@ const { CollectionConfig } = require("payload/types");
 
 const BannerImage = {
   slug: "banner",
-  admin: {
-    useAsTitle: "title",
-  },
   access: {
     create: () => true,
   },
+  admin: {
+    useAsTitle: 'type',
+  },
   fields: [
     {
-      name : "bannerFomat",
-      type : "text",
-      required : true
+      name: "type",
+      type: "text",
+      defaultValue: "banner_image"
     },
     {
-      name: "isVisible",
-      label : "Visible",
-      type: "checkbox", // Use "checkbox" for boolean fields
-      defaultValue: false,
+      name:"view",
+      type: "select",
+      options:["horizontal" , "vertical"],
+      defaultValue: "horizontal"
     },
     {
-      name : "bannerImg",
-      type : "relationship",
-      relationTo : "media",
-      required : true,
-      hasMany:true
+      name: "visibility",
+      type: "checkbox",
+      defaultValue: true,
+    },
+    // {
+    //   name : "image_url",
+    //   type : "relationship",
+    //   relationTo : "media",
+    //   defaultValue : undefined,
+    //   hasMany: false
+    // },
+    {
+      name: "items",
+      type: "group",
+      fields:[
+        {
+          name: "image_url",
+          type: "text",
+          required: true
+        },
+        {
+         name: "navigate",
+         type: "select",
+         options: ["none", "product" ,"collection" , "external_link"]
+        },
+        {
+        name: "redirect_id",
+        type: "text",
+        }
+      ]
     },
     {
       name: 'imageAdjustment',
@@ -50,82 +75,60 @@ const BannerImage = {
         layout: 'horizontal',
       },
     },
-    {
-      name: "title",
-      label: "Banner Title",
-      type: "text",
-    },
-    {
-      name: 'navigate',
-      type: 'radio',
-      label: "Navigate To",
-      options: [
-        {
-          label: 'None',
-          value: 'none',
-        },
-        {
-          label: 'Product',
-          value: 'product',
-        },
-        {
-          label: 'Collection',
-          value: 'collection',
-        },
-        {
-          label: 'External link',
-          value: 'external_link',
-        },
-      ],
-      defaultValue: 'none',
-      admin: {
-        layout: 'vertical',
-      },
-    },
-    {
-      name: "product",
-      label: "Products",
-      type: "array",
-      required : true,
-      fields:[
-        {
-          name: 'product_id',
-          type: 'text',
-        }
-      ],
-      admin: {
-        condition: (_, siblingData) => siblingData.navigate === "product",
-      },
-    },
-    {
-      name: "externalLink",
-      label: "Url",
-      type: "text",
-      admin: {
-        condition: (_, siblingData) => siblingData.navigate === "external_link",
-      },
-      required: true,
-    },
-    {
-      name: "collection",
-      label: "Collection",
-      type: "array",
-      fields:[
-        {
-          name: 'collection_id',
-          type: 'text',
-          required : true
-        }
-      ],
-      admin: {
-        condition: (_, siblingData) => siblingData.navigate === "collection",
-      },
-    },
-    {
-      name: "shop",
-      type: "text",
-      required : true
-    },
+//     {
+//       name: 'navigate',
+//       type: 'radio',
+//       label: "Navigate To",
+//       options: [
+//         {
+//           label: 'None',
+//           value: 'none',
+//         },
+//         {
+//           label: 'Product',
+//           value: 'product',
+//         },
+//         {
+//           label: 'Collection',
+//           value: 'collection',
+//         },
+//         {
+//           label: 'External link',
+//           value: 'external_link',
+//         },
+//       ],
+//       defaultValue: 'none',
+//       admin: {
+//         layout: 'vertical',
+//       },
+//     },
+//     {
+//       name: "product_id",
+//       label: "Products",
+//       type: "text",
+//       required : true,
+//       admin: {
+//         condition: (_, siblingData) => siblingData.navigate === "product",
+//       },
+//     },
+//     {
+//       name: "externalLink",
+//       label: "Url",
+//       type: "text",
+//       admin: {
+//         condition: (_, siblingData) => siblingData.navigate === "external_link",
+//       },
+//       required: true,
+//     },
+//     {
+//       name: "collection_id",
+//       label: "Collection",
+//       type: "text",
+//       required: true,
+//       admin: {
+//         condition: (_, siblingData) => siblingData.navigate === "collection",
+//       },
+//     },
   ],
 };
 

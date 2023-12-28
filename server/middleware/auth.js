@@ -85,11 +85,13 @@ const authMiddleware = (app) => {
       });
 
       const { session } = callbackResponse;
-      
+
       await sessionHandler.storeSession(session);
 
       const host = req.query.host;
       const { shop } = session;
+
+      console.log("Session in verifyRequest in line 24 is" , session)
 
       const result = await payload.find({
         collection: 'activeStores', // required
@@ -100,7 +102,7 @@ const authMiddleware = (app) => {
 
       if(result.docs?.length!=0){
         // Update Document
-        const data = await payload.update({
+        await payload.update({
           collection: 'activeStores',
           where: {
             shop: { equals: shop},
@@ -113,7 +115,7 @@ const authMiddleware = (app) => {
       }
       else{
         // Create The document
-        const data = await payload.create({
+        await payload.create({
           collection: 'activeStores', // required
           data: {
             shop : shop,

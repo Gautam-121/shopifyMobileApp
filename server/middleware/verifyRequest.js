@@ -16,14 +16,14 @@ const verifyRequest = async (req, res, next) => {
 
     let { shop } = req.query;
 
+    console.log(req , res)
+
     const sessionId = await shopify.session.getCurrentId({
       isOnline: true,
       rawRequest: req,
       rawResponse: res,
     });
     const session = await sessionHandler.loadSession(sessionId);
-
-    console.log("Session in verifyRequest in line 24 is" , session)
     
     if (new Date(session?.expires) > new Date()) {
 
@@ -35,9 +35,9 @@ const verifyRequest = async (req, res, next) => {
         `frame-ancestors https://${session.shop} https://admin.shopify.com;`
       );
       
-      req.query.shop = session.shop
-      req.query.shop_id = data?.body?.data?.shop?.id
-      req.body.accessToken = session.accessToken
+      req.shop = session.shop
+      req.shop_id = data?.body?.data?.shop?.id
+      req.accessToken = session.accessToken
 
       return next();
     }

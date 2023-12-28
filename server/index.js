@@ -21,7 +21,6 @@ const verifyRequest = require('./middleware/verifyRequest.js');
 const proxyRouter = require('./routes/app_proxy/index.js');
 const router = require('./routes/index.js');
 const webhookRegistrar = require('./webhooks/index.js');
-const multer = require("multer")
 require('events').EventEmitter.prototype._maxListeners = 70;
 
 
@@ -36,7 +35,6 @@ webhookRegistrar();
 
 const app = express();
 app.use(cors())
-app.use(multer().any())
 
 const start = async () => {
   // Initialize Payload
@@ -99,14 +97,14 @@ const createServer = async (root = process.cwd()) => {
       res.status(200).send(response.body);
     } catch (e) {
       console.error(`---> An error occured at GraphQL Proxy`, e);
-      res.status(403).send(e);
+      res.status(403).send(e)
     }
   });
 
   app.use(csp);
-  app.use(isShopActive);
+  app.use(isShopActive)
   // If you're making changes to any of the routes, please make sure to add them in `./client/vite.config.cjs` or it'll not work.
-  app.use("/apps",  router); //Verify user route requests
+  app.use("/apps" , verifyRequest ,  router); //Verify user route requests
   app.use("/proxy_route", verifyProxy, proxyRouter); //MARK:- App Proxy routes
 
   app.post("/gdpr/:topic", verifyHmac, async (req, res) => {

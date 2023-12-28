@@ -1,91 +1,46 @@
 const { Router } = require('express');
 const verifyRequest = require('../middleware/verifyRequest.js');
 
-const {
-  getProduct,
-  getCollection,
-  getProductByCollectionId
-} = require('../controllers/shopifyApiCotroller.js');
-
-const {
-  createBannerImage,
-  getBannerImage, 
-  updateBannerImage, 
-  deleteBannerImage
-} = require("../controllers/bannerImageController.js")
-
-const {
-  createCollectionSlider,
-  getCollectionSliderByShop,
-  updateCollectionSlider,
-  deleteCollectionSliderById
-} = require("../controllers/collectionSliderController.js")
-
-const {
-  createProductGrid,
-  getProductGridByShop,
-  updateProductGrid,
-  deleteProductGridById
-} = require("../controllers/productGridController.js")
+const {createHomePage , getHomePage , updateHomePage} = require("../controllers/homePageController.js")
+const {getProduct,getCollection,getProductByCollectionId} = require('../controllers/shopifyApiCotroller.js');
+const {createBrandingPage , getBrandingPage , updateBrandingPage} = require("../controllers/barandingPageController.js")
 
 const router = Router();
 
-// Creating Banner
-router.post("/api/createBanner", createBannerImage)
+/*---------------------------ShopifyRouter-------------------------------------------------- */
 
-//Fetch Banner Data
-router.get("/api/getBanner", getBannerImage);
-
-//Update Banner Data
-router.put("/api/updateBanner/:id",  updateBannerImage)
-
-//Delete Banner
-router.delete("/api/deleteBanner/:id",  deleteBannerImage)
-
-// Creating Collection-Slider
-router.post("/api/createCollection",  createCollectionSlider)
-
-//Fetch Collection-Slider Data
-router.get("/api/getCollection",  getCollectionSliderByShop);
-
-//Update Collection Data
-router.put("/api/updateCollection/:id",  updateCollectionSlider)
-
-//Delete Collection-Slider 
-router.delete("/api/deleteCollection/:id",  deleteCollectionSliderById)
-
-// Creating Product-Grid
-router.post("/api/createProductGrid",  createProductGrid)
-
-//Fetch Product-Grid Data
-router.get("/api/getProductGridByShop", getProductGridByShop);
-
-//Update Banner Data
-router.put("/api/updateProductGrid/:id",  updateProductGrid)
-
-//Delete Product-Grid
-router.delete("/api/deleteProductGridById/:id",  deleteProductGridById)
-
-// FETCH SHOPIFY STORE PRODUCT
+//FETCH SHOPIFY STORE PRODUCT
 router.get("/api/getProduct", verifyRequest ,  getProduct)
 
-router.get("/api/getServerKey" , verifyRequest , async(req , res , next)=>{
-  return res.status(400).json({
-    success : false,
-    message : "Server Key Not Found"
-  })
-})
-
-// FETCH SHOPIFY STORE COLLECTION
+//FETCH SHOPIFY STORE COLLECTION
 router.get("/api/getCollection", verifyRequest , getCollection)
 
-// FETCH SHOPIFY STORE PRODUCT BY COLLECTION
-router.get("/api/getProductByCollectionId", verifyRequest ,  getProductByCollectionId)
+//FETCH SHOPIFY STORE PRODUCT BY COLLECTION
+router.get("/api/getProductByCollectionId" ,  getProductByCollectionId)
 
-router.get("/api", (req, res) => {
+/*----------------------------HomePageRouter-------------------------------------------------- */
+
+router.post("/api/createHomePage" , createHomePage)
+
+router.get("/api/getHomePage/:shop_id" , getHomePage)
+
+router.put("/api/updateHomePage/:home_id" , updateHomePage)
+
+/*--------------------------BrandingPageRouter--------------------------------------------------*/
+
+router.post("/api/createBrandingPage", createBrandingPage)
+
+router.get("/api/getBrandingPage/:shop_id", getBrandingPage)
+
+router.put("/api/updateBrandingPage/:branding_id", updateBrandingPage)
+
+/*------------------------------------------------------------------------------------------------*/
+
+router.get("/api/getData", (req, res) => {
   const sendData = { text: "This is coming from /apps/api route." };
   return res.status(200).json(sendData);
 });
+
 
 
 module.exports = router;

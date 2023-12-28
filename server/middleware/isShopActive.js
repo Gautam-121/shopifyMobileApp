@@ -20,7 +20,7 @@ const isShopActive = async (req, res, next) => {
   if (isShopAvaialble.docs?.length === 0 || !isShopAvaialble.docs[0].isActive) {
 
     if (isShopAvaialble.docs?.length === 0) {
-      const data = await payload.create({
+      await payload.create({
         collection: 'activeStores', // required
         data: {
           shop : shop,

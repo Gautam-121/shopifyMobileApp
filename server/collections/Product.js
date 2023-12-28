@@ -1,40 +1,41 @@
 const { CollectionConfig } = require("payload/types");
 
-const ProductGrid = {
+const Product = {
   slug: "product",
   admin: {
-    useAsTitle: "title",
+    useAsTitle: "type",
   },
   fields: [
     {
-      name : "productFormat",
-      type : "text",
-      defaultValue : "Product grid"
+      name: "type",
+      type: "select",
+      options : ["product_grid", "product_slider", "product_stack"],
+      required: true
     },
     {
-      name: "isVisible",
-      label : "Visible",
+      name: "visibility",
       type: "checkbox", // Use "checkbox" for boolean fields
-      defaultValue: false,
+      defaultValue: true,
     },
     {
-      name: "title",
+      name: "block_title",
       label : "Block Title",
       type: "text",
       maxLength: 30, // Set to true if you want this field to be unique
-      required : true
+      defaultValue: undefined
     },
     {
       name: "collection_id",
-      label: "Select Collection",
+      label: "Collection Ids",
       type: "text",
       required : true
     },
     {
-      name: "countDisplay",
-      type: "number", // Use "checkbox" for boolean fields
-      min : 1,
-      defaultValue : 1,
+      name: "no_of_product",
+      type: "number", 
+      min : 4,
+      max: 8,
+      defaultValue : 4,
     },
     {
       name: 'imageAdjustment',
@@ -59,12 +60,7 @@ const ProductGrid = {
         layout: 'vertical',
       },
     },
-    {
-      name: "shop",
-      type: "text",
-      required : true
-    }
   ],
 };
 
-module.exports = ProductGrid
+module.exports = Product
