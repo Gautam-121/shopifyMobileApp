@@ -72,6 +72,34 @@ const getBrandingPage = async (req, res, next) => {
     }
 };
 
+const getBrandingPagWeb = async (req, res, next) => {
+    try {
+        
+        const brandingData = await Payload.find({
+            collection: 'brandingTheme',
+            where: {shop_id: { equals: req.shop_id},},
+        })
+
+        if(brandingData.docs.length === 0){
+            return res.status(400).json({
+              success: false,
+              message: "No Dcoument found"
+            })
+          }
+    
+        return res.status(200).json({
+            success: true,
+            message: "Data Send Successfully",
+            data: brandingData
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+};
+
 const updateBrandingPage = async (req, res, next) => {
     try {
         if(!req.params.branding_id){
@@ -100,4 +128,4 @@ const updateBrandingPage = async (req, res, next) => {
     }
 };
 
-module.exports = { createBrandingPage, getBrandingPage, updateBrandingPage };
+module.exports = { createBrandingPage, getBrandingPage, updateBrandingPage , getBrandingPagWeb };

@@ -1,9 +1,9 @@
 const { Router } = require('express');
 const verifyRequest = require('../middleware/verifyRequest.js');
 
-const {createHomePage , getHomePage , updateHomePage} = require("../controllers/homePageController.js")
+const {createHomePage , getHomePage , updateHomePage , getHomePageByWeb} = require("../controllers/homePageController.js")
 const {getProduct,getCollection,getProductByCollectionId} = require('../controllers/shopifyApiCotroller.js');
-const {createBrandingPage , getBrandingPage , updateBrandingPage} = require("../controllers/barandingPageController.js")
+const {createBrandingPage , getBrandingPage , updateBrandingPage , getBrandingPagWeb} = require("../controllers/barandingPageController.js")
 
 const router = Router();
 
@@ -16,23 +16,27 @@ router.get("/api/getProduct", verifyRequest ,  getProduct)
 router.get("/api/getCollection", verifyRequest , getCollection)
 
 //FETCH SHOPIFY STORE PRODUCT BY COLLECTION
-router.get("/api/getProductByCollectionId" ,  getProductByCollectionId)
+router.get("/api/getProductByCollectionId" , verifyRequest,  getProductByCollectionId)
 
 /*----------------------------HomePageRouter-------------------------------------------------- */
 
-router.post("/api/createHomePage" , createHomePage)
+router.post("/api/createHomePage" , verifyRequest ,  createHomePage)
 
 router.get("/api/getHomePage/:shop_id" , getHomePage)
 
-router.put("/api/updateHomePage/:home_id" , updateHomePage)
+router.get("/api/getHomePageByShop" , verifyRequest ,  getHomePageByWeb)
+
+router.put("/api/updateHomePage/:home_id" , verifyRequest ,  updateHomePage)
 
 /*--------------------------BrandingPageRouter--------------------------------------------------*/
 
-router.post("/api/createBrandingPage", createBrandingPage)
+router.post("/api/createBrandingPage", verifyRequest ,  createBrandingPage)
 
 router.get("/api/getBrandingPage/:shop_id", getBrandingPage)
 
-router.put("/api/updateBrandingPage/:branding_id", updateBrandingPage)
+router.get("/api/getBrandingPageByShop" , verifyRequest  getBrandingPagWeb)
+
+router.put("/api/updateBrandingPage/:branding_id", verifyRequest , updateBrandingPage)
 
 /*------------------------------------------------------------------------------------------------*/
 

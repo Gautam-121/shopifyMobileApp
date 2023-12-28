@@ -246,6 +246,36 @@ const getHomePage = async (req , res , next)=>{
   }
 }
 
+const getHomePageByWeb = async (req , res , next)=>{
+
+  try {
+
+    const homeData = await Payload.find({
+      collection: 'homePage',
+      where: {shop_id: { equals: req.shop_id},},
+    })
+
+    if(homeData.docs.length === 0){
+      return res.status(400).json({
+        success: false,
+        message: "No Document Found"
+      })
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Send Successfully",
+      data: homeData
+    })
+  
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message
+    })
+  }
+}
+
 const updateHomePage = async (req , res , next)=>{
   try {
 
@@ -583,4 +613,4 @@ const updateHomePage = async (req , res , next)=>{
   }
 }
 
-module.exports = {createHomePage , getHomePage , updateHomePage}
+module.exports = {createHomePage , getHomePage , updateHomePage , getHomePageByWeb}

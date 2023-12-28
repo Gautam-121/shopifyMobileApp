@@ -149,3 +149,61 @@ const data =[
 
 
 
+
+
+
+  const adata = {
+    datas: [
+    {
+            type: "banner_image",
+            view: "horizontal",
+            visibility: true,
+            items: {
+              image_url:
+                "https://static-mobile.onecommerce.io/images/doorbuster/advance-image-slider/1683537784349.jpg",
+              navigate: "none",
+              redirect_id: null,
+            },
+            imageAdjustment: "fill",
+    },
+    {
+            type: "announcement_bar",
+            visibility: true,
+            text: "Up to 50% off New Arrivals",
+            text_color: "#FFFFFF",
+            bg_color: "#FE6100",
+            animation: "Right To Left",
+            updatedAt: "2023-12-28T05:55:23.988Z",
+            createdAt: "2023-12-28T05:55:23.988Z",
+    },
+    {
+        visbillity: true,
+        type: "collection_card_slider",
+
+        collection_ids: [
+          {
+            collection_id: "gid://collectionId:1234",
+            image_src:
+              "https://static-mobile.onecommerce.io/images/doorbuster/advance-image-slider/1683537784349.jpg",
+            title: "Women",
+          },
+        ],
+        imageAdjustment: "stretch",
+    },
+    {
+            type: "product_slider",
+            visibility: true,
+            block_title: "Shoes",
+            collection_id: "gid://shopify/Collection/456867971390",
+            no_of_product: 5,
+            imageAdjustment: "fill",
+    },
+
+      {
+        _order: 5,
+        id: "658d5232f2ad44380c7f9298",
+      },
+    ],
+    updatedAt: "2023-12-28T10:47:14.073Z",
+    createdAt: "2023-12-28T10:47:14.073Z",
+  };
