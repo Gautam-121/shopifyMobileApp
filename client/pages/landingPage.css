@@ -1,0 +1,16 @@
+.componentPicker{
+    display: flex;
+    flex-direction: row;
+   border: 1px solid;
+   padding: 10px;
+   width: fit-content;
+
+}
+.layoutVeiwer{
+    border: 1px solid;
+    min-width: 20rem;
+}
+.wrapper{
+    display: flex;
+    gap: 10px;
+}
