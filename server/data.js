@@ -146,7 +146,14 @@ const data =[
     }
   ]
 
-
+  https://onemobile-api.onecommerce.io/api/uploads/image
+  const returnData = {
+    "status": true,
+    "message": "Ok",
+    "data": {
+        "link": "https:\/\/static-mobile.onecommerce.io\/images\/banner\/1703832997_bags.jpeg"
+    }
+}
 
 
 
@@ -207,3 +214,6 @@ const data =[
     updatedAt: "2023-12-28T10:47:14.073Z",
     createdAt: "2023-12-28T10:47:14.073Z",
   };
+
+
+

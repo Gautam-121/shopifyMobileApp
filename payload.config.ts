@@ -45,7 +45,7 @@ module.exports =  buildConfig({
   editor: slateEditor({}),
   cors: process.env.WHITELIST_ORIGINS ? process.env.WHITELIST_ORIGINS.split(',') : [],
   csrf: process.env.WHITELIST_ORIGINS ? process.env.WHITELIST_ORIGINS.split(',') : [],
-  collections: [BrandingByApp , Video , HomePage , AnnouncementBanner , OtherComponent , User , BannerImage  , EventTimer  , TextParagraph , SocialChannel  , Product , Collection , Session , ActiveStore],
+  collections: [BrandingByApp , Video , HomePage , AnnouncementBanner , OtherComponent , User , BannerImage  , EventTimer  , TextParagraph , SocialChannel  , Product , Collection , Session , ActiveStore ],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },

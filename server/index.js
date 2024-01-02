@@ -21,6 +21,7 @@ const verifyRequest = require('./middleware/verifyRequest.js');
 const proxyRouter = require('./routes/app_proxy/index.js');
 const router = require('./routes/index.js');
 const webhookRegistrar = require('./webhooks/index.js');
+const fileUpload = require("express-fileupload");
 require('events').EventEmitter.prototype._maxListeners = 70;
 
 
@@ -35,6 +36,9 @@ webhookRegistrar();
 
 const app = express();
 app.use(cors())
+app.use(fileUpload({
+  useTempFiles: true
+}))
 
 const start = async () => {
   // Initialize Payload

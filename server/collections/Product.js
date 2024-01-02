@@ -9,7 +9,7 @@ const Product = {
     {
       name: "type",
       type: "select",
-      options : ["product_grid", "product_slider", "product_stack"],
+      options : ["product_grid", "product_slider"],
       required: true
     },
     {

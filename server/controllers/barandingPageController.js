@@ -20,7 +20,7 @@ const createBrandingPage = async (req, res, next) => {
     const brandingData = await Payload.create({
       collection: "brandingTheme",
       data: {
-        data,
+        ...data,
         shop_id: req.shop_id || "gid://shopify/Shop/81447387454"
       },
     });

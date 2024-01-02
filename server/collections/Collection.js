@@ -14,7 +14,7 @@ const Collection = {
     {
       name: "type",
       type: "select",
-      options : ["collection_card_slider", "collection_card_grid", "collection_card_stack"],
+      options : ["collection_card_slider", "collection_card_stack" , "collection_slider" , "collection_grid"],
       required: true
     },
     {

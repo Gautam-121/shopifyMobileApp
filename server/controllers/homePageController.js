@@ -5,6 +5,7 @@ const createHomePage = async (req, res, next) => {
   try {
 
     const {datas} = req.body;
+    console.log(datas)
     let saveData = [];
 
     const isHomeDataPresent = await Payload.find({
@@ -35,8 +36,7 @@ const createHomePage = async (req, res, next) => {
           },
         });
 
-        console.log("BannerImage Created Succefully" , index)
-
+        console.log("Banner" , index)
       } 
       else if (datas[index].type === "announcement_bar") {
 
@@ -51,9 +51,7 @@ const createHomePage = async (req, res, next) => {
             value: announcementBar.id,
           },
         });
-
-        console.log("AnnounceMentBar Created Succefully", index)
-
+        console.log("announcementBar" , index)
       } 
       else if (
         datas[index].type === "product_grid" ||
@@ -72,10 +70,7 @@ const createHomePage = async (req, res, next) => {
             value: product.id,
           },
         });
-
-        console.log("Product Created Succefully", index)
-
-
+        console.log("product", index)
       } 
       else if (
         datas[index].type === "collection_card_stack" ||
@@ -94,9 +89,7 @@ const createHomePage = async (req, res, next) => {
             value: collection.id,
           },
         });
-
-        console.log("collection Created Succefully", index)
-
+        console.log("collection", index)
       } 
       else if (datas[index].type === "social_channel") {
 
@@ -111,9 +104,7 @@ const createHomePage = async (req, res, next) => {
             value: social.id,
           },
         });
-
-        console.log("social Channel Created Succefully", index)
-
+        console.log("social", index)
       } 
       else if (datas[index].type === "text_paragraph") {
 
@@ -128,8 +119,7 @@ const createHomePage = async (req, res, next) => {
             value: paragraph.id,
           },
         });
-
-        console.log("text Paragraph Created Successfully", index)
+        console.log("paragraph", index)
       } 
       else if (datas[index].type === "countdown") {
 
@@ -144,9 +134,7 @@ const createHomePage = async (req, res, next) => {
             value: eventTimer.id,
           },
         });
-
-        console.log("EventTimer Created Successfully", index)
-
+        console.log("eventTimer" , index)
       } 
       else if (datas[index].type === "video") {
 
@@ -161,8 +149,7 @@ const createHomePage = async (req, res, next) => {
             value: video.id,
           },
         });
-
-        console.log("Video Created Successfully", index)
+        console.log("video" , index)
       }
       else if (
         datas[index].type === "banner_image_slider" ||
@@ -183,8 +170,7 @@ const createHomePage = async (req, res, next) => {
             value: otherCommon.id,
           },
         });
-
-        console.log("OthersCommon Created Successfully", index)
+        console.log("othersCommon" , index)
       }
     }
 
@@ -281,6 +267,7 @@ const updateHomePage = async (req , res , next)=>{
 
     const { datas } = req.body;
     let saveData = [];
+
 
     if(!req.params.home_id){
       return res.status(400).json({

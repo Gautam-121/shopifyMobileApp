@@ -25,13 +25,6 @@ const BannerImage = {
       type: "checkbox",
       defaultValue: true,
     },
-    // {
-    //   name : "image_url",
-    //   type : "relationship",
-    //   relationTo : "media",
-    //   defaultValue : undefined,
-    //   hasMany: false
-    // },
     {
       name: "items",
       type: "group",
