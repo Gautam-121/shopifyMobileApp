@@ -14,6 +14,7 @@
 
 const { buildConfig } = require('payload/config');
 const path = require('path');
+const dotenv = require("dotenv")
 const { payloadCloud } = require('@payloadcms/plugin-cloud');
 const { postgresAdapter } = require('@payloadcms/db-postgres');
 const { webpackBundler } = require('@payloadcms/bundler-webpack');
@@ -35,6 +36,9 @@ const BrandingByApp = require("./server/collections/BrandingTheme.js")
 const HomePage = require("./server/collections/HomePage.js")
 const Video = require("./server/collections/Video.js")
 
+dotenv.config()
+
+console.log(process.env.DATABASE_URI)
 
 module.exports =  buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_EXTERNAL_SERVER_URL,
