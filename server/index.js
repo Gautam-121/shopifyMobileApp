@@ -54,6 +54,8 @@ const createServer = async (root = process.cwd()) => {
 
   app.disable("x-powered-by");
   applyAuthMiddleware(app);
+  start()
+
 
   console.log("Enter Inside The createServer")
 
@@ -172,5 +174,3 @@ createServer().then(({ app }) => {
     console.log(`--> Running on ${PORT}`);
   });
 });
-
-start()

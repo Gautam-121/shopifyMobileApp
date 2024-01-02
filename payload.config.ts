@@ -36,9 +36,6 @@ const BrandingByApp = require("./server/collections/BrandingTheme.js")
 const HomePage = require("./server/collections/HomePage.js")
 const Video = require("./server/collections/Video.js")
 
-dotenv.config()
-
-console.log(process.env.DATABASE_URI)
 
 module.exports =  buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_EXTERNAL_SERVER_URL,
