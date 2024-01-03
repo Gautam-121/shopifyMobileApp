@@ -42,6 +42,7 @@ async function connectToDatabase() {
       pool: {
         connectionString: process.env.DATABASE_URI,
       },
+      sync: true
     });
 
     console.log('Database connection successful:', db);
@@ -72,7 +73,9 @@ module.exports =  buildConfig({
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI,
+      sync: true
     },
+    sync: true
   }),
 });
 
