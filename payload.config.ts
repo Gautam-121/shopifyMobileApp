@@ -36,6 +36,21 @@ const BrandingByApp = require("./server/collections/BrandingTheme.js")
 const HomePage = require("./server/collections/HomePage.js")
 const Video = require("./server/collections/Video.js")
 
+async function connectToDatabase() {
+  try {
+    const db = postgresAdapter({
+      pool: {
+        connectionString: process.env.DATABASE_URI,
+      },
+    });
+
+    console.log('Database connection successful:', db);
+  } catch (error) {
+    console.error('Error connecting to the database:', error);
+  }
+}
+
+connectToDatabase();
 
 module.exports =  buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_EXTERNAL_SERVER_URL,
