@@ -6,10 +6,10 @@
   "scripts": {
     "dev": "concurrently \"npm run dev:*\"",
     "payload": "cross-env PAYLOAD_CONFIG_PATH=./payload.config.ts payload",
-    "dev:server": "NODE_ENV=dev nodemon server/index.js --ignore client/ --ignore dist/",
+    "dev:server": "NODE_ENV=dev nodemon src/index.js --ignore client/ --ignore dist/",
     "dev:client": "vite --config=./client/vite.config.cjs",
     "build": "vite build --config=./client/vite.config.cjs",
-    "start": "node --trace-warnings server/index.js NODE_ENV=prod node server/index.js",
+    "start": "node --trace-warnings src/index.js NODE_ENV=prod node srcindex.js",
     "-----> utils <-----": "",
     "update": "ncu -u",
     "update:url": "node _developer/updateDashboard.js",
