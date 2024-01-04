@@ -40,8 +40,22 @@ app.use(fileUpload({
   useTempFiles: true
 }))
 
-const start = async () => {
-  // Initialize Payload
+
+// const start = async () => {
+//   // Initialize Payload
+//   await payload.init({
+//     secret: process.env.PAYLOAD_SECRET,
+//     express: app,
+//     onInit: async () => {
+//       payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
+//     },
+//   })
+// }
+
+const createServer = async (root = process.cwd()) => {
+
+  app.disable("x-powered-by");
+
   await payload.init({
     secret: process.env.PAYLOAD_SECRET,
     express: app,
@@ -49,11 +63,7 @@ const start = async () => {
       payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
     },
   })
-}
 
-const createServer = async (root = process.cwd()) => {
-
-  app.disable("x-powered-by");
   applyAuthMiddleware(app);
 
   console.log("Enter Inside The createServer")
@@ -174,6 +184,5 @@ createServer().then(({ app }) => {
   });
 });
 
-start()
 
 

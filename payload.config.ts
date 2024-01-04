@@ -22,37 +22,21 @@ const { webpackBundler } = require('@payloadcms/bundler-webpack');
 const { slateEditor } = require('@payloadcms/richtext-slate');
 
 // Importing the actual modules for runtime
-const Product = require('./src/collections/Product.js');
-const User = require('./src/collections/User.js');
-const BannerImage = require('./src/collections/BannerImage.js');
-const Collection = require('./src/collections/Collection.js');
-const Session = require("./src/collections/Session.js")
-const ActiveStore = require("./src/collections/ActiveStore.js")
-const SocialChannel = require("./src/collections/SocialChannels.js")
-const TextParagraph = require("./src/collections/TextParagraph.js")
-const EventTimer = require("./src/collections/EventTimer.js")
-const AnnouncementBanner = require("./src/collections/AnnouncementBanner.js")
-const OtherComponent = require("./src/collections/OthersComponent.js")
-const BrandingByApp = require("./src/collections/BrandingTheme.js")
-const HomePage = require("./src/collections/HomePage.js")
-const Video = require("./src/collections/Video.js")
+const Product = require('./server/collections/Product.js');
+const User = require('./server/collections/User.js');
+const BannerImage = require('./server/collections/BannerImage.js');
+const Collection = require('./server/collections/Collection.js');
+const Session = require("./server/collections/Session.js")
+const ActiveStore = require("./server/collections/ActiveStore.js")
+const SocialChannel = require("./server/collections/SocialChannels.js")
+const TextParagraph = require("./server/collections/TextParagraph.js")
+const EventTimer = require("./server/collections/EventTimer.js")
+const AnnouncementBanner = require("./server/collections/AnnouncementBanner.js")
+const OtherComponent = require("./server/collections/OthersComponent.js")
+const BrandingByApp = require("./server/collections/BrandingTheme.js")
+const HomePage = require("./server/collections/HomePage.js")
+const Video = require("./server/collections/Video.js")
 
-async function connectToDatabase() {
-  try {
-    const db = postgresAdapter({
-      pool: {
-        connectionString: process.env.DATABASE_URI,
-      },
-      sync: true
-    });
-
-    console.log('Database connection successful:', db);
-  } catch (error) {
-    console.error('Error connecting to the database:', error);
-  }
-}
-
-connectToDatabase();
 
 module.exports =  buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_EXTERNAL_SERVER_URL,
@@ -75,11 +59,6 @@ module.exports =  buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI,
     },
-  }),
-  // db: mongooseAdapter({
-  //   // Mongoose-specific arguments go here.
-  //   // URL is required.
-  //   url: process.env.DATABASE_URI,
-  // })
+  })
 });
 
