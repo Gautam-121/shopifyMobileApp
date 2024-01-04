@@ -36,9 +36,9 @@ webhookRegistrar();
 
 const app = express();
 app.use(cors())
-app.use(fileUpload({
-  useTempFiles: true
-}))
+// app.use(fileUpload({
+//   useTempFiles: true
+// }))
 
 const start = async () => {
   // Initialize Payload
@@ -50,12 +50,11 @@ const start = async () => {
     },
   })
 }
+
 const createServer = async (root = process.cwd()) => {
 
   app.disable("x-powered-by");
   applyAuthMiddleware(app);
-  start()
-
 
   console.log("Enter Inside The createServer")
 
@@ -174,3 +173,7 @@ createServer().then(({ app }) => {
     console.log(`--> Running on ${PORT}`);
   });
 });
+
+start()
+
+

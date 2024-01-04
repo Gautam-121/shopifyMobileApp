@@ -17,6 +17,7 @@ const path = require('path');
 const dotenv = require("dotenv")
 const { payloadCloud } = require('@payloadcms/plugin-cloud');
 const { postgresAdapter } = require('@payloadcms/db-postgres');
+// const  { mongooseAdapter } = require('@payloadcms/db-mongodb')
 const { webpackBundler } = require('@payloadcms/bundler-webpack');
 const { slateEditor } = require('@payloadcms/richtext-slate');
 
@@ -73,9 +74,12 @@ module.exports =  buildConfig({
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI,
-      sync: true
     },
-    sync: true
   }),
+  // db: mongooseAdapter({
+  //   // Mongoose-specific arguments go here.
+  //   // URL is required.
+  //   url: process.env.DATABASE_URI,
+  // })
 });
 
