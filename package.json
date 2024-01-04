@@ -5,7 +5,7 @@
   "type": "commonjs",
   "scripts": {
 
-    "dev": "concurrently \"npm run dev:*\"",
+  "dev": "concurrently \"npm run dev:*\"",
   "payload": "cross-env PAYLOAD_CONFIG_PATH=./payload.config.ts payload migrate",
   "dev:server": "NODE_ENV=dev nodemon src/index.js --ignore client/ --ignore dist/",
   "dev:client": "vite --config=./client/vite.config.cjs",
