@@ -36,9 +36,9 @@ webhookRegistrar();
 
 const app = express();
 app.use(cors())
-// app.use(fileUpload({
-//   useTempFiles: true
-// }))
+app.use(fileUpload({
+  useTempFiles: true
+}))
 
 const start = async () => {
   // Initialize Payload
