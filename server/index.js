@@ -66,7 +66,7 @@ const createServer = async (root = process.cwd()) => {
 
   applyAuthMiddleware(app);
 
-  console.log("Enter Inside The createServer")
+  console.log("Enter Inside The createServer App")
 
   // Incoming webhook requests
   app.post(
