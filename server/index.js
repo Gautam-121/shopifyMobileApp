@@ -41,21 +41,8 @@ app.use(fileUpload({
 }))
 
 
-// const start = async () => {
-//   // Initialize Payload
-//   await payload.init({
-//     secret: process.env.PAYLOAD_SECRET,
-//     express: app,
-//     onInit: async () => {
-//       payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
-//     },
-//   })
-// }
-
-const createServer = async (root = process.cwd()) => {
-
-  app.disable("x-powered-by");
-
+const start = async () => {
+  // Initialize Payload
   await payload.init({
     secret: process.env.PAYLOAD_SECRET,
     express: app,
@@ -63,6 +50,26 @@ const createServer = async (root = process.cwd()) => {
       payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
     },
   })
+}
+
+const createServer = async (root = process.cwd()) => {
+
+  app.disable("x-powered-by");
+
+  start()
+
+  // await payload.init({
+  //   secret: process.env.PAYLOAD_SECRET,
+  //   express: app,
+  //   onInit: async () => {
+  //     try {
+  //       payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`);
+  //       // Additional initialization logic...
+  //     } catch (error) {
+  //       console.error('Error during Payload initialization:', error);
+  //     }
+  //   },
+  // });
 
   applyAuthMiddleware(app);
 
@@ -182,6 +189,8 @@ createServer().then(({ app }) => {
   app.listen(PORT, () => {
     console.log(`--> Running on ${PORT}`);
   });
+}).catch((err)=>{
+  console.log(err)
 });
 
 
