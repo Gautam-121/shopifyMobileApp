@@ -21,90 +21,67 @@ const verifyRequest = require('./middleware/verifyRequest.js');
 const proxyRouter = require('./routes/app_proxy/index.js');
 const router = require('./routes/index.js');
 const webhookRegistrar = require('./webhooks/index.js');
-const fileUpload = require("express-fileupload");
-require('events').EventEmitter.prototype._maxListeners = 70;
-
+const fileUpload = require('express-fileupload');
 
 dotenv.config();
-setupCheck(); // Run a check to ensure everything is setup properly
+setupCheck();
 
 const PORT = parseInt(process.env.PORT, 10) || 8081;
-const isDev = process.env.NODE_ENV === "dev";
-
-// Register all webhook handlers
-webhookRegistrar();
+const isDev = process.env.NODE_ENV === 'dev';
 
 const app = express();
-app.use(cors())
-app.use(fileUpload({
-  useTempFiles: true
-}))
+app.use(cors());
+app.use(fileUpload({ useTempFiles: true }));
 
+// Increase the event listeners limit
+require('events').EventEmitter.prototype._maxListeners = 70;
 
-const start = async () => {
-  // Initialize Payload
+const startPayload = async () => {
   await payload.init({
     secret: process.env.PAYLOAD_SECRET,
     express: app,
     onInit: async () => {
-      payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
+      payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`);
     },
-  })
-}
+  });
+};
 
-const createServer = async (root = process.cwd()) => {
+const initializeWebhooks = () => {
+  // Register all webhook handlers
+  webhookRegistrar();
+};
 
-  app.disable("x-powered-by");
+const configureExpressApp = () => {
+  app.disable('x-powered-by');
 
-  start()
-
-  // await payload.init({
-  //   secret: process.env.PAYLOAD_SECRET,
-  //   express: app,
-  //   onInit: async () => {
-  //     try {
-  //       payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`);
-  //       // Additional initialization logic...
-  //     } catch (error) {
-  //       console.error('Error during Payload initialization:', error);
-  //     }
-  //   },
-  // });
-
+  // Apply middlewares
+  startPayload();
   applyAuthMiddleware(app);
-
-  console.log("Enter Inside The createServer App")
+  initializeWebhooks();
 
   // Incoming webhook requests
-  app.post(
-    "/webhooks/:topic",
-    express.text({ type: "*/*" }),
-    async (req, res) => {
-      const { topic } = req.params || "";
-      const shop = req.headers["x-shopify-shop-domain"] || "";
+  app.post('/webhooks/:topic', express.text({ type: '*/*' }), async (req, res) => {
+    const { topic } = req.params || '';
+    const shop = req.headers['x-shopify-shop-domain'] || '';
 
-      try {
-        await shopify.webhooks.process({
-          rawBody: req.body,
-          rawRequest: req,
-          rawResponse: res,
-        });
-        console.log(`--> Processed ${topic} webhook for ${shop}`);
-      } catch (e) {
-        console.error(
-          `---> Error while registering ${topic} webhook for ${shop}`,
-          e
-        );
-        if (!res.headersSent) {
-          res.status(500).send(error.message);
-        }
+    try {
+      await shopify.webhooks.process({
+        rawBody: req.body,
+        rawRequest: req,
+        rawResponse: res,
+      });
+      console.log(`--> Processed ${topic} webhook for ${shop}`);
+    } catch (e) {
+      console.error(`---> Error while registering ${topic} webhook for ${shop}`, e);
+      if (!res.headersSent) {
+        res.status(500).send(error.message);
       }
     }
-  );
+  });
 
   app.use(express.json());
 
-  app.post("/graphql", verifyRequest, async (req, res) => {
+  app.post('/graphql', verifyRequest, async (req, res) => {
     try {
       const sessionId = await shopify.session.getCurrentId({
         isOnline: true,
@@ -118,33 +95,34 @@ const createServer = async (root = process.cwd()) => {
       });
       res.status(200).send(response.body);
     } catch (e) {
-      console.error(`---> An error occured at GraphQL Proxy`, e);
-      res.status(403).send(e)
+      console.error('---> An error occurred at GraphQL Proxy', e);
+      res.status(403).send(e);
     }
   });
 
   app.use(csp);
-  app.use(isShopActive)
-  // If you're making changes to any of the routes, please make sure to add them in `./client/vite.config.cjs` or it'll not work.
-  app.use("/apps" ,  router); //Verify user route requests
-  app.use("/proxy_route", verifyProxy, proxyRouter); //MARK:- App Proxy routes
+  app.use(isShopActive);
 
-  app.post("/gdpr/:topic", verifyHmac, async (req, res) => {
+  // If you're making changes to any of the routes, please make sure to add them in `./client/vite.config.cjs` or it'll not work.
+  app.use('/apps', router); // Verify user route requests
+  app.use('/proxy_route', verifyProxy, proxyRouter); // MARK:- App Proxy routes
+
+  app.post('/gdpr/:topic', verifyHmac, async (req, res) => {
     const { body } = req;
     const { topic } = req.params;
     const shop = req.body.shop_domain;
 
-    console.warn(`--> GDPR request for ${shop} / ${topic} recieved.`);
+    console.warn(`--> GDPR request for ${shop} / ${topic} received.`);
 
     let response;
     switch (topic) {
-      case "customers_data_request":
+      case 'customers_data_request':
         response = await customerDataRequest(topic, shop, body);
         break;
-      case "customers_redact":
+      case 'customers_redact':
         response = await customerRedact(topic, shop, body);
         break;
-      case "shop_redact":
+      case 'shop_redact':
         response = await shopRedact(topic, shop, body);
         break;
       default:
@@ -152,46 +130,47 @@ const createServer = async (root = process.cwd()) => {
           "--> Congratulations on breaking the GDPR route! Here's the topic that broke it: ",
           topic
         );
-        response = "broken";
+        response = 'broken';
         break;
     }
 
     if (response.success) {
       res.status(200).send();
     } else {
-      res.status(403).send("An error occured");
+      res.status(403).send('An error occurred');
     }
   });
 
   if (!isDev) {
-    const compression = await import("compression").then(
-      ({ default: fn }) => fn
-    );
-    const serveStatic = await import("serve-static").then(
-      ({ default: fn }) => fn
-    );
-    const fs = await import("fs");
-
-    app.use(compression());
-    app.use(serveStatic(resolve("dist/client")));
-    app.use("/*", (req, res, next) => {
-      res
-        .status(200)
-        .set("Content-Type", "text/html")
-        .send(fs.readFileSync(`${root}/dist/client/index.html`));
-    });
+    configureProductionEnvironment();
   }
 
-  return { app };
+  return { app }; // Ensure to return the app here
 };
 
-createServer().then(({ app }) => {
+const configureProductionEnvironment = () => {
+  const compression = require('compression');
+  const serveStatic = require('serve-static');
+  const fs = require('fs');
+
+  app.use(compression());
+  app.use(serveStatic(resolve('dist/client')));
+  app.use('/*', (req, res, next) => {
+    res
+      .status(200)
+      .set('Content-Type', 'text/html')
+      .send(fs.readFileSync(`${root}/dist/client/index.html`));
+  });
+};
+
+const startServer = async () => {
+  const { app } = await configureExpressApp();
+
   app.listen(PORT, () => {
     console.log(`--> Running on ${PORT}`);
   });
-}).catch((err)=>{
-  console.log(err)
+};
+
+startServer().catch((err) => {
+  console.error(err);
 });
-
-
-
