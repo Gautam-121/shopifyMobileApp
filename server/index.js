@@ -185,13 +185,21 @@ const createServer = async (root = process.cwd()) => {
 };
 
 
-start()
-  .then(() => createServer())
-  .then(({ app }) => {
-    app.listen(PORT, () => {
-      console.log(`--> Running on ${PORT}`);
-    });
-  })
-  .catch((error) => {
-    console.error("Error:", error);
+// start()
+//   .then(() => createServer())
+//   .then(({ app }) => {
+//     app.listen(PORT, () => {
+//       console.log(`--> Running on ${PORT}`);
+//     });
+//   })
+//   .catch((error) => {
+//     console.error("Error:", error);
+//   });
+
+createServer().then(({ app }) => {
+  app.listen(PORT, () => {
+    console.log(`--> Running on ${PORT}`);
   });
+});
+
+start()
