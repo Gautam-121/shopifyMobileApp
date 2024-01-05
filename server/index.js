@@ -51,11 +51,11 @@ const initializeWebhooks = () => {
   webhookRegistrar();
 };
 
-const configureExpressApp = () => {
+const configureExpressApp = async() => {
   app.disable('x-powered-by');
 
   // Apply middlewares
-  startPayload();
+  await startPayload();
   applyAuthMiddleware(app);
   initializeWebhooks();
 
@@ -74,7 +74,7 @@ const configureExpressApp = () => {
     } catch (e) {
       console.error(`---> Error while registering ${topic} webhook for ${shop}`, e);
       if (!res.headersSent) {
-        res.status(500).send(error.message);
+        res.status(500).send(e.message);
       }
     }
   });
@@ -149,6 +149,9 @@ const configureExpressApp = () => {
 };
 
 const configureProductionEnvironment = () => {
+
+  const root = process.cwd();
+
   const compression = require('compression');
   const serveStatic = require('serve-static');
   const fs = require('fs');
