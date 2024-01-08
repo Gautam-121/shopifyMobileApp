@@ -36,39 +36,23 @@ webhookRegistrar();
 
 const app = express();
 app.use(cors())
+app.use(express.json());
 app.use(fileUpload({
   useTempFiles: true
 }))
 
 
 const start = async () => {
-  try {
-    // Initialize Payload
-    await payload.init({
-      secret: process.env.PAYLOAD_SECRET,
-      express: app,
-      onInit: async () => {
-        payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`);
-      },
-    });
-  } catch (error) {
-    console.error('Error during Payload initialization:', error);
-    throw error; // Rethrow the error for proper handling in the calling code
-  }
-};
+  await payload.init({
+    secret: process.env.PAYLOAD_SECRET,
+    express: app,
+    onInit: async () => {
+      payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`);
+    },
+  });
 
-
-const createServer = async (root = process.cwd()) => {
-
+  const root = process.cwd()
   app.disable("x-powered-by");
-
-  // await payload.init({
-  //   secret: process.env.PAYLOAD_SECRET,
-  //   express: app,
-  //   onInit: async () => {
-  //     payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
-  //   },
-  // })
 
   applyAuthMiddleware(app);
 
@@ -100,8 +84,6 @@ const createServer = async (root = process.cwd()) => {
       }
     }
   );
-
-  app.use(express.json());
 
   app.post("/graphql", verifyRequest, async (req, res) => {
     try {
@@ -181,8 +163,17 @@ const createServer = async (root = process.cwd()) => {
     });
   }
 
-  return { app };
+  app.listen(PORT, () => {
+    console.log(`--> Running on ${PORT}`);
+  });
+
 };
+
+
+// const createServer = async (root = process.cwd()) => {
+
+  
+// };
 
 
 // start()
@@ -196,10 +187,10 @@ const createServer = async (root = process.cwd()) => {
 //     console.error("Error:", error);
 //   });
 
-createServer().then(({ app }) => {
-  app.listen(PORT, () => {
-    console.log(`--> Running on ${PORT}`);
-  });
-});
+// createServer().then(({ app }) => {
+//   app.listen(PORT, () => {
+//     console.log(`--> Running on ${PORT}`);
+//   });
+// });
 
 start()
