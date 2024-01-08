@@ -170,9 +170,7 @@ const createServer = async (root = process.cwd()) => {
     });
   }
 
-  app.listen(PORT, () => {
-    console.log(`--> Running on ${PORT}`);
-  });
+  return {app}
 };
 
 
