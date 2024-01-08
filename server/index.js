@@ -59,7 +59,6 @@ const start = async () => {
 
 const createServer = async (root = process.cwd()) => {
 
-  const root = process.cwd()
   app.disable("x-powered-by");
 
   applyAuthMiddleware(app);
