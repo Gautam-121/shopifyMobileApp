@@ -3,6 +3,9 @@
   "version": "0.0.6",
   "description": "Shopify Boilerplate Code written in React, Node, Express, MongoDB and GraphQL",
   "type": "commonjs",
+  "engines": {
+    "node": ">=18.17.1<19.0.0"
+  },
   "scripts": {
     "dev": "concurrently \"npm run dev:*\"",
     "payload": "cross-env PAYLOAD_CONFIG_PATH=./payload.config.ts payload",

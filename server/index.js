@@ -34,6 +34,10 @@ const isDev = process.env.NODE_ENV === "dev";
 // Register all webhook handlers
 webhookRegistrar();
 
+// Print memory usage information
+const memoryUsage = process.memoryUsage();
+console.log('Memory Usage:', memoryUsage);
+
 const app = express();
 app.use(cors())
 app.use(express.json());
@@ -50,6 +54,10 @@ const start = async () => {
       payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`);
     },
   });
+};
+
+
+const createServer = async (root = process.cwd()) => {
 
   const root = process.cwd()
   app.disable("x-powered-by");
@@ -166,31 +174,13 @@ const start = async () => {
   app.listen(PORT, () => {
     console.log(`--> Running on ${PORT}`);
   });
-
 };
 
 
-// const createServer = async (root = process.cwd()) => {
-
-  
-// };
-
-
-// start()
-//   .then(() => createServer())
-//   .then(({ app }) => {
-//     app.listen(PORT, () => {
-//       console.log(`--> Running on ${PORT}`);
-//     });
-//   })
-//   .catch((error) => {
-//     console.error("Error:", error);
-//   });
-
-// createServer().then(({ app }) => {
-//   app.listen(PORT, () => {
-//     console.log(`--> Running on ${PORT}`);
-//   });
-// });
+createServer().then(({ app }) => {
+  app.listen(PORT, () => {
+    console.log(`--> Running on ${PORT}`);
+  });
+});
 
 start()
