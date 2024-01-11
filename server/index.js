@@ -34,13 +34,8 @@ const isDev = process.env.NODE_ENV === "dev";
 // Register all webhook handlers
 webhookRegistrar();
 
-// Print memory usage information
-const memoryUsage = process.memoryUsage();
-console.log('Memory Usage:', memoryUsage);
-
 const app = express();
 app.use(cors())
-app.use(express.json());
 app.use(fileUpload({
   useTempFiles: true
 }))
@@ -54,11 +49,8 @@ const start = async () => {
       payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`);
     },
   });
-};
 
-
-const createServer = async (root = process.cwd()) => {
-
+  const root = process.cwd()
   app.disable("x-powered-by");
 
   applyAuthMiddleware(app);
@@ -91,6 +83,8 @@ const createServer = async (root = process.cwd()) => {
       }
     }
   );
+
+  app.use(express.json());
 
   app.post("/graphql", verifyRequest, async (req, res) => {
     try {
@@ -170,14 +164,34 @@ const createServer = async (root = process.cwd()) => {
     });
   }
 
-  return {app}
-};
-
-
-createServer().then(({ app }) => {
   app.listen(PORT, () => {
     console.log(`--> Running on ${PORT}`);
   });
-});
+
+};
+
+
+// const createServer = async (root = process.cwd()) => {
+
+  
+// };
+
+
+// start()
+//   .then(() => createServer())
+//   .then(({ app }) => {
+//     app.listen(PORT, () => {
+//       console.log(`--> Running on ${PORT}`);
+//     });
+//   })
+//   .catch((error) => {
+//     console.error("Error:", error);
+//   });
+
+// createServer().then(({ app }) => {
+//   app.listen(PORT, () => {
+//     console.log(`--> Running on ${PORT}`);
+//   });
+// });
 
 start()
