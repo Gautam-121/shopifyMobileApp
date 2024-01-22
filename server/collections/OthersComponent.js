@@ -1,24 +1,24 @@
 const { CollectionConfig } = require("payload/types");
 
-const OthersComponent = {
+const othersComponentConfig = {
   slug: "othersCommon",
   fields: [
     {
-        name: "type",
-        type: "select",
-        options: ["banner_image_slider" ,  "advanced_image_slider" , "circle_image_slider" , "circle_image_slider_with_text" , "square_image_grid" , "square_image_slider"],
-        required: true
+      name: "type",
+      type: "select",
+      options: ["banner_image_slider", "advanced_image_slider", "circle_image_slider", "circle_image_slider_with_text", "square_image_grid", "square_image_slider"],
+      required: true
     },
     {
-        name: "visibility",
-        type: "checkbox",
-        defaultValue: true
+      name: "isVisible",
+      type: "checkbox",
+      defaultValue: true
     },
     {
-      name: "auto_slide",
+      name: "autoSlide",
       type: "group",
       admin: {
-        condition: (_, siblingData) => siblingData.type  === "banner_image_slider",
+        condition: (_, siblingData) => siblingData.type === "banner_image_slider",
       },
       fields: [
         {
@@ -39,25 +39,25 @@ const OthersComponent = {
     {
       name: "items",
       type: "array",
-      fields:[
+      fields: [
         {
-          name: "image_url",
+          name: "imageUrl",
           type: "text",
           required: true
-       },
-       {
-         name: "navigate",
-         type: "select",
-         options: ["none", "product" ,"collection" , "external_link"]
-       },
-       {
-        name: "redirect_id",
-        type: "text",
-        defaultValue: undefined
-       },
+        },
+        {
+          name: "navigateType",
+          type: "select",
+          options: ["none", "product", "collection", "external_link"]
+        },
+        {
+          name: "redirectId",
+          type: "text",
+          defaultValue: undefined
+        },
       ]
     }
   ],
 };
 
-module.exports = OthersComponent;
+module.exports = othersComponentConfig;

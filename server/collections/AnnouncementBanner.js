@@ -1,43 +1,30 @@
-const { CollectionConfig } = require('payload/types');
+const { CollectionConfig } = require("payload/types");
 
-const AnnouncementBanner = {
-  slug: 'announcementBar',
-  admin: {
-    useAsTitle: 'type',
-  },
+const announcementBannerConfig = {
+  slug: "announcementBanner",
   fields: [
     {
-        name: "type",
-        type: "text",
-        defaultValue: "announcement_bar"
+      name: "message",
+      type: "text",
+      defaultValue: "Up to 50% off New Arrivals",
     },
     {
-        name: "visibility",
-        type: "checkbox",
-        defaultValue: true
+      name: "textColor",
+      type: "text",
+      defaultValue: "#FFFFFF",
     },
     {
-        name: "text",
-        type: "text",
-        defaultValue: "Up to 50% off New Arrivals"
+      name: "backgroundColor",
+      type: "text",
+      defaultValue: "#FE6100",
     },
     {
-        name: "text_color",
-        type: "text",
-        defaultValue: "#FFFFFF"
+      name: "animationType",
+      type: "select",
+      options: ["None", "Left To Right", "Right To Left"],
+      defaultValue: "None",
     },
-    {
-        name: "bg_color",
-        type: "text",
-        defaultValue: "#FE6100"
-    },
-    {
-        name: "animation",
-        type: "select",
-        options:["None", "Left To Right" , "Right To Left"],
-        defaultValue: "None"
-    }
   ],
 };
 
-module.exports = AnnouncementBanner
+module.exports = announcementBannerConfig;

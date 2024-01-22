@@ -3,7 +3,7 @@ const verifyRequest = require('../middleware/verifyRequest.js');
 
 const {createHomePage , getHomePage , updateHomePage , getHomePageByWeb} = require("../controllers/homePageController.js")
 const {getProduct,getCollection,getProductByCollectionId} = require('../controllers/shopifyApiCotroller.js');
-const {createBrandingPage , getBrandingPage , updateBrandingPage , getBrandingPagWeb} = require("../controllers/barandingPageController.js")
+const {createBrandingApp,getBrandingApp,getBrandingAppWeb,updateBrandingApp} = require("../controllers/barandingAppController.js")
 const {uploadImages} = require("../controllers/ImageUploadController.js")
 
 const router = Router();
@@ -23,21 +23,21 @@ router.get("/api/getProductByCollectionId",  getProductByCollectionId)
 
 router.post("/api/createHomePage" ,  createHomePage)
 
-router.get("/api/getHomePage/:shop_id" , getHomePage)
+router.get("/api/getHomePage/:shopId" , getHomePage)
 
 router.get("/api/getHomePageByShop" ,  getHomePageByWeb)
 
-router.put("/api/updateHomePage/:home_id"  ,  updateHomePage)
+router.put("/api/updateHomePage/:homePageId"  ,  updateHomePage)
 
 /*--------------------------BrandingPageRouter--------------------------------------------------*/
 
-router.post("/api/createBrandingPage" ,  createBrandingPage)
+router.post("/api/createBrandingPage" ,  createBrandingApp)
 
-router.get("/api/getBrandingPage/:shop_id", getBrandingPage)
+router.get("/api/getBrandingPage/:shop_id", getBrandingApp)
 
-router.get("/api/getBrandingPageByShop"  ,  getBrandingPagWeb)
+router.get("/api/getBrandingPageByShop"  ,  getBrandingAppWeb)
 
-router.put("/api/updateBrandingPage/:branding_id" , updateBrandingPage)
+router.put("/api/updateBrandingPage/:branding_id" , updateBrandingApp)
 
 /*----------------------------------------------------------------------------------------*/
 

@@ -1,17 +1,3 @@
-// import { buildConfig } from 'payload/config';
-// import path from 'path';
-// import { payloadCloud } from '@payloadcms/plugin-cloud';
-// import { postgresAdapter } from '@payloadcms/db-postgres';
-// import { webpackBundler } from '@payloadcms/bundler-webpack';
-// import { slateEditor } from '@payloadcms/richtext-slate';
-
-
-// // Importing the actual modules for runtime
-// import Product from './server/collections/Product.js';
-// import User from './server/collections/User.js';
-// import Banner from './server/collections/Banner.js';
-// import Collection from './server/collections/Collection.js';
-
 const { buildConfig } = require('payload/config');
 const path = require('path');
 const dotenv = require("dotenv")
@@ -22,32 +8,36 @@ const { webpackBundler } = require('@payloadcms/bundler-webpack');
 const { slateEditor } = require('@payloadcms/richtext-slate');
 
 // Importing the actual modules for runtime
-const Product = require('./server/collections/Product.js');
-const User = require('./server/collections/User.js');
-const BannerImage = require('./server/collections/BannerImage.js');
-const Collection = require('./server/collections/Collection.js');
-const Session = require("./server/collections/Session.js")
-const ActiveStore = require("./server/collections/ActiveStore.js")
-const SocialChannel = require("./server/collections/SocialChannels.js")
-const TextParagraph = require("./server/collections/TextParagraph.js")
-const EventTimer = require("./server/collections/EventTimer.js")
-const AnnouncementBanner = require("./server/collections/AnnouncementBanner.js")
-const OtherComponent = require("./server/collections/OthersComponent.js")
-const BrandingByApp = require("./server/collections/BrandingTheme.js")
-const HomePage = require("./server/collections/HomePage.js")
-const Video = require("./server/collections/Video.js")
+const productConfig = require('./server/collections/Product.js');
+const userConfig = require('./server/collections/User.js');
+const bannerImageConfig = require('./server/collections/BannerImage.js');
+const collectionConfig = require('./server/collections/Collection.js');
+const sessionConfig = require("./server/collections/Session.js")
+const activeStoreConfig = require("./server/collections/ActiveStore.js")
+const socialChannelConfig = require("./server/collections/SocialChannels.js")
+const textParagraphConfig = require("./server/collections/TextParagraph.js")
+const eventTimerConfig = require("./server/collections/EventTimer.js")
+const announcementBannerConfig = require("./server/collections/AnnouncementBanner.js")
+const otherComponentConfig = require("./server/collections/OthersComponent.js")
+const brandingThemeConfig = require("./server/collections/BrandingApp.js")
+const homePageConfig = require("./server/collections/HomePage.js")
+const videoConfig = require("./server/collections/Video.js")
+const tabMenuConfig = require("./server/collections/tabMenuNavigation.js")
+const productPageDetailConfig = require("./server/collections/ProductPageDetail.js")
+const emptyCartPageDetailConfig = require("./server/collections/EmptyCartPageDetail.js")
+const accountPageDetailConfig = require("./server/collections/AccountPageDetail.js")
 
 
 module.exports =  buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_EXTERNAL_SERVER_URL,
   admin: {
-    user: User.slug,
+    user: userConfig.slug,
     bundler: webpackBundler(),
   },
   editor: slateEditor({}),
   cors: process.env.WHITELIST_ORIGINS ? process.env.WHITELIST_ORIGINS.split(',') : [],
   csrf: process.env.WHITELIST_ORIGINS ? process.env.WHITELIST_ORIGINS.split(',') : [],
-  collections: [BrandingByApp , Video , HomePage , AnnouncementBanner , OtherComponent , User , BannerImage  , EventTimer  , TextParagraph , SocialChannel  , Product , Collection , Session , ActiveStore ],
+  collections: [ accountPageDetailConfig , emptyCartPageDetailConfig , productPageDetailConfig ,socialChannelConfig , brandingThemeConfig , videoConfig , textParagraphConfig , eventTimerConfig ,  tabMenuConfig  ,  homePageConfig , announcementBannerConfig  , userConfig , bannerImageConfig    , productConfig , collectionConfig , sessionConfig , activeStoreConfig ],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },

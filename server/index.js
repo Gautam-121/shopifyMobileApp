@@ -31,14 +31,16 @@ setupCheck(); // Run a check to ensure everything is setup properly
 const PORT = parseInt(process.env.PORT, 10) || 8081;
 const isDev = process.env.NODE_ENV === "dev";
 
+const localIp = "192.168.1.135"
+
 // Register all webhook handlers
 webhookRegistrar();
 
 const app = express();
 app.use(cors())
-app.use(fileUpload({
-  useTempFiles: true
-}))
+// app.use(fileUpload({
+//   useTempFiles: true
+// }))
 
 
 const start = async () => {
@@ -166,35 +168,12 @@ const start = async () => {
     }
   
     app.listen(PORT, () => {
-      console.log(`--> Running on ${PORT}`);
+      console.log(`Server running at http://${localIp}:${PORT}/`);
     });
   } catch (error) {
     console.log("error is " , error)
   }
 };
 
-
-// const createServer = async (root = process.cwd()) => {
-
-  
-// };
-
-
-// start()
-//   .then(() => createServer())
-//   .then(({ app }) => {
-//     app.listen(PORT, () => {
-//       console.log(`--> Running on ${PORT}`);
-//     });
-//   })
-//   .catch((error) => {
-//     console.error("Error:", error);
-//   });
-
-// createServer().then(({ app }) => {
-//   app.listen(PORT, () => {
-//     console.log(`--> Running on ${PORT}`);
-//   });
-// });
 
 start()

@@ -5,7 +5,6 @@ const getProduct = async (req, res) => {
   try {
 
     const shop = req.query.shop;
-
     const shopifyGraphQLEndpoint = `https://${shop || "renergii.myshopify.com"}/admin/api/2023-04/graphql.json`;
 
     const graphqlQuery = `
@@ -20,7 +19,6 @@ const getProduct = async (req, res) => {
       }
     }
   `;
-
     const axiosShopifyConfig = {
       headers: {
         "Content-Type": "application/json",
@@ -47,7 +45,6 @@ const getCollection = async (req, res) => {
   try {
 
     const shop = req.query.shop;
-
     const shopifyGraphQLEndpoint = `https://${shop || "renergii.myshopify.com"}/admin/api/2023-04/graphql.json`;
 
     const graphqlQuery = `
@@ -65,7 +62,6 @@ const getCollection = async (req, res) => {
       }
     }
   `;
-
     const axiosShopifyConfig = {
       headers: {
         "Content-Type": "application/json",
@@ -98,7 +94,6 @@ const getProductByCollectionId = async( req , res , next)=>{
   }
 
     const shop = req.query.shop;
-
     const shopifyGraphQLEndpoint = `https://${shop || "renergii.myshopify.com"}/admin/api/2023-04/graphql.json`;
 
     const graphqlQuery = `
@@ -134,7 +129,6 @@ const getProductByCollectionId = async( req , res , next)=>{
       }
     }
   `;
-
     const axiosShopifyConfig = {
       headers: {
         "Content-Type": "application/json",

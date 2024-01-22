@@ -1,60 +1,49 @@
 const { CollectionConfig } = require("payload/types");
 
-const Video = {
-    slug: "video",
-    admin: {
-      useAsTitle: "id",
+const videoFeaturedConfig = {
+  slug: "video",
+  admin: {
+    useAsTitle: "type",
+  },
+  fields: [
+    {
+      name: "title",
+      type: "text",
+      label: "Block Title",
+      defaultValue: undefined
     },
-    fields: [
-      {
-        name: "type",
-        type: "text",
-        defaultValue: "video"
-      },
-      {
-        name: "visibility",
-        type: "checkbox",
-        defaultValue:false
-      },
-      {
-        name: "block_title",
-        type: "text",
-        label: "Block Title",
-        defaultValue: undefined
-      },
-      {
-        name: "video_url",
-        type: "text",
-        label: "Url",
-        defaultValue: undefined
-      },
-      {
-        name: "mute",
-        type: "checkbox",
-        defaultValue: false
-      },
-      {
-        name: "auto_play",
-        type: "checkbox",
-        defaultValue: false
-      },
-      {
-        name: "full_width",
-        type: "checkbox",
-        defaultValue: true
-      },
-      {
-        name: "loop",
-        type: "checkbox",
-        defaultValue:"false"
-      },
-      {
-        name:"show_playback",
-        type: "checkbox",
-        defaultValue: true
-      },
-    ]
-  };
+    {
+      name: "videoUrl",
+      type: "text",
+      label: "URL",
+      defaultValue: undefined
+    },
+    {
+      name: "mute",
+      type: "checkbox",
+      defaultValue: false
+    },
+    {
+      name: "autoPlay",
+      type: "checkbox",
+      defaultValue: false
+    },
+    {
+      name: "fullWidth",
+      type: "checkbox",
+      defaultValue: true
+    },
+    {
+      name: "loop",
+      type: "checkbox",
+      defaultValue: false
+    },
+    {
+      name: "showPlayback",
+      type: "checkbox",
+      defaultValue: true
+    },
+  ]
+};
 
-module.exports = Video
-  
+module.exports = videoFeaturedConfig;

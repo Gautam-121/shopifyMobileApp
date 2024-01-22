@@ -1,13 +1,13 @@
 const Payload = require("payload");
 
-const createBrandingPage = async (req, res, next) => {
+const createBrandingApp = async (req, res, next) => {
   try {
 
     const data = req.body;
 
     const isBrandingDataExist = await Payload.find({
         collection: 'brandingTheme',
-        where: {shop_id: { equals: req.shop_id || "gid://shopify/Shop/81447387454",}},
+        where: {shopId: { equals: req.shop_id || "gid://shopify/Shop/81447387454",}},
       })
   
     if(isBrandingDataExist.docs.length!=0){
@@ -21,7 +21,7 @@ const createBrandingPage = async (req, res, next) => {
       collection: "brandingTheme",
       data: {
         ...data,
-        shop_id: req.shop_id || "gid://shopify/Shop/81447387454"
+        shopId: req.shop_id || "gid://shopify/Shop/81447387454"
       },
     });
 
@@ -38,7 +38,7 @@ const createBrandingPage = async (req, res, next) => {
   }
 };
 
-const getBrandingPage = async (req, res, next) => {
+const getBrandingApp = async (req, res, next) => {
     try {
         if(!req.params.shop_id){
             return res.status(400).json({
@@ -49,7 +49,7 @@ const getBrandingPage = async (req, res, next) => {
     
         const brandingData = await Payload.find({
             collection: 'brandingTheme',
-            where: {shop_id: { equals: `gid://shopify/Shop/${req.params.shop_id}`},},
+            where: {shopId: { equals: `gid://shopify/Shop/${req.params.shop_id}`},},
         })
 
         if(brandingData.docs.length === 0){
@@ -72,12 +72,12 @@ const getBrandingPage = async (req, res, next) => {
     }
 };
 
-const getBrandingPagWeb = async (req, res, next) => {
+const getBrandingAppWeb = async (req, res, next) => {
     try {
         
         const brandingData = await Payload.find({
             collection: 'brandingTheme',
-            where: {shop_id: { equals: req.shop_id},},
+            where: {shopId: { equals: req.shop_id },},
         })
 
         if(brandingData.docs.length === 0){
@@ -100,13 +100,28 @@ const getBrandingPagWeb = async (req, res, next) => {
     }
 };
 
-const updateBrandingPage = async (req, res, next) => {
+const updateBrandingApp = async (req, res, next) => {
     try {
         if(!req.params.branding_id){
             return res.status(400).json({
                 success: false,
                 message: "Branding_id is missing"
             })
+        }
+
+        const isExistbrandingData = await Payload.find({
+          collection: 'brandingTheme',
+          where: {
+            shopId: { equals: req.shop_id || "gid://shopify/Shop/81447387454"},
+            id: { equals: req.params.branding_id}
+          },
+      })
+
+      if(isExistbrandingData.docs.length === 0){
+          return res.status(400).json({
+            success: false,
+            message: "No Dcoument found"
+          })
         }
     
         const brandingData = await Payload.update({
@@ -128,4 +143,4 @@ const updateBrandingPage = async (req, res, next) => {
     }
 };
 
-module.exports = { createBrandingPage, getBrandingPage, updateBrandingPage , getBrandingPagWeb };
+module.exports = { createBrandingApp, getBrandingApp, updateBrandingApp , getBrandingAppWeb };

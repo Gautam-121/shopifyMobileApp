@@ -1,6 +1,6 @@
 const cloudinary = require("cloudinary").v2;
-const dotenv = require('dotenv');
-dotenv.config()
+const dotenv = require("dotenv");
+dotenv.config();
 
 cloudinary.config({
   cloud_name: process.env.CLOUDANARY_NAME,
@@ -18,7 +18,7 @@ const uploadImages = async (req, res, next) => {
         message: "file is missing",
       });
     }
-    
+
     const result = await cloudinary.uploader.upload(file.photos.tempFilePath, {
       folder: "banner",
     });

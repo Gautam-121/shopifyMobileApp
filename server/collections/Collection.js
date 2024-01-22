@@ -1,69 +1,34 @@
 const { CollectionConfig } = require("payload/types");
 
-const Collection = {
+const featuredCollectionConfig = {
   slug: "collection",
   admin: {
     useAsTitle: "type",
   },
   fields: [
     {
-      name: "visbillity",
-      type: "checkbox", // Use "checkbox" for boolean fields
-      defaultValue: true,
-    },
-    {
-      name: "type",
-      type: "select",
-      options : ["collection_card_slider", "collection_card_stack" , "collection_slider" , "collection_grid"],
-      required: true
-    },
-    {
-      name: "collection_ids",
-      label: "Collection Ids",
+      name: "data",
       type: "array",
       required: true,
-      fields:[
+      fields: [
         {
-          name: 'collection_id',
-          type: 'text',
-          required : true
+          name: "title",
+          type: "text",
+          defaultValue: undefined,
         },
         {
-          name : "image_src",
-          type : "text",
-          defaultValue : undefined
+          name: "imageUrl",
+          type: "text",
+          defaultValue: undefined,
         },
         {
-          name : "title",
-          type : "text",
-          defaultValue : undefined
-        }
-      ]
-    },
-    {
-      name: 'imageAdjustment',
-      label: "Image Adjustment",
-      type: 'radio',
-      options: [
-        {
-          label: 'Fill',
-          value: 'fill',
-        },
-        {
-          label: 'Fit',
-          value: 'fit',
-        },
-        {
-          label: 'Stretch',
-          value: 'stretch',
+          name: "collection_id",
+          type: "text",
+          required: true,
         },
       ],
-      defaultValue: 'fill',
-      admin: {
-        layout: 'horizontal',
-      },
     },
   ],
 };
 
-module.exports = Collection;
+module.exports = featuredCollectionConfig;
