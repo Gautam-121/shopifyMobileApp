@@ -31,7 +31,7 @@ setupCheck(); // Run a check to ensure everything is setup properly
 const PORT = parseInt(process.env.PORT, 10) || 8081;
 const isDev = process.env.NODE_ENV === "dev";
 
-const localIp = "192.168.1.135"
+// const localIp = "192.168.1.135"
 
 // Register all webhook handlers
 webhookRegistrar();
@@ -168,7 +168,7 @@ const start = async () => {
     }
   
     app.listen(PORT, () => {
-      console.log(`Server running at http://${localIp}:${PORT}/`);
+      console.log(`Server running at http://localhost:${PORT}`);
     });
   } catch (error) {
     console.log("error is " , error)

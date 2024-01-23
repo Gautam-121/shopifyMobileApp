@@ -4,6 +4,11 @@ const productPageDetailConfig = {
   slug: "productPageDetail",
   fields: [
     {
+        name: "shopId",
+        type: "text",
+        defaultValue: undefined
+    },
+    {
       name: "image",
       type: "group",
       fields:[

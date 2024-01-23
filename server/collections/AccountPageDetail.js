@@ -4,6 +4,11 @@ const accountPageDetailConfig = {
   slug: "accountPageDetail",
   fields: [
     {
+      name: "shopId",
+      type: "text",
+      defaultValue: undefined
+    },
+    {
       name: "header_bar",
       type: "group",
       fields:[

@@ -5,6 +5,7 @@ const {createHomePage , getHomePage , updateHomePage , getHomePageByWeb} = requi
 const {getProduct,getCollection,getProductByCollectionId} = require('../controllers/shopifyApiCotroller.js');
 const {createBrandingApp,getBrandingApp,getBrandingAppWeb,updateBrandingApp} = require("../controllers/barandingAppController.js")
 const {uploadImages} = require("../controllers/ImageUploadController.js")
+const {createProductDetailPage , createCartDetailPage , createAccountDetailPage , getOtherScreenPageDetailByWeb} = require("../controllers/otherScreenController.js")
 
 const router = Router();
 
@@ -48,6 +49,13 @@ router.get("/api/getData", (req, res) => {
   return res.status(200).json(sendData);
 });
 
+router.post("/api/createProductDetail" , createProductDetailPage)
+
+router.post("/api/createCartDetail" , createCartDetailPage)
+
+router.post("/api/createAccountDetail" , createAccountDetailPage)
+
+router.get("/api/getOtherScreenDetailByWeb" , getOtherScreenPageDetailByWeb)
 
 
 module.exports = router;

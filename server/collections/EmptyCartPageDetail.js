@@ -4,6 +4,11 @@ const emptyCartPageDetailConfig = {
   slug: "emptyCartPageDetail",
   fields: [
     {
+      name: "shopId",
+      type: "text",
+      defaultValue: undefined
+    },
+    {
       name: "empty_state_illustration",
       type: "group",
       fields:[

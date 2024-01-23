@@ -1,3 +1,109 @@
+const otherScreen = {
+  "data": {
+      "productDetail": {
+          "image": {
+              "adjustment": "cover",
+              "ratio": "3:4"
+          },
+          "actions": {
+              "basic": {
+                  "wishlist": true,
+                  "share": true,
+                  "cart": true
+              },
+              "advanced": {
+                  "rating_and_reviews": {
+                      "visibility": true
+                  },
+                  "recommendation": {
+                      "visibility": true,
+                      "image_adjustment": "cover",
+                      "content": "You may also like"
+                  },
+                  "recent_viewed_products": {
+                      "visibility": false,
+                      "content": "Recently viewed",
+                      "image_adjustment": "cover"
+                  },
+                  "contact_information": {
+                      "visibility": true,
+                      "title": "Contact with us",
+                      "channels": [
+                          {
+                              "title": "Facebook",
+                              "url": null,
+                              "visibility": true
+                          },
+                          {
+                              "title": "X",
+                              "url": null,
+                              "visibility": true
+                          },
+                          {
+                              "title": "Instagram",
+                              "url": null,
+                              "visibility": true
+                          },
+                          {
+                              "title": "YouTube",
+                              "url": null,
+                              "visibility": true
+                          },
+                          {
+                              "title": "TikTok",
+                              "url": null,
+                              "visibility": true
+                          }
+                      ]
+                  }
+              }
+          },
+          "faster_checkout": {
+              "buy_now": false
+          }
+      },
+      "search": {
+          "visibility": false,
+          "groups": []
+      },
+      "cart": {
+          "empty_state_illustration": {
+              "image_url": "https:\/\/static-mobile.onecommerce.io\/images\/icon\/1701773380_icon-cart.png"
+          },
+          "empty_state_texts": {
+              "title": "Nothing added to cart yet",
+              "subtitle": "It's quite lonely here, isn't it? Why don't we continue shopping?"
+          },
+          "empty_state_button": {
+              "call_to_action_text": "Continue shopping",
+              "redirect_to": "home"
+          }
+      },
+      "account": {
+          "header_bar": {
+              "cart": true,
+              "settings": true
+          },
+          "main_section": [
+              {
+                  "type": "orders",
+                  "visibility": true
+              },
+              {
+                  "type": "personal_information",
+                  "visibility": true
+              },
+              {
+                  "type": "shipping_address",
+                  "visibility": true
+              }
+          ]
+      }
+  }
+}
+
+module.exports = {otherScreen}
+
 const data = {
     "success": true,
     "message": "Send Successfully",
@@ -963,111 +1069,7 @@ const homePageData = {
     ]
 }
 
-const otherScreen = {
-    "status": true,
-    "message": "Ok",
-    "data": {
-        "product-detail": {
-            "image": {
-                "adjustment": "cover",
-                "ratio": "3:4"
-            },
-            "actions": {
-                "basic": {
-                    "wishlist": true,
-                    "share": true,
-                    "cart": true
-                },
-                "advanced": {
-                    "rating_and_reviews": {
-                        "visibility": true
-                    },
-                    "recommendation": {
-                        "visibility": true,
-                        "image_adjustment": "cover",
-                        "content": "You may also like"
-                    },
-                    "recent_viewed_products": {
-                        "visibility": false,
-                        "content": "Recently viewed",
-                        "image_adjustment": "cover"
-                    },
-                    "contact_information": {
-                        "visibility": true,
-                        "title": "Contact with us",
-                        "channels": [
-                            {
-                                "title": "Facebook",
-                                "url": null,
-                                "visibility": true
-                            },
-                            {
-                                "title": "X",
-                                "url": null,
-                                "visibility": true
-                            },
-                            {
-                                "title": "Instagram",
-                                "url": null,
-                                "visibility": true
-                            },
-                            {
-                                "title": "YouTube",
-                                "url": null,
-                                "visibility": true
-                            },
-                            {
-                                "title": "TikTok",
-                                "url": null,
-                                "visibility": true
-                            }
-                        ]
-                    }
-                }
-            },
-            "faster_checkout": {
-                "buy_now": false
-            }
-        },
-        "search": {
-            "visibility": false,
-            "groups": []
-        },
-        "cart": {
-            "empty_state_illustration": {
-                "image_url": "https:\/\/static-mobile.onecommerce.io\/images\/icon\/1701773380_icon-cart.png"
-            },
-            "empty_state_texts": {
-                "title": "Nothing added to cart yet",
-                "subtitle": "It's quite lonely here, isn't it? Why don't we continue shopping?"
-            },
-            "empty_state_button": {
-                "call_to_action_text": "Continue shopping",
-                "redirect_to": "home"
-            }
-        },
-        "account": {
-            "header_bar": {
-                "cart": true,
-                "settings": true
-            },
-            "main_section": [
-                {
-                    "type": "orders",
-                    "visibility": true
-                },
-                {
-                    "type": "personal_information",
-                    "visibility": true
-                },
-                {
-                    "type": "shipping_address",
-                    "visibility": true
-                }
-            ]
-        }
-    }
-}
+
 
 
 
@@ -2844,3 +2846,442 @@ const advanced_image_slider = {
           }
         ]
       }
+
+  const themes = {
+    "status": true,
+    "message": "Ok",
+    "next_page": null,
+    "previous_page": null,
+    "data": [
+        {
+            "id": "BW",
+            "name": "Ascend",
+            "default": 1,
+            "status": 1,
+            "created_at": "2023-07-24T07:56:57.000000Z",
+            "updated_at": "2023-07-24T07:56:57.000000Z",
+            "description": "A sense of growth and advancement, elevating businesses in various industries.",
+            "product_grid_column": 2,
+            "type": "free",
+            "price": null,
+            "industry": "other",
+            "slug": "ascend",
+            "des_highlight": null,
+            "images": [
+                {
+                    "theme_id": "BW",
+                    "url": "https:\/\/static-mobile.onecommerce.io\/images\/ascend\/1687513959129.jpg",
+                    "name": "1687513959129",
+                    "type": "image"
+                },
+                {
+                    "theme_id": "BW",
+                    "url": "https:\/\/static-mobile.onecommerce.io\/images\/ascend\/1687513959229.jpg",
+                    "name": "1687513959229",
+                    "type": "image"
+                },
+                {
+                    "theme_id": "BW",
+                    "url": "https:\/\/static-mobile.onecommerce.io\/images\/ascend\/1687513959329.jpg",
+                    "name": "1687513959329",
+                    "type": "image"
+                }
+            ],
+            "lock": true,
+            "plan": "Growth",
+            "active": false,
+            "app_design_updated_at": "2023-12-15T11:09:12.000000Z"
+        },
+        {
+            "id": "69",
+            "name": "Pulse",
+            "default": 1,
+            "status": 1,
+            "created_at": "2023-07-12T03:27:47.000000Z",
+            "updated_at": "2023-07-12T03:27:47.000000Z",
+            "description": "A robust and visually fast-paced theme that conveys a sense of power and cutting-edge technology.",
+            "product_grid_column": 2,
+            "type": "free",
+            "price": null,
+            "industry": "electronics",
+            "slug": "pulse",
+            "des_highlight": null,
+            "images": [
+                {
+                    "theme_id": "69",
+                    "url": "https:\/\/static-mobile.onecommerce.io\/images\/pulse\/1686111806155.jpg",
+                    "name": "1686111806155",
+                    "type": "image"
+                },
+                {
+                    "theme_id": "69",
+                    "url": "https:\/\/static-mobile.onecommerce.io\/images\/pulse\/1686111806255.jpg",
+                    "name": "1686111806255",
+                    "type": "image"
+                },
+                {
+                    "theme_id": "69",
+                    "url": "https:\/\/static-mobile.onecommerce.io\/images\/pulse\/1686111806355.jpg",
+                    "name": "1686111806355",
+                    "type": "image"
+                }
+            ],
+            "lock": true,
+            "plan": "Growth",
+            "active": false,
+            "app_design_updated_at": "2023-12-19T05:40:44.000000Z"
+        },
+        {
+            "id": "g9",
+            "name": "Garnet",
+            "default": 0,
+            "status": 1,
+            "created_at": "2023-04-03T07:02:52.000000Z",
+            "updated_at": "2023-05-26T02:55:28.000000Z",
+            "description": "An attractive theme designed to showcase bold imagery and refined styling. Focused on an elegant user experience.",
+            "product_grid_column": 2,
+            "type": "free",
+            "price": null,
+            "industry": "health_and_beauty",
+            "slug": "garnet",
+            "des_highlight": null,
+            "images": [
+                {
+                    "theme_id": "g9",
+                    "url": "https:\/\/static-mobile.onecommerce.io\/images\/garnet\/1677554919874.jpg",
+                    "name": "1677554919874",
+                    "type": "image"
+                },
+                {
+                    "theme_id": "g9",
+                    "url": "https:\/\/static-mobile.onecommerce.io\/images\/garnet\/1677554919879.jpg",
+                    "name": "1677554919879",
+                    "type": "image"
+                },
+                {
+                    "theme_id": "g9",
+                    "url": "https:\/\/static-mobile.onecommerce.io\/images\/garnet\/1677554919974.jpg",
+                    "name": "1677554919974",
+                    "type": "image"
+                }
+            ],
+            "lock": true,
+            "plan": "Growth",
+            "active": false,
+            "app_design_updated_at": "2023-12-14T08:58:08.000000Z"
+        },
+        {
+            "id": "9b",
+            "name": "Oak",
+            "default": 0,
+            "status": 1,
+            "created_at": "2023-04-03T07:02:41.000000Z",
+            "updated_at": "2023-05-26T02:55:28.000000Z",
+            "description": "A clean and impressive design that lets your product images take center stage. Great for customer trust.",
+            "product_grid_column": 2,
+            "type": "free",
+            "price": null,
+            "industry": "home_and_decor",
+            "slug": "oak",
+            "des_highlight": null,
+            "images": [
+                {
+                    "theme_id": "9b",
+                    "url": "https:\/\/static-mobile.onecommerce.io\/images\/oak\/1676519604309.png",
+                    "name": "1676519604309",
+                    "type": "image"
+                },
+                {
+                    "theme_id": "9b",
+                    "url": "https:\/\/static-mobile.onecommerce.io\/images\/oak\/1676519616278.png",
+                    "name": "1676519616278",
+                    "type": "image"
+                },
+                {
+                    "theme_id": "9b",
+                    "url": "https:\/\/static-mobile.onecommerce.io\/images\/oak\/1676519630181.png",
+                    "name": "1676519630181",
+                    "type": "image"
+                }
+            ],
+            "lock": true,
+            "plan": "Growth",
+            "active": false,
+            "app_design_updated_at": "2023-12-20T06:57:25.000000Z"
+        },
+        {
+            "id": "Pe",
+            "name": "Mighty",
+            "default": 0,
+            "status": 1,
+            "created_at": "2023-04-03T07:02:30.000000Z",
+            "updated_at": "2023-05-26T02:55:28.000000Z",
+            "description": "Bold, witty, and dynamic. A feature-packed theme that elevates your energetic brands.",
+            "product_grid_column": 2,
+            "type": "free",
+            "price": null,
+            "industry": "electronics",
+            "slug": "mighty",
+            "des_highlight": null,
+            "images": [
+                {
+                    "theme_id": "Pe",
+                    "url": "https:\/\/static-mobile.onecommerce.io\/images\/mighty\/1676355824218.png",
+                    "name": "1676355824218",
+                    "type": "image"
+                },
+                {
+                    "theme_id": "Pe",
+                    "url": "https:\/\/static-mobile.onecommerce.io\/images\/mighty\/1676355865218.png",
+                    "name": "1676355865218",
+                    "type": "image"
+                },
+                {
+                    "theme_id": "Pe",
+                    "url": "https:\/\/static-mobile.onecommerce.io\/images\/mighty\/1676355887498.png",
+                    "name": "1676355887498",
+                    "type": "image"
+                }
+            ],
+            "lock": true,
+            "plan": "Growth",
+            "active": true,
+            "app_design_updated_at": "2024-01-19T08:54:07.000000Z"
+        },
+        {
+            "id": "eb",
+            "name": "Chic",
+            "default": 0,
+            "status": 1,
+            "created_at": "2023-04-03T07:02:11.000000Z",
+            "updated_at": "2023-05-26T02:55:28.000000Z",
+            "description": "Bring your refined style brand appeal to life with special attention to artists and collections.",
+            "product_grid_column": 2,
+            "type": "free",
+            "price": null,
+            "industry": "clothing",
+            "slug": "chic",
+            "des_highlight": null,
+            "images": [
+                {
+                    "theme_id": "eb",
+                    "url": "https:\/\/static-mobile.onecommerce.io\/images\/chic\/1675755625.png",
+                    "name": "1675755625",
+                    "type": "image"
+                },
+                {
+                    "theme_id": "eb",
+                    "url": "https:\/\/static-mobile.onecommerce.io\/images\/chic\/1675755627.png",
+                    "name": "1675755627",
+                    "type": "image"
+                },
+                {
+                    "theme_id": "eb",
+                    "url": "https:\/\/static-mobile.onecommerce.io\/images\/chic\/1675755700.png",
+                    "name": "1675755700",
+                    "type": "image"
+                }
+            ],
+            "lock": false,
+            "plan": null,
+            "active": false,
+            "app_design_updated_at": null
+        },
+        {
+            "id": "3E",
+            "name": "Airy",
+            "default": 1,
+            "status": 1,
+            "created_at": "2023-02-07T09:51:57.000000Z",
+            "updated_at": "2023-05-26T02:55:28.000000Z",
+            "description": "A minimal and versatile theme with plenty  of fresh air, designed for scalability and customization.",
+            "product_grid_column": 2,
+            "type": "free",
+            "price": null,
+            "industry": "clothing",
+            "slug": "airy",
+            "des_highlight": null,
+            "images": [
+                {
+                    "theme_id": "3E",
+                    "url": "https:\/\/static-mobile.onecommerce.io\/images\/airy\/1675755489.png",
+                    "name": "1673408597",
+                    "type": "image"
+                },
+                {
+                    "theme_id": "3E",
+                    "url": "https:\/\/static-mobile.onecommerce.io\/images\/airy\/1675755490.png",
+                    "name": "1673409021",
+                    "type": "image"
+                },
+                {
+                    "theme_id": "3E",
+                    "url": "https:\/\/static-mobile.onecommerce.io\/images\/airy\/1675755500.png",
+                    "name": "1673409062",
+                    "type": "image"
+                }
+            ],
+            "lock": false,
+            "plan": null,
+            "active": false,
+            "app_design_updated_at": "2023-12-28T05:38:37.000000Z"
+        }
+    ]
+}
+
+const themeType_Market = {
+  "status": true,
+  "message": "Ok",
+  "next_page": null,
+  "previous_page": null,
+  "data": [
+      {
+          "id": "Oe",
+          "name": "Doorbuster",
+          "default": 0,
+          "status": 1,
+          "created_at": "2023-05-26T02:54:18.000000Z",
+          "updated_at": "2023-05-26T02:55:28.000000Z",
+          "description": "Create a sense of urgency and excitement around big sales events such as Black Friday and Cyber Monday.",
+          "product_grid_column": 2,
+          "type": "payment",
+          "price": 239,
+          "industry": "other",
+          "slug": "doorbuster",
+          "des_highlight": 5,
+          "images": [
+              {
+                  "theme_id": "Oe",
+                  "url": "https:\/\/static-mobile.onecommerce.io\/images\/doorbuster\/1683537784349.jpg",
+                  "name": "1683537784349",
+                  "type": "image"
+              },
+              {
+                  "theme_id": "Oe",
+                  "url": "https:\/\/static-mobile.onecommerce.io\/images\/doorbuster\/1683537784449.jpg",
+                  "name": "1683537784449",
+                  "type": "image"
+              },
+              {
+                  "theme_id": "Oe",
+                  "url": "https:\/\/static-mobile.onecommerce.io\/images\/doorbuster\/1683537784549.jpg",
+                  "name": "1683537784549",
+                  "type": "image"
+              },
+              {
+                  "theme_id": "Oe",
+                  "url": "https:\/\/static-mobile.onecommerce.io\/images\/doorbuster\/1683537784649.jpg",
+                  "name": "1683537784649",
+                  "type": "image"
+              }
+          ],
+          "lock": false,
+          "plan": null,
+          "active": false,
+          "app_design_updated_at": null
+      }
+  ]
+}
+
+const userData = {
+  "status": true,
+  "message": "Ok",
+  "data": {
+      "id": 81447387454,
+      "name": "renergii",
+      "shopify_domain": "renergii.myshopify.com",
+      "domain": "renergii.myshopify.com",
+      "owner": "renergii Admin",
+      "email": "mahesh@renergii.com",
+      "phone": null,
+      "timezone": "(GMT-05:00) Eastern Time (US & Canada)",
+      "country": "IN",
+      "currency": "INR",
+      "created_at": "2023-12-11T09:26:14.000000Z",
+      "updated_at": "2024-01-19T08:54:07.000000Z",
+      "theme_id": "Pe",
+      "storefront_access_token": "56746832730e253a18cc313b89f6fe7d",
+      "money_format": "Rs. {{amount}}",
+      "money_with_currency_format": "Rs. {{amount}}",
+      "uninstalled_at": "2023-12-26 04:20:38",
+      "plan_name": "partner_test",
+      "status": 1,
+      "mobile_auth": 1,
+      "started_free_trial": 0,
+      "language": "en",
+      "is_test": 0,
+      "is_onboarding": 1,
+      "publish_changes": 1,
+      "in_app_notify": true,
+      "has_access_token": true,
+      "published_theme_id": 3,
+      "theme_name": "Mighty",
+      "plans": {
+          "free": {
+              "plan_name": "Free",
+              "level": 1
+          },
+          "minimal": {
+              "plan_name": "Starter",
+              "trial_days": null,
+              "every_30_days": {
+                  "origin_price": null,
+                  "price": 29,
+                  "interval": "EVERY_30_DAYS"
+              },
+              "annual": {
+                  "origin_price": null,
+                  "price": 275,
+                  "interval": "ANNUAL"
+              },
+              "level": 2
+          },
+          "standard": {
+              "plan_name": "Growth",
+              "trial_days": null,
+              "every_30_days": {
+                  "origin_price": null,
+                  "price": 99,
+                  "interval": "EVERY_30_DAYS"
+              },
+              "annual": {
+                  "origin_price": null,
+                  "price": 949,
+                  "interval": "ANNUAL"
+              },
+              "level": 3
+          },
+          "advanced": {
+              "plan_name": "Professional",
+              "trial_days": null,
+              "every_30_days": {
+                  "origin_price": null,
+                  "price": 299,
+                  "interval": "EVERY_30_DAYS"
+              },
+              "annual": {
+                  "origin_price": null,
+                  "price": 2869,
+                  "interval": "ANNUAL"
+              },
+              "level": 4
+          }
+      },
+      "one_portal_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdG9yZV9pZCI6ODE0NDczODc0NTQsImNsaWVudF9uYW1lIjoicG9ydGFsX29uZV9tb2JpbGUiLCJleHAiOjE3MDU5OTU3Nzh9.61sktoGfe9uwJAa5kf1BabG_2ZGxFsqGDatoJeYSiN0",
+      "subscription": {
+          "trial_days_left": null,
+          "plan_name": "free",
+          "interval": null,
+          "trial_ends_on": null
+      },
+      "crisp_id": "4ff53d4c190e6f1a411bdcbaed30e273",
+      "paid_themes": [],
+      "scope_changed": false,
+      "install_url": null,
+      "is_published_app": false,
+      "notifications": [],
+      "instagram_user": null,
+      "promo_code": null,
+      "preview_app_installation": true
+  }
+}
