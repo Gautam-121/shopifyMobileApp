@@ -18,7 +18,7 @@
     "update:url": "node _developer/updateDashboard.js",
     "pretty": "prettier --write .",
     "-----> ngrok <-----": "",
-    "ngrok:auth": "ngrok authtoken 2WZ76Dhwqq1xg2eESg8dPeR6nGl_3exQSkJMv6NFtiuw1us9X",
+    "ngrok:auth": "ngrok authtoken 2bkmbuP6DycF0Z8aggErBq1xdZb_3ZkeGpVGTZffr9NWZJAnk",
     "ngrok": "ngrok http 5173",
     "ngrok:prod": "ngrok http 8081",
     "-----> Shopify <-----": "",
@@ -57,7 +57,9 @@
     "raviger": "^4.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^5.0.1",
     "recoil": "^0.7.7",
+    "sass": "^1.70.0",
     "serve-static": "^1.15.0"
   },
   "devDependencies": {

@@ -127,6 +127,7 @@ const AppForm = () => {
           onChange={(e) => handleInputChange(e, 'pb_text_color')}
         /><br/>
       </div>
+
       <button onClick={handleSubmit}>Submit</button>
     </div>
   );
