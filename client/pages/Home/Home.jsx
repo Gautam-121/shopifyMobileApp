@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./Home.css";
 import "./SelectedTheme/SelectedTheme.css"
 import { FaWandMagicSparkles } from "react-icons/fa6";
@@ -13,21 +13,27 @@ const Home = () => {
 
     const fetch = useFetch();
 
-    useEffect(async ()=>{
+    // useEffect(async () => {
 
-        const res = await fetch("/api/getAllTheme"); //fetch instance of useFetch()
-        const data = await res.json();
-        console.log("themes: ", data);
-    })
+    //     const res = await fetch("/api/getAllTheme"); //fetch instance of useFetch()
+    //     const data = await res.json();
+    //     console.log("themes: ", data);
+    // })
 
-   
+
 
     const cards = [{ image: { appImage }, themeName: 'Ascend', category: 'General', desc: 'A sense of growth and advancement, elevating businesses in various industries.' },
     { image: { appImage }, themeName: 'Ascend', category: 'General', desc: 'A sense of growth and advancement, elevating businesses in various industries.' },
     { image: { appImage }, themeName: 'Butterfly', category: 'General', desc: 'A sense of growth and advancement, elevating businesses in various industries.' },
-    { image: { appImage }, themeName: 'RiseUp', category: 'General', desc: 'A sense of growth and advancement, elevating businesses in various industries.' },
+    { image: { appImage }, themeName: 'RiseUp', category: 'Free', desc: 'A sense of growth and advancement, elevating businesses in various industries.' },
     { image: { appImage }, themeName: 'Growth', category: 'General', desc: 'A sense of growth and advancement, elevating businesses in various industries.' },
-    { image: { appImage }, themeName: 'Home', category: 'free', desc: 'A sense of growth and advancement, elevating businesses in various industries.' }]
+    { image: { appImage }, themeName: 'Home', category: 'Free', desc: 'A sense of growth and advancement, elevating businesses in various industries.' }]
+
+
+    const [selectedTheme, setSelectedTheme] = useState(cards[0]);
+
+    console.log("selectedtheme: ", selectedTheme);
+
 
     return (
         <div className='main-div'>
@@ -49,7 +55,7 @@ const Home = () => {
 
             <div className='selected-theme-main-div'>
 
-                <SelectedTheme />
+                <SelectedTheme selectedTheme={selectedTheme && selectedTheme} />
 
             </div>
 
@@ -75,7 +81,7 @@ const Home = () => {
 
                             return (
                                 <>
-                                    <div className='theme-card'>
+                                    <div className='theme-card' key={index}>
                                         <div className='the-card-image-div'>
                                             <img src={appImage} alt="apps-images" className='card-images' />
                                         </div>
@@ -89,9 +95,14 @@ const Home = () => {
                                             <span>{res?.desc}</span>
                                         </div>
 
-                                        {res?.category === 'free' ? <div className='buttons-div'><button className='card-buttons'>Publish</button> <button className='card-buttons'>Customize</button></div> : <div className='buttons-div'>
-                                            <button className='card-buttons'>Upgrade</button> <button className='card-buttons'>Try for free</button>
-                                        </div>}
+                                        {res?.category.toLocaleLowerCase() === 'free' ?
+                                            <div className='buttons-div'>
+                                                <button className='card-buttons' onClick={()=>setSelectedTheme(res)}>Publish</button>
+                                                <button className='card-buttons'>Customize</button>
+                                            </div>
+                                            : <div className='buttons-div'>
+                                                <button className='card-buttons'>Upgrade</button> <button className='card-buttons'>Try for free</button>
+                                            </div>}
                                     </div>
 
                                 </>
