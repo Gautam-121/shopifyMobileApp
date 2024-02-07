@@ -13,10 +13,12 @@ const proxyOptions = {
   secure: true,
   ws: false,
 };
+
 const host = process.env.SHOPIFY_APP_URL
   ? process.env.SHOPIFY_APP_URL.replace(/https?:\/\//, "")
   : "localhost";
 let hmrConfig;
+
 if (host === "localhost") {
   hmrConfig = {
     protocol: "ws",

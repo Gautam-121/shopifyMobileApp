@@ -9,7 +9,7 @@ function useFetch() {
 
   return async (uri, options) => {
 
-
+    console.log(`https://${appOrigin}/apps${uri}`)
     const response = await fetchFunction(
       uri.startsWith("/")
         ? `https://${appOrigin}/apps${uri}`
@@ -18,8 +18,6 @@ function useFetch() {
     );
     if (
       response.headers.get("X-Shopify-API-Request-Failure-Reauthorize") === "1"
-           
-
     ) {
       console.log("hii response")
       const authUrlHeader = response.headers.get(

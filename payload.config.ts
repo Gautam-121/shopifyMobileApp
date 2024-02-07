@@ -26,6 +26,8 @@ const tabMenuConfig = require("./server/collections/tabMenuNavigation.js")
 const productPageDetailConfig = require("./server/collections/ProductPageDetail.js")
 const emptyCartPageDetailConfig = require("./server/collections/EmptyCartPageDetail.js")
 const accountPageDetailConfig = require("./server/collections/AccountPageDetail.js")
+const themeConfig = require("./server/collections/Theme.js")
+const Media = require("./server/collections/Media.js")
 
 
 module.exports =  buildConfig({
@@ -37,7 +39,7 @@ module.exports =  buildConfig({
   editor: slateEditor({}),
   cors: process.env.WHITELIST_ORIGINS ? process.env.WHITELIST_ORIGINS.split(',') : [],
   csrf: process.env.WHITELIST_ORIGINS ? process.env.WHITELIST_ORIGINS.split(',') : [],
-  collections: [ accountPageDetailConfig , emptyCartPageDetailConfig , productPageDetailConfig ,socialChannelConfig , brandingThemeConfig , videoConfig , textParagraphConfig , eventTimerConfig ,  tabMenuConfig  ,  homePageConfig , announcementBannerConfig  , userConfig , bannerImageConfig    , productConfig , collectionConfig , sessionConfig , activeStoreConfig ],
+  collections: [ Media , themeConfig ,  accountPageDetailConfig , emptyCartPageDetailConfig , productPageDetailConfig ,socialChannelConfig , brandingThemeConfig , videoConfig , textParagraphConfig , eventTimerConfig ,  tabMenuConfig  ,  homePageConfig , announcementBannerConfig  , userConfig , bannerImageConfig    , productConfig , collectionConfig , sessionConfig , activeStoreConfig ],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },

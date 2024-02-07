@@ -13,7 +13,7 @@ const isShopActive = async (req, res, next) => {
   const isShopAvaialble = await payload.find({
     collection: 'activeStores', // required
     where: {
-      shop: { equals: shop},
+      shopName: { equals: shop},
     }
   })
 
@@ -23,7 +23,7 @@ const isShopActive = async (req, res, next) => {
       await payload.create({
         collection: 'activeStores', // required
         data: {
-          shop : shop,
+          shopName : shop,
           isActive: false
         },
       })
@@ -31,7 +31,7 @@ const isShopActive = async (req, res, next) => {
         await payload.update({
         collection: 'activeStores',
         where: {
-          shop: { equals: shop},
+          shopName: { equals: shop},
         },
         data: {
           isActive: false

@@ -2,17 +2,21 @@ const { CollectionConfig } = require("payload/types");
 
 const featuredProductConfig = {
   slug: "product",
+  admin:{
+    useAsTitle:"title"
+  },
   fields: [
     {
       name: "title",
+      label:"Title",
       type: "text",
       maxLength: 30,
       defaultValue: undefined,
     },
     {
       name: "productGroupId",
+      label: "Product Group Id",
       type: "text",
-      required: true,
     },
   ],
 };

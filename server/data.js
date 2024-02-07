@@ -2854,8 +2854,8 @@ const advanced_image_slider = {
     "previous_page": null,
     "data": [
         {
-            "id": "BW",
-            "name": "Ascend",
+            "id": "BW -d",
+            "name": "Ascend -d",
             "default": 1,
             "status": 1,
             "created_at": "2023-07-24T07:56:57.000000Z",
@@ -2864,7 +2864,7 @@ const advanced_image_slider = {
             "product_grid_column": 2,
             "type": "free",
             "price": null,
-            "industry": "other",
+            "industry": "other -d",
             "slug": "ascend",
             "des_highlight": null,
             "images": [
@@ -3285,3 +3285,124 @@ const userData = {
       "preview_app_installation": true
   }
 }
+
+
+
+const shopifyStoreDetail = {
+  "status": true,
+  "message": "Ok",
+  "data": {
+      "id": 86078423340,
+      "name": "My Store",
+      "shopify_domain": "c493e9-2.myshopify.com",
+      "domain": "c493e9-2.myshopify.com",
+      "owner": "Gautam Dhakate",
+      "email": "gautamdhakate1234@gmail.com",
+      "phone": null,
+      "timezone": "(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi",
+      "country": "IN",
+      "currency": "INR",
+      "money_format": "Rs. {{amount}}",
+      "money_with_currency_format": "Rs. {{amount}}",
+      "theme_id": "3E",
+      "plan_name": "trial",
+      "uninstalled_at": null, // isActive
+      "created_at": "2024-02-06T04:35:41.000000Z",
+      "updated_at": "2024-02-06T04:35:41.000000Z",
+      "storefront_access_token": "8a028623542548f3d13bdae3cfaeec47",
+      
+      "status": 1,
+      "limit_blocks_by_plan": 1,
+      "mobile_auth": 1,
+      "started_free_trial": 0,
+      "language": "en",
+      "is_test": 0,
+      "is_onboarding": 0,
+      "publish_changes": 0,
+      "in_app_notify": true,
+      "has_access_token": true,
+      "published_theme_id": 1,
+      "active_limit_blocks": {
+          "active": true,
+          "plans": {
+              "free": 5,
+              "minimal": 5,
+              "standard": 20,
+              "advanced": 30
+          }
+      },
+      "theme_name": "Airy",
+      "plans": {
+          "free": {
+              "plan_name": "Free",
+              "level": 1
+          },
+          "minimal": {
+              "plan_name": "Starter",
+              "trial_days": null,
+              "every_30_days": {
+                  "origin_price": null,
+                  "price": 29,
+                  "interval": "EVERY_30_DAYS"
+              },
+              "annual": {
+                  "origin_price": null,
+                  "price": 275,
+                  "interval": "ANNUAL"
+              },
+              "level": 2
+          },
+          "standard": {
+              "plan_name": "Growth",
+              "trial_days": null,
+              "every_30_days": {
+                  "origin_price": null,
+                  "price": 99,
+                  "interval": "EVERY_30_DAYS"
+              },
+              "annual": {
+                  "origin_price": null,
+                  "price": 949,
+                  "interval": "ANNUAL"
+              },
+              "level": 3
+          },
+          "advanced": {
+              "plan_name": "Professional",
+              "trial_days": null,
+              "every_30_days": {
+                  "origin_price": null,
+                  "price": 299,
+                  "interval": "EVERY_30_DAYS"
+              },
+              "annual": {
+                  "origin_price": null,
+                  "price": 2869,
+                  "interval": "ANNUAL"
+              },
+              "level": 4
+          }
+      },
+      "one_portal_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdG9yZV9pZCI6ODYwNzg0MjMzNDAsImNsaWVudF9uYW1lIjoicG9ydGFsX29uZV9tb2JpbGUiLCJleHAiOjE3MDcxOTc3ODJ9.qSiZQgiJoN7trF6wCnkmYrMLLUHmhL4zId1LS4HnEjA",
+      "subscription": {
+          "trial_days_left": null,
+          "plan_name": "free",
+          "interval": null,
+          "trial_ends_on": null
+      },
+      "crisp_id": "9af60c305df417d13a12814c3c4e10af",
+      "paid_themes": [],
+      "scope_changed": false,
+      "install_url": null,
+      "is_published_app": false,
+      "notifications": [],
+      "instagram_user": null,
+      "promo_code": null,
+      "preview_app_installation": false
+  }
+}
+
+
+"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdG9yZV9pZCI6ODYwNzg0MjMzNDAsImNsaWVudF9uYW1lIjoicG9ydGFsX29uZV9tb2JpbGUiLCJleHAiOjE3MDcyMTMxNzN9.PItu_G8UkwWFtLFtHbQm0onzZhL5ylPMG0hSn5fA5Ak"
+
+"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdG9yZV9pZCI6ODYwNzg0MjMzNDAsImNsaWVudF9uYW1lIjoicG9ydGFsX29uZV9tb2JpbGUiLCJleHAiOjE3MDcyMTY2MjR9.OIWt1JKnC3YmYjuV_9zn-KNg2_U378vYur7bhM4B5tQ"

@@ -6,21 +6,30 @@ const tabMenuConfig = {
     {
       name: "shopId",
       type: "text",
-      required: true,
+      unique: true,
+      defaultValue: undefined,
+    },
+    {
+      name: "themeId",
+      type: "relationship",
+      relationTo: "theme",
+      required: true
     },
     {
       name: "setting",
       type: "array",
+      required: true,
       fields: [
         {
             name: "redirect_page",
             type: "select",
-            options: ["home", "search" , "cart" , "account" , "order"]
+            options: ["home", "search" , "cart" , "account" , "order"],
         },
         {
           name: "order",
           type: "number",
-          unique: true
+          unique: true,
+          required: true
         }
       ],
     }

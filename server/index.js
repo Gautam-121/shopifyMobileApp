@@ -166,10 +166,13 @@ const start = async () => {
           .send(fs.readFileSync(`${root}/dist/client/index.html`));
       });
     }
+
+    const localIp = "192.168.1.135"
   
-    app.listen(PORT, () => {
-      console.log(`Server running at http://localhost:${PORT}`);
+    app.listen(PORT,localIp ,() => {
+      console.log(`Server running at http://localhost:${process.env.PORT}`);
     });
+    
   } catch (error) {
     console.log("error is " , error)
   }

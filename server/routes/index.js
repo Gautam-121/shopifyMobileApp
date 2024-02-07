@@ -6,6 +6,9 @@ const {getProduct,getCollection,getProductByCollectionId} = require('../controll
 const {createBrandingApp,getBrandingApp,getBrandingAppWeb,updateBrandingApp} = require("../controllers/barandingAppController.js")
 const {uploadImages} = require("../controllers/ImageUploadController.js")
 const {createProductDetailPage , createCartDetailPage , createAccountDetailPage , getOtherScreenPageDetailByWeb} = require("../controllers/otherScreenController.js")
+const {updateUserThemeDetail} = require("../controllers/userConfigController.js")
+const {getTabMenuDataByWeb} = require("../controllers/tabNavigationController.js")
+const {getAllTheme , getThemeById} = require("../controllers/themeController.js")
 
 const router = Router();
 
@@ -26,9 +29,9 @@ router.post("/api/createHomePage" ,  createHomePage)
 
 router.get("/api/getHomePage/:shopId" , getHomePage)
 
-router.get("/api/getHomePageByShop" ,  getHomePageByWeb)
+router.get("/api/getHomePageByShop/:themeId" ,  getHomePageByWeb)
 
-router.put("/api/updateHomePage/:homePageId"  ,  updateHomePage)
+router.put("/api/updateHomePage/:themeId"  ,  updateHomePage)
 
 /*--------------------------BrandingPageRouter--------------------------------------------------*/
 
@@ -36,7 +39,7 @@ router.post("/api/createBrandingPage" ,  createBrandingApp)
 
 router.get("/api/getBrandingPage/:shop_id", getBrandingApp)
 
-router.get("/api/getBrandingPageByShop"  ,  getBrandingAppWeb)
+router.get("/api/getBrandingPageByShop/:themeId"  ,  getBrandingAppWeb)
 
 router.put("/api/updateBrandingPage/:branding_id" , updateBrandingApp)
 
@@ -56,6 +59,14 @@ router.post("/api/createCartDetail" , createCartDetailPage)
 router.post("/api/createAccountDetail" , createAccountDetailPage)
 
 router.get("/api/getOtherScreenDetailByWeb" , getOtherScreenPageDetailByWeb)
+
+router.put("/api/updateUserThemeDetail" , updateUserThemeDetail)
+
+router.get("/api/getTabMenuDataByWeb/:themeId" , getTabMenuDataByWeb);
+
+router.get("/api/getAllTheme", getAllTheme)
+
+router.get("/api/geThemeById/:themeId", getThemeById)
 
 
 module.exports = router;

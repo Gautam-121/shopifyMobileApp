@@ -5,30 +5,37 @@ const bannerImageConfig = {
   access: {
     create: () => true,
   },
+  admin:{
+    useAsTitle:"bannerType"
+  },
   fields: [
     {
       name: "data",
+      label:"Data",
       type: "array",
       required: true,
       fields: [
         {
           name: "isVisible",
+          label:"Visible",
           type: "checkbox",
           defaultValue: true,
         },
         {
           name: "imageUrl",
+          label:"Image",
           type: "text",
-          defaultValue: undefined,
         },
         {
           name: "bannerType",
+          label:"Type",
           type: "select",
           options: ["product", "category", "marketing"],
           required: true,
         },
         {
           name: "actionUrl",
+          label:"Action",
           type: "text",
         },
       ],

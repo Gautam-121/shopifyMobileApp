@@ -8,11 +8,19 @@ const sessionHandler = require("../utils/sessionHandler.js");
 const shopify = require("../utils/shopifyConfig.js");
 const payload = require('payload');
 
+const TEST_QUERY = `
+{
+  shop {
+    name
+    id
+  }
+}`
 
 const authMiddleware = (app) => {
   
   app.get("/auth", async (req, res) => {
     try {
+      console.log("Come")
       await authRedirect(req, res);
     } catch (e) {
       console.error(`---> Error at /auth`, e);
@@ -90,13 +98,17 @@ const authMiddleware = (app) => {
 
       const host = req.query.host;
       const { shop } = session;
+      const client = new shopify.clients.Graphql({ session });
+      const data = await client.query({ data: TEST_QUERY });
+
+      console.log("data from line 97" , data?.body?.data.shop , "data" , data.body.extensions)
 
       console.log("Session in verifyRequest in line 24 is" , session)
 
       const result = await payload.find({
         collection: 'activeStores', // required
         where: {
-          shop: { equals: shop},
+          shopName: { equals: shop},
         }
       })
 
@@ -105,10 +117,10 @@ const authMiddleware = (app) => {
         await payload.update({
           collection: 'activeStores',
           where: {
-            shop: { equals: shop},
+            shopName: { equals: shop},
           },
           data: {
-            shop : shop,
+            shopName : shop,
             isActive: true
           }
         })
@@ -118,7 +130,8 @@ const authMiddleware = (app) => {
         await payload.create({
           collection: 'activeStores', // required
           data: {
-            shop : shop,
+            shopName : shop,
+            shopId: data?.body?.data?.shop?.id,
             isActive: true
           },
         })

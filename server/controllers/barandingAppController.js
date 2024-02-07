@@ -73,39 +73,51 @@ const getBrandingApp = async (req, res, next) => {
 };
 
 const getBrandingAppWeb = async (req, res, next) => {
-    try {
-        
-        const brandingData = await Payload.find({
-            collection: 'brandingTheme',
-            where: {shopId: { equals: req.shop_id },},
-        })
+  try {
 
-        if(brandingData.docs.length === 0){
-            return res.status(400).json({
-              success: false,
-              message: "No Dcoument found"
-            })
-          }
-    
-        return res.status(200).json({
-            success: true,
-            message: "Data Send Successfully",
-            data: brandingData
-        })
-    } catch (error) {
-        return res.status(500).json({
-            success: false,
-            message: error.message
-        })
+    if (!req.params.themeId) {
+      return res.status(400).json({
+        success: false,
+        message: "themeId is missing",
+      });
     }
+
+    const brandingData = await Payload.find({
+      collection: "brandingTheme",
+      where: {
+        shopId: { equals: "gid://shopify/Shop/81447387454" || req.shop_id},
+        themeId: { equals: req.params.themeId },
+      },
+      depth:0
+    });
+
+    if (brandingData.docs.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "No Dcoument found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Data Send Successfully",
+      data: brandingData.docs[0],
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 const updateBrandingApp = async (req, res, next) => {
     try {
-        if(!req.params.branding_id){
+        if(!req.params.themeId){
             return res.status(400).json({
                 success: false,
-                message: "Branding_id is missing"
+                message: "themeId is missing"
             })
         }
 
@@ -113,7 +125,7 @@ const updateBrandingApp = async (req, res, next) => {
           collection: 'brandingTheme',
           where: {
             shopId: { equals: req.shop_id || "gid://shopify/Shop/81447387454"},
-            id: { equals: req.params.branding_id}
+            themeId: { equals: req.params.themeId}
           },
       })
 
@@ -126,7 +138,10 @@ const updateBrandingApp = async (req, res, next) => {
     
         const brandingData = await Payload.update({
             collection: "brandingTheme",
-            id: req.params.branding_id,
+            where: {
+              shopId: { equals: req.shop_id || "gid://shopify/Shop/81447387454"},
+              themeId: { equals: req.params.themeId}
+            },
             data: req.body,
         });
     

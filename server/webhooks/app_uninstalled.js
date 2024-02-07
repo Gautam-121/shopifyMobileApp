@@ -18,7 +18,7 @@ const appUninstallHandler = async (
   await payload.update({
     collection: 'activeStores',
     where: {
-      shop: { equals: shop},
+      shopName: { equals: shop},
     },
     data: {
       isActive: false
@@ -28,7 +28,7 @@ const appUninstallHandler = async (
   await payload.delete({
     collection: 'session',
     where: {
-      shop: { equals: shop },
+      shop: { equals: shop},
     },
   })
 };

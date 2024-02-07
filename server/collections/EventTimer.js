@@ -2,6 +2,9 @@ const { CollectionConfig } = require("payload/types");
 
 const eventTimerConfig = {
   slug: "eventTimer",
+  admin:{
+    useAsTitle: "title"
+  },
   fields: [
     {
       name: "title",
@@ -57,6 +60,7 @@ const eventTimerConfig = {
       fields: [
         {
           name: "date",
+          label:"Date",
           type: "date",
           admin: {
             date: {
@@ -72,6 +76,7 @@ const eventTimerConfig = {
         },
         {
           name: "time",
+          label: "Time",
           type: "date",
           admin: {
             date: {
@@ -82,6 +87,7 @@ const eventTimerConfig = {
         },
         {
           name: "timeZone",
+          label:"Time-Zone",
           type: "text",
         },
       ],

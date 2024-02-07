@@ -8,7 +8,7 @@ const createHomePage = async (req, res, next) => {
 
     const isHomeDataPresent = await Payload.find({
       collection: 'homePage',
-      where: { shopId: { equals: "gid://shopify/Shop/814473874890"} }
+      where: { shopId: { equals: "gid://shopify/Shop/814473874894"} }
     })
 
     if (isHomeDataPresent.docs.length != 0) {
@@ -21,12 +21,11 @@ const createHomePage = async (req, res, next) => {
     for (let index in datas) {
 
       if (datas[index].featureType === "banner") {
-
-        const isVisible = datas[index]?.data?.data.some(val => val.isVisible === true)
+        const isVisible = datas[index]?.data?.some(val => val.isVisible === true)
         const banner = await Payload.create({
           collection: "banner",
           data: {
-            data: datas[index].data?.data
+            data: datas[index].data
           }
         });
 
@@ -35,41 +34,38 @@ const createHomePage = async (req, res, next) => {
           value: banner.id,
         }
         datas[index].isVisible = isVisible
-        datas[index].dispalyOrder = Number(index) + 1
+        datas[index].displayOrder = Number(index) + 1
       }
       else if (datas[index].featureType === "announcement") {
-
         const announcementBar = await Payload.create({
           collection: "announcementBanner",
-          data:  datas[index].data?.data
+          data:  datas[index].data
         });
 
         datas[index].data = {
           relationTo: "announcementBanner",
           value: announcementBar.id,
         }
-        datas[index].dispalyOrder = Number(index) + 1
+        datas[index].displayOrder = Number(index) + 1
 
       }
-      else if (datas[index].featureType === "ProductGroup") {
-
+      else if (datas[index].featureType === "productGroup") {
         const product = await Payload.create({
           collection: "product",
-          data:  datas[index].data?.data,
+          data:  datas[index].data,
         });
 
         datas[index].data = {
           relationTo: "product",
           value: product.id,
         }
-        datas[index].dispalyOrder = Number(index) + 1
+        datas[index].displayOrder = Number(index) + 1
       }
-      else if (datas[index].featureType === "Categories") {
-
+      else if (datas[index].featureType === "categories") {
         const collection = await Payload.create({
           collection: "collection",
           data: {
-            data:  datas[index].data?.data,
+            data:  datas[index].data,
           }
         });
 
@@ -77,17 +73,20 @@ const createHomePage = async (req, res, next) => {
           relationTo: "collection",
           value: collection.id,
         }
-        datas[index].dispalyOrder = Number(index) + 1
+        datas[index].displayOrder = Number(index) + 1
       }
     }
-
+    console.log("Check enter Upto" , datas)
     const homeData = await Payload.create({
       collection: "homePage",
       data: {
-        shopId: req.shop_id || "gid://shopify/Shop/814473874890",
+        shopId: req.shop_id || "gid://shopify/Shop/814473874884",
         homeData: datas
       },
     });
+
+    console.log("Check Finish Upto")
+
 
     return res.status(201).json({
       success: true,
@@ -126,10 +125,10 @@ const getHomePage = async (req, res, next) => {
     }
     // Update the homeData.docs[0].homeData array
     homeData.docs[0].homeData = homeData.docs[0].homeData.map((value) => {
-      if (value.featureType === "banner" || value.featureType === "Categories") {
+      if (value.featureType === "banner" || value.featureType === "categories") {
         return { ...value, data: value.data.value.data };
       } 
-      else if (value.featureType === "announcement" ||value.featureType === "ProductGroup") {
+      else if (value.featureType === "announcement" ||value.featureType === "productGroup") {
         return { ...value, data: value.data.value };
       }
     });
@@ -152,9 +151,20 @@ const getHomePageByWeb = async (req , res , next)=>{
 
   try {
 
+    if(!req.params.themeId){
+      return res.status(400).json({
+        success: false,
+        message: "themeId is missing"
+      })
+    }
+
     const homeData = await Payload.find({
       collection: 'homePage',
-      where: {shopId: { equals: "gid://shopify/Shop/814473874893" || req.shop_id},},
+      where: {
+        shopId: { equals: "gid://shopify/Shop/81447387454" || req.shop_id},
+        themeId: { equals: req.params.themeId}
+      },
+      depth: 1
     })
 
     if(homeData.docs.length === 0){
@@ -165,10 +175,11 @@ const getHomePageByWeb = async (req , res , next)=>{
     }
 
     homeData.docs[0].homeData = homeData.docs[0].homeData.map((value) => {
-      if (value.featureType === "banner" || value.featureType === "Categories") {
+      console.log("enter")
+      if (value.featureType === "banner" || value.featureType === "categories") {
         return { ...value, data: value.data.value };
       } 
-      else if (value.featureType === "announcement" ||value.featureType === "ProductGroup") {
+      else if (value.featureType === "announcement" ||value.featureType === "productGroup") {
         return { ...value, data: value.data.value };
       }
     });
@@ -176,7 +187,10 @@ const getHomePageByWeb = async (req , res , next)=>{
     return res.status(200).json({
       success: true,
       message: "Send Successfully",
-      data: homeData.docs[0]
+      data: {
+        ...homeData.docs[0],
+        themeId:homeData.docs[0].themeId?.id
+      }
     })
   
   } catch (error) {
@@ -191,18 +205,18 @@ const updateHomePage = async (req, res, next) => {
   try {
     const { datas } = req.body;
 
-    if (!req.params.homePageId) {
+    if (!req.params.themeId) {
       return res.status(400).json({
         success: false,
-        message: "homePageId is missing",
+        message: "themeId is missing",
       });
     }
 
     const isExistHomeData = await Payload.find({
       collection: "homePage",
       where: {
-        shopId: { equals: req.shop_id || "gid://shopify/Shop/814473874890"},
-        id: { equals: req.params.homePageId },
+        shopId: { equals: req.shop_id || "gid://shopify/Shop/81447387454"},
+        themeId: { equals: req.params.themeId },
       },
     });
 
@@ -217,7 +231,7 @@ const updateHomePage = async (req, res, next) => {
 
       if (datas[index].featureType === "banner") {
 
-        const isVisible = datas[index]?.data?.data.some(
+        const isVisible = datas[index]?.data?.some(
           (val) => val.isVisible === true
         );
 
@@ -227,7 +241,7 @@ const updateHomePage = async (req, res, next) => {
             collection: "banner",
             id: datas[index].data.id,
             data: {
-              data: datas[index]?.data?.data,
+              data: datas[index]?.data,
             },
           });
 
@@ -244,7 +258,7 @@ const updateHomePage = async (req, res, next) => {
           const banner = await Payload.create({
             collection: "banner",
             data: {
-              data: datas[index].data.data,
+              data: datas[index].data,
             },
           });
 
@@ -265,7 +279,7 @@ const updateHomePage = async (req, res, next) => {
             collection: "announcementBanner",
             id: datas[index]?.data?.id,
             data: {
-              data: datas[index]?.data?.data,
+              data: datas[index]?.data,
             },
           });
 
@@ -281,7 +295,7 @@ const updateHomePage = async (req, res, next) => {
 
           const announcementBar = await Payload.create({
             collection: "announcementBanner",
-            data: datas[index]?.data?.data,
+            data: datas[index]?.data,
           });
 
           datas[index].data = {
@@ -292,7 +306,7 @@ const updateHomePage = async (req, res, next) => {
           datas[index].dispalyOrder = Number(index) + 1;
         }
       } 
-      else if (datas[index].featureType === "ProductGroup") {
+      else if (datas[index].featureType === "productGroup") {
 
         if (datas[index]?.data?.id) {
 
@@ -300,7 +314,7 @@ const updateHomePage = async (req, res, next) => {
             collection: "product",
             id: datas[index]?.data?.id,
             data: {
-              data: datas[index]?.data?.data,
+              data: datas[index]?.data,
             },
           });
 
@@ -315,7 +329,7 @@ const updateHomePage = async (req, res, next) => {
 
           const product = await Payload.create({
             collection: "product",
-            data: datas[index]?.data?.data,
+            data: datas[index]?.data,
           });
 
           datas[index].data = {
@@ -326,7 +340,7 @@ const updateHomePage = async (req, res, next) => {
           datas[index].dispalyOrder = Number(index) + 1;
         }
       } 
-      else if (datas[index].featureType === "Categories") {
+      else if (datas[index].featureType === "categories") {
 
         if (datas[index]?.data?.id) {
 
@@ -334,7 +348,7 @@ const updateHomePage = async (req, res, next) => {
             collection: "collection",
             id: datas[index].data.id,
             data: {
-              data: datas[index]?.data?.data,
+              data: datas[index]?.data,
             },
           });
 
@@ -351,7 +365,7 @@ const updateHomePage = async (req, res, next) => {
           const collection = await Payload.create({
             collection: "collection",
             data: {
-              data: datas[index]?.data?.data,
+              data: datas[index]?.data,
             },
           });
 
@@ -368,7 +382,10 @@ const updateHomePage = async (req, res, next) => {
 
     const homeData = await Payload.update({
       collection: "homePage",
-      id: req.params.homePageId,
+      where: {
+        shopId: { equals: req.shop_id || "gid://shopify/Shop/814473874890"},
+        themeId: { equals: req.params.themeId },
+      },
       data: {
         homeData: datas,
       },
