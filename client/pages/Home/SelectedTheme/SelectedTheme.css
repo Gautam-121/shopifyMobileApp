@@ -1,0 +1,132 @@
+.theme-main-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    border: 1px solid white;
+    border-radius: 12px;
+    background-color: white;
+    padding: 25px;
+    margin-top: 5px;
+    height: 290px;
+}
+
+
+.left-main-card-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 60px;
+}
+
+.theme-name-main-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+
+.live-text-main-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(161, 219, 161);
+    color: rgb(17, 53, 17);
+   
+    border: 1px solid rgb(198, 241, 198);
+    border-radius: 10px;
+    width: 60px;
+}
+
+.the-live-dot{
+    border: 5px solid rgb(66, 129, 66);
+    border-radius: 50%;
+    width: 0.5px;
+    height: 0.5px;
+}
+
+.them-name-text{
+    color: rgb(26, 25, 25);
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.update-date{
+    color: grey;
+    font-weight: bold;
+}
+
+.buttons-main-div{
+
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+
+}
+
+.customize-button-div{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #414141;
+    color: #e7e2e2;
+    border: 1px solid #414141;
+    border-radius: 6px;
+    font-weight: bold;
+    padding: 5px 8px 5px 8px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5); 
+    outline: 2px solid rgba(82, 79, 79, 0.5);
+    outline-offset: -4px; 
+    cursor: pointer;
+
+}
+
+.preview-button-div{
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    align-items: center;
+    background-color: white;
+    color: #414141;
+    border: 1px solid #e7e2e2;
+    border-radius: 6px;
+    font-weight: bold;
+    padding: 6px 8px 6px 8px;
+    box-shadow: 1px 1px 1px #e7e2e2; 
+    cursor: pointer;
+}
+
+
+.side-image-div{
+    background-color: #f1f1f1;
+    border: 1px solid #f1f1f1;
+    border-radius: 8px;
+    width: 40vw;
+    padding: 12px;
+
+}
+
+
+
+.images-grid-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.images-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.images{
+    width: 150px;
+    height: 110px;
+}

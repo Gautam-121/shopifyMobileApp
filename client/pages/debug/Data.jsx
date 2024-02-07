@@ -1,11 +1,11 @@
-import LandingPage from "../LandingPage"
+import Home from "../Home/Home"
 
 const GetData = () => {
   return (
     <>
-    <div>
-      <LandingPage/>
-    </div>
+      <div>
+          <Home />
+      </div>
     </>
   );
 };
