@@ -1,0 +1,22 @@
+
+
+.elements-div{
+    border: 2px solid blue;
+    padding: 10px;
+
+}
+
+.dragging{
+    border: 1px solid #ebebeb;
+    padding: 10px;
+}
+
+
+/* on hover buttons for the dragged elements */
+
+.buttons-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
